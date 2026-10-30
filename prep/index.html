@@ -207,14 +207,14 @@ $("setup").addEventListener("click",function(e){
  if(b.dataset.sel!==undefined){
   var it=ITEMS[+b.dataset.sel];
   if(isOn(it))delete S.cfg.on[it.n];else S.cfg.on[it.n]=true;
-  persist();renderSetup();
+  persist();enqueueSettings();renderSetup();
   var again=document.querySelector('#setup [data-sel="'+b.dataset.sel+'"]');
   if(again)again.focus();
  }else if(b.dataset.tstep!==undefined){
   var i=+b.dataset.i,cur=tgt(ITEMS[i]),d=+b.dataset.tstep;
   if(cur===null&&d<0)return;
   var nt=Math.min(999,Math.max(1,(cur||0)+d));
-  S.cfg.t[ITEMS[i].n]=nt;persist();
+  S.cfg.t[ITEMS[i].n]=nt;persist();enqueueSettings();
   var inp=$("ti"+i);if(inp)inp.value=nt;
  }
 });
@@ -224,11 +224,11 @@ $("setup").addEventListener("change",function(e){
  var it=ITEMS[+inp.dataset.tin],v=parseInt(inp.value,10);
  if(isNaN(v)||v<1){delete S.cfg.t[it.n];inp.value=""}
  else{v=Math.min(999,v);S.cfg.t[it.n]=v;inp.value=v}
- persist();
+ persist();enqueueSettings();
 });
 
 /* ---- Syncing with the Google Apps Script web app ---- */
-var inflight=null,flushing=false,flushTimer=null,retryMs=0,netErr=false,lastError="",loaded=false,stale=false;
+var inflight=null,flushing=false,flushTimer=null,retryMs=0,netErr=false,lastError="",loaded=false,stale=false,noSync=false;
 function plural(n){return n===1?"1 change":n+" changes"}
 function status(){
  var n=S.queue.length,el=$("sync"),msg,warn=false;
@@ -244,7 +244,7 @@ function status(){
  el.className=warn?"warn":"";
 }
 function send(op){
- var body=op.type==="clear"?{action:"clear"}:{action:"set",item:op.item,count:op.count};
+ var body=op.type==="clear"?{action:"clear"}:op.type==="settings"?{action:"saveSettings",settings:op.cfg}:{action:"set",item:op.item,count:op.count};
  var ctl=typeof AbortController==="function"?new AbortController():null;
  var to=setTimeout(function(){if(ctl)ctl.abort()},15000);
  return fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body),signal:ctl?ctl.signal:undefined})
@@ -278,11 +278,18 @@ function enqueueSet(item,n){
  persist();status();scheduleFlush(350);
 }
 function enqueueClear(){
- S.queue=S.queue.filter(function(o){return inflight&&o.id===inflight.id});
+ S.queue=S.queue.filter(function(o){return(inflight&&o.id===inflight.id)||o.type==="settings"});
  S.queue.push({id:++S.seq,type:"clear"});
  persist();status();scheduleFlush(0);
 }
+function enqueueSettings(){
+ if(noSync)return;
+ S.queue=S.queue.filter(function(o){return(inflight&&o.id===inflight.id)||o.type!=="settings"});
+ S.queue.push({id:++S.seq,type:"settings",cfg:JSON.parse(JSON.stringify(S.cfg))});
+ persist();status();scheduleFlush(600);
+}
 async function loadRemote(){
+ var cfgChanged=false;
  try{
   var r=await fetch(API,{cache:"no-store"});
   var d=await r.json();
@@ -291,11 +298,27 @@ async function loadRemote(){
   ITEMS.forEach(function(it){c[it.n]=Math.max(0,Math.floor(Number(d.counts&&d.counts[it.n])||0))});
   S.queue.forEach(function(op){
    if(op.type==="clear")ITEMS.forEach(function(it){c[it.n]=0});
-   else c[op.item]=op.count;
+   else if(op.type==="set")c[op.item]=op.count;
   });
-  S.counts=c;persist();stale=false;
+  S.counts=c;stale=false;
+  var pending=S.queue.some(function(o){return o.type==="settings"});
+  if(d.settings===undefined){
+   noSync=true;
+   S.queue=S.queue.filter(function(o){return o.type!=="settings"});
+  }else{
+   noSync=false;
+   if(d.settings===null){if(!pending)enqueueSettings()}
+   else if(!pending&&!setupOpen){
+    var before=JSON.stringify(S.cfg);
+    S.cfg={on:d.settings.on||{},t:d.settings.t||{}};
+    cfgChanged=before!==JSON.stringify(S.cfg);
+   }
+  }
+  persist();
  }catch(e){stale=true}
- loaded=true;paintAll();status();
+ loaded=true;
+ if(cfgChanged&&!setupOpen)renderCount();else paintAll();
+ status();
 }
 
 /* ---- Taps in the count view ---- */
@@ -339,6 +362,9 @@ document.addEventListener("visibilitychange",function(){
  if(document.visibilityState==="visible"&&loaded&&!setupOpen&&!S.queue.length&&!flushTimer&&!flushing&&navigator.onLine)loadRemote();
 });
 
+setInterval(function(){
+ if(document.visibilityState==="visible"&&loaded&&!setupOpen&&!S.queue.length&&!flushTimer&&!flushing&&navigator.onLine)loadRemote();
+},60000);
 setView(false);status();
 loadRemote().then(function(){if(S.queue.length)scheduleFlush(0)});
 })();
