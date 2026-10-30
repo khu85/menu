@@ -44,8 +44,8 @@ ul.list{list-style:none;margin:0;padding:0;display:grid;gap:18px}
 .st .ic{font-size:34px;line-height:1}
 .intro{font-size:26px;margin:0 0 4px}
 .pick{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.pick button{min-height:88px;padding:8px 12px;border:3px solid var(--ink);border-radius:2px;background:var(--beige);color:var(--ink);font-size:24px;line-height:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;text-align:center}
-.pick button[aria-pressed="true"]{background:var(--ink);color:var(--beige)}
+.pick button{min-height:88px;padding:8px 12px;border:3px solid var(--ink);border-radius:2px;background:var(--ink);color:var(--beige);font-size:24px;line-height:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;text-align:center}
+.pick button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--beige)}
 .pick .ps{font-size:20px}
 .sub{font-size:22px;letter-spacing:1px;margin:18px 0 4px}
 .tgrow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 0;border-bottom:2px solid var(--ink)}
@@ -77,7 +77,7 @@ var KEY="kinhfolk-prepcheck-v1";
 var GROUPS=["Cream Tops","Milk Bases","Syrups"];
 function I(n,g,u){return{n:n,g:g,u:u||""}}
 var ITEMS=[
- I("Sea Salt Cream Top","Cream Tops","containers"),
+ I("Sea Salt Cream Top","Cream Tops"),
  I("Calamansi Cream Top","Cream Tops"),
  I("Pandan Coconut Cloud","Cream Tops"),
  I("Coconut Cloud","Cream Tops"),
@@ -172,7 +172,7 @@ function renderSetup(){
   ITEMS.forEach(function(it,i){
    if(it.g!==g)return;
    var on=isOn(it);
-   pick+='<button type="button" data-sel="'+i+'" aria-pressed="'+on+'"><span class="pn">'+(on?"\u2713 ":"")+esc(it.n)+'</span><span class="ps">'+esc(on?"In list":"Not in list")+'</span></button>';
+   pick+='<button type="button" data-sel="'+i+'" aria-pressed="'+on+'"><span class="pn">'+esc(it.n)+'</span><span class="ps">'+esc(on?"In list":"Not in list")+'</span></button>';
    if(on){
     var t=tgt(it),u=unitFor(it,t||0)||it.u;
     tg+='<div class="tgrow"><label for="ti'+i+'">'+esc(it.n)+'</label><div class="tc">'+
