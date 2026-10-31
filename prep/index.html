@@ -149,7 +149,7 @@ var btn=$("newcount"),dbtn=$("discordbtn"),setupBtn=$("setupbtn"),setupOpen=fals
 
 /* ---- Count view ---- */
 function unitFor(it,t){return it.u?(t===1?it.u.replace(/s$/,""):it.u):""}
-var RECIPES_URL="https://claude.ai/artifact/4C2PUrZ1uCaEsNVxM6S2sV";
+var RECIPES_URL="recipes.html"; /* same folder as this page */
 function recipeUrl(it){return it.g==="Coffee"?"":RECIPES_URL+"#"+it.n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
 function recipeLink(it){
  var u=recipeUrl(it);
