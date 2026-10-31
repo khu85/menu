@@ -24,6 +24,8 @@ main{padding:24px 28px 72px;max-width:1000px;margin:0 auto}
 .top h1{margin:0;font-size:44px;line-height:1.1;margin-right:auto}
 .big{min-height:68px;padding:0 30px;border:0;border-radius:2px;background:var(--ink);color:var(--beige);font-size:30px;cursor:pointer}
 #newcount.armed{background:#b3261e;color:#fff}
+#discordbtn.armed{background:var(--brand)}
+.big[disabled]{opacity:.6;cursor:wait}
 #setupbtn[aria-pressed="true"]{background:var(--brand)}
 section{margin-top:28px}
 section h2{font-size:32px;margin:0 0 14px;padding-bottom:6px;border-bottom:4px solid var(--ink);letter-spacing:1px}
@@ -65,7 +67,7 @@ header button:focus-visible{outline-color:var(--beige)}
 <body>
 <header><img class="logo" alt="Kinhfolk logo" src="data:image/png;base64,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"><span class="wm" id="wm"></span><div id="sync" role="status" aria-live="polite"></div></header>
 <main>
- <div class="top"><h1 id="h1"></h1><button class="big" id="setupbtn" type="button" aria-pressed="false"></button><button class="big" id="newcount" type="button"></button></div>
+ <div class="top"><h1 id="h1"></h1><button class="big" id="setupbtn" type="button" aria-pressed="false"></button><button class="big" id="discordbtn" type="button"></button><button class="big" id="newcount" type="button"></button></div>
  <div id="groups"></div>
  <div id="setup" hidden></div>
 </main>
@@ -123,7 +125,7 @@ function tgt(it){var v=Number(S.cfg.t[it.n]);return v>=1?Math.floor(v):null}
 /* ---- Elements ---- */
 var $=function(id){return document.getElementById(id)};
 $("wm").textContent=cap("Kinhfolk Prep Check");
-var btn=$("newcount"),setupBtn=$("setupbtn"),setupOpen=false;
+var btn=$("newcount"),dbtn=$("discordbtn"),setupBtn=$("setupbtn"),setupOpen=false;
 
 /* ---- Count view ---- */
 function unitFor(it,t){return it.u?(t===1?it.u.replace(/s$/,""):it.u):""}
@@ -191,8 +193,9 @@ function renderSetup(){
  $("setup").innerHTML=html;
 }
 function setView(open){
+ if(!open&&setupOpen)commitInputs();
  setupOpen=open;
- $("groups").hidden=open;$("setup").hidden=!open;btn.hidden=open;
+ $("groups").hidden=open;$("setup").hidden=!open;btn.hidden=open;dbtn.hidden=open;
  setupBtn.setAttribute("aria-pressed",open);
  setupBtn.textContent=cap(open?"Done":"Set up list");
  $("h1").textContent=cap(open?"Set up list":"Prep Check");
@@ -205,12 +208,14 @@ $("setup").addEventListener("click",function(e){
  var b=e.target.closest("button");
  if(!b)return;
  if(b.dataset.sel!==undefined){
+  commitInputs();
   var it=ITEMS[+b.dataset.sel];
   if(isOn(it))delete S.cfg.on[it.n];else S.cfg.on[it.n]=true;
   persist();enqueueSettings();renderSetup();
   var again=document.querySelector('#setup [data-sel="'+b.dataset.sel+'"]');
   if(again)again.focus();
  }else if(b.dataset.tstep!==undefined){
+  commitInputs();
   var i=+b.dataset.i,cur=tgt(ITEMS[i]),d=+b.dataset.tstep;
   if(cur===null&&d<0)return;
   var nt=Math.min(999,Math.max(1,(cur||0)+d));
@@ -218,20 +223,30 @@ $("setup").addEventListener("click",function(e){
   var inp=$("ti"+i);if(inp)inp.value=nt;
  }
 });
-$("setup").addEventListener("change",function(e){
- var inp=e.target.closest("input[data-tin]");
- if(!inp)return;
- var it=ITEMS[+inp.dataset.tin],v=parseInt(inp.value,10);
- if(isNaN(v)||v<1){delete S.cfg.t[it.n];inp.value=""}
- else{v=Math.min(999,v);S.cfg.t[it.n]=v;inp.value=v}
- persist();enqueueSettings();
-});
+function applyInput(inp,fix){
+ var it=ITEMS[+inp.dataset.tin],raw=inp.value.trim(),v=parseInt(raw,10),old=S.cfg.t[it.n];
+ if(raw===""||isNaN(v)||v<1){
+  if(old!==undefined){delete S.cfg.t[it.n];persist();enqueueSettings()}
+  if(fix)inp.value="";
+  return;
+ }
+ v=Math.min(999,v);
+ if(old!==v){S.cfg.t[it.n]=v;persist();enqueueSettings()}
+ if(fix)inp.value=v;
+}
+function commitInputs(){
+ var list=document.querySelectorAll("#setup input[data-tin]");
+ for(var k=0;k<list.length;k++)applyInput(list[k],false);
+}
+$("setup").addEventListener("input",function(e){var inp=e.target.closest("input[data-tin]");if(inp)applyInput(inp,false)});
+$("setup").addEventListener("change",function(e){var inp=e.target.closest("input[data-tin]");if(inp)applyInput(inp,true)});
 
 /* ---- Syncing with the Google Apps Script web app ---- */
-var inflight=null,flushing=false,flushTimer=null,retryMs=0,netErr=false,lastError="",loaded=false,stale=false,noSync=false;
+var notice=null,noticeTimer=null,inflight=null,flushing=false,flushTimer=null,retryMs=0,netErr=false,lastError="",loaded=false,stale=false,noSync=false;
 function plural(n){return n===1?"1 change":n+" changes"}
 function status(){
  var n=S.queue.length,el=$("sync"),msg,warn=false;
+ if(notice){el.textContent=cap(notice.text);el.className=notice.warn?"warn":"";return}
  if(!loaded)msg="Loading counts\u2026";
  else if(!navigator.onLine){msg="\u26A0 Offline \u2013 "+(n?plural(n)+" waiting to send":"counts are kept on this tablet");warn=true}
  else if(inflight)msg="Saving\u2026";
@@ -239,12 +254,15 @@ function status(){
  else if(n)msg="Waiting to save\u2026 "+plural(n);
  else if(stale){msg="\u26A0 Couldn\u2019t load shared counts \u2013 showing this tablet\u2019s counts";warn=true}
  else if(lastError){msg="\u26A0 A change was not accepted: "+lastError;warn=true}
+ else if(noSync){msg="\u26A0 Counts are saved, but the list and targets are not shared \u2013 update the Google script";warn=true}
  else msg="\u2713 All changes saved";
  el.textContent=cap(msg);
  el.className=warn?"warn":"";
 }
 function send(op){
- var body=op.type==="clear"?{action:"clear"}:op.type==="settings"?{action:"saveSettings",settings:op.cfg}:{action:"set",item:op.item,count:op.count};
+ return post(op.type==="clear"?{action:"clear"}:op.type==="settings"?{action:"saveSettings",settings:op.cfg}:{action:"set",item:op.item,count:op.count});
+}
+function post(body){
  var ctl=typeof AbortController==="function"?new AbortController():null;
  var to=setTimeout(function(){if(ctl)ctl.abort()},15000);
  return fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body),signal:ctl?ctl.signal:undefined})
@@ -281,6 +299,39 @@ function enqueueClear(){
  S.queue=S.queue.filter(function(o){return(inflight&&o.id===inflight.id)||o.type==="settings"});
  S.queue.push({id:++S.seq,type:"clear"});
  persist();status();scheduleFlush(0);
+}
+function buildReport(){
+ var groups=[];
+ GROUPS.forEach(function(g){
+  var items=[];
+  ITEMS.forEach(function(it){if(it.g===g&&isOn(it))items.push({item:it.n,count:count(it.n),target:tgt(it)})});
+  if(items.length)groups.push({name:g,items:items});
+ });
+ return{groups:groups};
+}
+function showNotice(text,warn,ms){
+ notice={text:text,warn:!!warn};
+ clearTimeout(noticeTimer);status();
+ if(ms)noticeTimer=setTimeout(function(){notice=null;status()},ms);
+}
+async function sendDiscord(){
+ var report=buildReport();
+ if(!report.groups.length){showNotice("\u26A0 No items are selected, so there is nothing to send",true,8000);return}
+ if(!navigator.onLine){showNotice("\u26A0 You\u2019re offline \u2013 connect to the internet, then send to Discord",true,10000);return}
+ dbtn.disabled=true;
+ showNotice("Sending to Discord\u2026",false,0);
+ try{
+  var d=await post({action:"sendDiscord",report:report});
+  if(d&&d.ok){
+   var when=new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});
+   showNotice("\u2713 Sent to Discord at "+when,false,10000);
+  }else{
+   var err=(d&&d.error)||"unknown error";
+   if(/Unknown action/i.test(err))err="update the Google script first";
+   showNotice("\u26A0 Not sent to Discord: "+err,true,15000);
+  }
+ }catch(e){showNotice("\u26A0 Couldn\u2019t reach the saving service \u2013 not sent to Discord",true,12000)}
+ dbtn.disabled=false;
 }
 function enqueueSettings(){
  if(noSync)return;
@@ -351,6 +402,23 @@ btn.addEventListener("click",function(){
  $("announce").textContent=cap("All counts cleared");
 });
 setBtn();
+
+/* Send count to Discord: first tap arms it, second tap sends. */
+var dArmed=false,dTimer=null;
+function setDBtn(){
+ dbtn.className="big"+(dArmed?" armed":"");
+ dbtn.textContent=cap(dArmed?"Tap again to send to Discord":"Send count to Discord");
+}
+dbtn.addEventListener("click",function(){
+ if(!dArmed){
+  dArmed=true;setDBtn();
+  clearTimeout(dTimer);dTimer=setTimeout(function(){dArmed=false;setDBtn()},5000);
+  return;
+ }
+ clearTimeout(dTimer);dArmed=false;setDBtn();
+ sendDiscord();
+});
+setDBtn();
 
 /* ---- Connection and visibility ---- */
 window.addEventListener("online",function(){
