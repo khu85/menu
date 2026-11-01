@@ -30,7 +30,7 @@ main{padding:24px 28px 72px;max-width:1000px;margin:0 auto}
 .big[disabled]{opacity:.6;cursor:wait}
 #setupbtn[aria-pressed="true"]{background:var(--brand)}
 section{margin-top:28px}
-section h2{font-size:32px;margin:0 0 14px;padding-bottom:6px;border-bottom:4px solid var(--ink);letter-spacing:1px}
+section h2{background:var(--ink);color:var(--beige);border-radius:2px;padding:10px 18px;font-size:28px;margin:0 0 14px;letter-spacing:1px}
 .empty{font-size:28px;padding:24px;border:3px dashed var(--ink);border-radius:2px}
 ul.list{list-style:none;margin:0;padding:0;display:grid;gap:18px}
 .row{display:grid;grid-template-columns:1fr auto;gap:10px 12px;align-items:stretch}
@@ -39,7 +39,7 @@ ul.list{list-style:none;margin:0;padding:0;display:grid;gap:18px}
 .rl{flex:none;display:inline-flex;align-items:center;min-height:48px;padding:0 14px;border:2px solid var(--beige);border-radius:2px;color:var(--beige);text-decoration:none;font-size:20px}
 .rl:focus-visible{outline-color:var(--beige)}
 .sum{background:var(--ink);color:var(--beige);border-radius:2px;padding:14px 18px;margin:8px 0 4px}
-.sum h2{font-size:26px;letter-spacing:1px;margin:0 0 8px;padding:0;border:0}
+.sum h2{background:none;font-size:26px;letter-spacing:1px;margin:0 0 8px;padding:0;border:0}
 .sum ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .sum li{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:6px 0 6px 12px;border-left:8px solid var(--beige)}
 .sum li.more{border-left-color:#b3261e}
@@ -49,30 +49,40 @@ ul.list{list-style:none;margin:0;padding:0;display:grid;gap:18px}
 .sum .sd{flex:none;font-size:22px}
 .sum p{margin:6px 0 0;font-size:22px}
 .nm{font-size:30px;line-height:1.15}
-.tg{font-size:22px;line-height:1.25}
+.tg{font-size:22px;line-height:1.25;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:1px 10px;border-radius:2px;font-size:18px;line-height:1.5}
+.chip.ok{background:#1b6e3c;color:#fff}
+.chip.low{background:#f2c230;color:var(--ink)}
+.chip.bad{background:#b3261e;color:#fff}
+.chip.none{border:2px dashed var(--beige);color:var(--beige)}
+.nmbox{border-left:10px solid #7a7778}
+.nmbox.ok{border-left-color:#1b6e3c}
+.nmbox.low{border-left-color:#f2c230}
+.nmbox.bad{border-left-color:#b3261e}
 .ctl{display:flex;align-items:stretch;gap:10px}
-.ctl button{width:78px;min-height:76px;border:0;border-radius:2px;background:var(--ink);color:var(--beige);font-size:36px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
+.ctl button{width:88px;min-height:76px;border:0;border-radius:2px;background:var(--ink);color:var(--beige);font-size:52px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
 .ctl button:active{background:var(--brand)}
-.ctl button.q{width:66px;font-size:28px}
-.ct{min-width:92px;display:grid;place-items:center;border:3px solid var(--ink);border-radius:2px;background:#fff;color:var(--ink);font-size:46px;line-height:1}
-.st{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:4px 18px;border-radius:2px;font-size:28px}
-.st.ok{background:#1b6e3c;color:#fff}
-.st.low{background:#f2c230;color:var(--ink)}
-.st.bad{background:#b3261e;color:#fff}
-.st.none{border:3px dashed var(--ink);color:var(--ink)}
-.st .ic{font-size:34px;line-height:1}
+.ct{min-width:100px;display:grid;place-items:center;border:3px solid var(--ink);border-radius:2px;background:#fff;color:var(--ink);font-size:52px;line-height:1}
 .intro{font-size:26px;margin:0 0 4px}
-.pick{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:132px;gap:12px}
-.pick button{height:100%;padding:8px 10px;border:3px solid var(--ink);border-radius:2px;background:var(--ink);color:var(--beige);font-size:22px;line-height:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;text-align:center}
-.pick button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--beige)}
-.pick .ps{font-size:18px}
-.sub{font-size:22px;letter-spacing:1px;margin:18px 0 4px}
-.tgrow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 0;border-bottom:2px solid var(--ink)}
-.tgrow label{font-size:28px;flex:1 1 260px}
-.tc{display:flex;align-items:center;gap:10px}
-.tc button{width:72px;height:72px;border:0;border-radius:2px;background:var(--ink);color:var(--beige);font-size:44px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
-.tc input{width:120px;height:72px;font:inherit;font-size:36px;text-align:center;border:3px solid var(--ink);border-radius:2px;background:#fff;color:var(--ink)}
-.tc .un{min-width:120px;font-size:24px}
+.pick{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 12px}
+.pc{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pc>button{height:96px;padding:8px 10px;border:0;border-radius:2px;background:var(--ink);color:var(--beige);font-size:22px;line-height:1.15;display:flex;align-items:center;justify-content:center;cursor:pointer;text-align:center}
+.pc>button[aria-pressed="true"]{background:var(--brand)}
+.tm{height:48px;display:flex;align-items:stretch;gap:3px}
+.tm.ph{visibility:hidden}
+.tm button{flex:none;width:52px;border:0;border-radius:2px;background:var(--ink);color:var(--beige);font-size:30px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
+.tm input{flex:1;min-width:0;width:100%;font:inherit;font-size:22px;text-align:center;border:3px solid var(--ink);border-radius:2px;background:#fff;color:var(--ink);padding:0}
+.cfm{position:fixed;inset:0;z-index:20;background:rgba(51,49,50,.65);display:flex;align-items:center;justify-content:center;padding:20px}
+.cfmbox{background:var(--beige);border:4px solid var(--ink);border-radius:2px;padding:24px;max-width:560px;width:100%}
+.cfmtitle{font-size:34px;line-height:1.15}
+.cfmsub{font-size:24px;margin:8px 0 18px}
+.cfmbtns{display:flex;gap:12px}
+.cfmb{flex:1;min-height:76px;border:0;border-radius:2px;font-size:28px;cursor:pointer;color:var(--beige);background:var(--ink)}
+#cfmno{background:#fff;color:var(--ink);border:3px solid var(--ink)}
+#cfmyes.red{background:#b3261e;color:#fff}
+#cfmyes.green{background:var(--brand)}
+#totop{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:6;width:68px;height:68px;border:0;border-radius:2px;background:var(--ink);color:var(--beige);display:grid;place-items:center;padding:0;cursor:pointer}
+#totop svg{width:34px;height:34px;display:block}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 button:focus-visible,input:focus-visible{outline:4px solid var(--brand);outline-offset:3px}
 header button:focus-visible{outline-color:var(--beige)}
@@ -88,6 +98,8 @@ header button:focus-visible{outline-color:var(--beige)}
  <div id="groups"></div>
  <div id="setup" hidden></div>
 </main>
+<div id="confirm" class="cfm" hidden><div class="cfmbox" role="alertdialog" aria-modal="true" aria-labelledby="cfmt" aria-describedby="cfms"><div class="cfmtitle" id="cfmt"></div><div class="cfmsub" id="cfms"></div><div class="cfmbtns"><button type="button" class="cfmb" id="cfmno"></button><button type="button" class="cfmb" id="cfmyes"></button></div></div></div>
+<button type="button" id="totop" aria-label="Back to top" title="Back to top" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 3 3 12h5.5v9h7v-9H21z"/></svg></button>
 <div class="sr" id="announce" role="status" aria-live="polite"></div>
 <script>
 (function(){
@@ -150,10 +162,22 @@ var btn=$("newcount"),dbtn=$("discordbtn"),setupBtn=$("setupbtn"),setupOpen=fals
 /* ---- Count view ---- */
 function unitFor(it,t){return it.u?(t===1?it.u.replace(/s$/,""):it.u):""}
 var RECIPES_URL="../recipes/"; /* the recipes folder next to the prep folder */
-function recipeUrl(it){return it.g==="Coffee"?"":RECIPES_URL+"#"+it.n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
-function recipeLink(it){
+/* How much one batch makes, in the same unit as the counts (bottles). A pair means [single batch, full batch]. */
+var PER_BATCH={"Sea Salt Cream Top":1.5,"Calamansi Cream Top":1,"Pandan Coconut Cloud":2,"Coconut Cloud":1.5,"Mango Sticky Rice Cloud":1.5,"Pandan Coconut Milk":[1.5,4],"Coconut Milk":[1.5,4],"Mango Sticky Rice Milk":[1.5,4],"Earl Grey Syrup":1.3125};
+function slugOf(it){return it.n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
+function recipeUrl(it){
+ if(it.g==="Coffee")return"";
+ var url=RECIPES_URL,tg=tgt(it),c=count(it.n),pb=PER_BATCH[it.n];
+ if(tg!==null&&c<tg&&pb){
+  var need=tg-c,full=0,per=pb;
+  if(Array.isArray(pb)){full=need>=pb[1]?1:0;per=pb[full]}
+  url+="?b="+Math.max(1,Math.ceil(need/per-1e-9))+(full?"&v=1":"")+"&need="+need;
+ }
+ return url+"#"+slugOf(it);
+}
+function recipeLink(it,i){
  var u=recipeUrl(it);
- return u?'<a class="rl" href="'+u+'" target="_blank" rel="noopener" aria-label="'+esc("Recipe for "+it.n+" (opens in a new tab)")+'">'+esc("Recipe")+'</a>':"";
+ return u?'<a class="rl"'+(i===undefined?'':' id="rl'+i+'"')+' href="'+u+'" target="_blank" rel="noopener" aria-label="'+esc("Recipe for "+it.n+" (opens in a new tab)")+'">'+esc("Recipe")+'</a>':"";
 }
 function renderSummary(){
  var el=$("summary");
@@ -192,14 +216,12 @@ function renderCount(){
   ITEMS.forEach(function(it,i){
    if(it.g!==g||!isOn(it))return;
    any=true;
-   rows+='<li class="row"><div class="nmbox"><div class="nmt"><div class="nm">'+esc(it.n)+'</div><div class="tg" id="t'+i+'">'+esc(targetText(it))+'</div></div>'+recipeLink(it)+'</div>'+
+   rows+='<li class="row"><div class="nmbox none" id="nb'+i+'"><div class="nmt"><div class="nm">'+esc(it.n)+'</div><div class="tg"><span id="t'+i+'">'+esc(targetText(it))+'</span><span class="chip none" id="s'+i+'"></span></div></div>'+recipeLink(it,i)+'</div>'+
     '<div class="ctl" role="group" aria-label="'+esc(it.n)+'">'+
-    '<button type="button" data-act="-1" data-i="'+i+'" aria-label="'+esc("Decrease "+it.n+" by 1")+'">\u22121</button>'+
-    '<button type="button" class="q" data-act="-0.25" data-i="'+i+'" aria-label="'+esc("Decrease "+it.n+" by one quarter")+'">\u2212\u00BC</button>'+
+    '<button type="button" data-act="-0.25" data-i="'+i+'" aria-label="'+esc("Decrease "+it.n+" by one quarter")+'">\u2212</button>'+
     '<div class="ct" id="c'+i+'" aria-live="polite">0</div>'+
-    '<button type="button" class="q" data-act="0.25" data-i="'+i+'" aria-label="'+esc("Increase "+it.n+" by one quarter")+'">+\u00BC</button>'+
-    '<button type="button" data-act="1" data-i="'+i+'" aria-label="'+esc("Increase "+it.n+" by 1")+'">+1</button></div>'+
-    '<div class="st none" id="s'+i+'"></div></li>';
+    '<button type="button" data-act="0.25" data-i="'+i+'" aria-label="'+esc("Increase "+it.n+" by one quarter")+'">+</button></div>'+
+    '</li>';
   });
   if(rows)html+='<section><h2>'+esc(g)+'</h2><ul class="list">'+rows+'</ul></section>';
  });
@@ -218,30 +240,29 @@ function paintRow(i){
  if(!s)return;
  var it=ITEMS[i],c=count(it.n),st=statusOf(c,tgt(it));
  $("c"+i).textContent=fq(c);
- s.className="st "+st.cls;
- s.innerHTML='<span class="ic" aria-hidden="true">'+st.ic+'</span><span>'+esc(st.word)+'</span>';
+ s.className="chip "+st.cls;
+ s.innerHTML='<span aria-hidden="true">'+st.ic+'</span><span>'+esc(st.word)+'</span>';
+ $("nb"+i).className="nmbox "+st.cls;
+ var rl=$("rl"+i);if(rl)rl.href=recipeUrl(it);
 }
 function paintAll(){ITEMS.forEach(function(_,i){paintRow(i)});renderSummary()}
 
 /* ---- Set up view: choose items and set targets ---- */
 function renderSetup(){
- var html='<p class="intro">'+esc("Tap the items you need to prep. Then set a target for each one.")+'</p>';
+ var html='<p class="intro">'+esc("Tap an item to add it to the list. Set its target underneath.")+'</p>';
  GROUPS.forEach(function(g){
-  var pick="",tg="";
+  var cells="";
   ITEMS.forEach(function(it,i){
    if(it.g!==g)return;
-   var on=isOn(it);
-   pick+='<button type="button" data-sel="'+i+'" aria-pressed="'+on+'"><span class="pn">'+esc(it.n)+'</span><span class="ps">'+esc(on?"In list":"Not in list")+'</span></button>';
-   if(on){
-    var t=tgt(it),u=unitFor(it,t||0)||it.u;
-    tg+='<div class="tgrow"><label for="ti'+i+'">'+esc(it.n)+'</label><div class="tc">'+
-     '<button type="button" data-tstep="-1" data-i="'+i+'" aria-label="'+esc("Lower target for "+it.n)+'">\u2212</button>'+
-     '<input id="ti'+i+'" data-tin="'+i+'" type="number" inputmode="decimal" min="0.25" max="999" step="0.25" placeholder="\u2013" value="'+(t===null?"":t)+'">'+
-     '<button type="button" data-tstep="1" data-i="'+i+'" aria-label="'+esc("Raise target for "+it.n)+'">+</button>'+
-     '<span class="un">'+esc(u)+'</span></div></div>';
-   }
+   var on=isOn(it),t=tgt(it);
+   cells+='<div class="pc"><button type="button" data-sel="'+i+'" aria-pressed="'+on+'">'+esc(it.n)+'</button>'+
+    (on?'<div class="tm" role="group" aria-label="'+esc("Target for "+it.n)+'">'+
+     '<button type="button" data-tstep="-0.25" data-i="'+i+'" aria-label="'+esc("Lower target for "+it.n+" by one quarter")+'">\u2212</button>'+
+     '<input id="ti'+i+'" data-tin="'+i+'" type="number" inputmode="decimal" min="0.25" max="999" step="0.25" placeholder="\u2013" aria-label="'+esc("Target for "+it.n)+'" value="'+(t===null?"":t)+'">'+
+     '<button type="button" data-tstep="0.25" data-i="'+i+'" aria-label="'+esc("Raise target for "+it.n+" by one quarter")+'">+</button></div>'
+     :'<div class="tm ph" aria-hidden="true"></div>')+'</div>';
   });
-  html+='<section><h2>'+esc(g)+'</h2><div class="pick">'+pick+'</div>'+(tg?'<div class="sub">'+esc("Targets")+'</div>'+tg:'')+'</section>';
+  html+='<section><h2>'+esc(g)+'</h2><div class="pick">'+cells+'</div></section>';
  });
  $("setup").innerHTML=html;
 }
@@ -272,14 +293,20 @@ $("setup").addEventListener("click",function(e){
   var again=document.querySelector('#setup [data-sel="'+b.dataset.sel+'"]');
   if(again)again.focus();
  }else if(b.dataset.tstep!==undefined){
-  commitInputs();
-  var i=+b.dataset.i,cur=tgt(ITEMS[i]),d=+b.dataset.tstep;
-  if(cur===null&&d<0)return;
-  var nt=Math.min(999,Math.max(0.25,(cur||0)+d));
-  S.cfg.t[ITEMS[i].n]=nt;persist();enqueueSettings();
-  var inp=$("ti"+i);if(inp)inp.value=nt;
+  stepTarget(+b.dataset.i,+b.dataset.tstep);
  }
 });
+function stepTarget(i,d){
+ commitInputs();
+ var cur=tgt(ITEMS[i]);
+ if(cur===null&&d<0)return false;
+ var nt=Math.min(999,Math.max(0.25,(cur||0)+d));
+ if(nt===cur)return false;
+ S.cfg.t[ITEMS[i].n]=nt;persist();enqueueSettings();
+ var inp=$("ti"+i);if(inp)inp.value=nt;
+ return true;
+}
+wireHold($("setup"),"button[data-tstep]",function(b){return stepTarget(+b.dataset.i,+b.dataset.tstep)});
 function applyInput(inp,fix){
  var it=ITEMS[+inp.dataset.tin],raw=inp.value.trim(),v=q(parseFloat(raw)),old=S.cfg.t[it.n];
  if(raw===""||v<0.25){
@@ -429,57 +456,93 @@ async function loadRemote(){
 }
 
 /* ---- Taps in the count view ---- */
-$("groups").addEventListener("click",function(e){
- var b=e.target.closest("button[data-act]");
- if(!b)return;
- var i=+b.dataset.i,it=ITEMS[i],c=count(it.n),n=Math.min(999,Math.max(0,c+(+b.dataset.act)));
- if(n===c)return;
+function changeCount(i,delta){
+ var it=ITEMS[i],c=count(it.n),n=Math.min(999,Math.max(0,c+delta));
+ if(n===c)return false;
  S.counts[it.n]=n;
  paintRow(i);
  renderSummary();
  enqueueSet(it.n,n);
+ return true;
+}
+$("groups").addEventListener("click",function(e){
+ var b=e.target.closest("button[data-act]");
+ if(b)changeCount(+b.dataset.i,+b.dataset.act);
 });
 
-/* Start new count: first tap arms it, second tap clears everything. */
-var armed=false,armTimer=null;
-function setBtn(){
- btn.className="big icon"+(armed?" armed":"");
- btn.innerHTML=ICON_RESET;
- var l=armed?"Tap again to clear all counts":"Start new count";
- btn.setAttribute("aria-label",l);btn.title=l;
+/* Press and hold a plus or minus to keep stepping (a quick tap is still one step). */
+function wireHold(root,sel,apply){
+ var delay=null,rep=null,held=false;
+ function stop(){clearTimeout(delay);clearInterval(rep);delay=rep=null}
+ root.addEventListener("pointerdown",function(e){
+  var b=e.target.closest(sel);
+  if(!b||(e.pointerType==="mouse"&&e.button!==0))return;
+  held=false;stop();
+  delay=setTimeout(function(){
+   held=true;
+   var n=0;
+   rep=setInterval(function(){
+    if(apply(b)===false){stop();return}
+    if(++n===12){clearInterval(rep);rep=setInterval(function(){if(apply(b)===false)stop()},45)}
+   },110);
+  },450);
+ });
+ document.addEventListener("pointerup",function(){stop();setTimeout(function(){held=false},60)});
+ document.addEventListener("pointercancel",stop);
+ root.addEventListener("contextmenu",function(e){if(e.target.closest(sel))e.preventDefault()});
+ root.addEventListener("click",function(e){
+  if(held&&e.target.closest(sel)){held=false;e.stopImmediatePropagation();e.preventDefault()}
+ },true);
 }
+wireHold($("groups"),"button[data-act]",function(b){return changeCount(+b.dataset.i,+b.dataset.act)});
+
+/* Asking before reset / Discord: a small dialog with a clear way out. */
+var cfmFn=null,cfmOpener=null;
+function ask(title,sub,yes,cls,fn,opener){
+ $("cfmt").textContent=cap(title);$("cfms").textContent=cap(sub);
+ $("cfmno").textContent=cap("Cancel");
+ var y=$("cfmyes");y.textContent=cap(yes);y.className="cfmb "+cls;
+ cfmFn=fn;cfmOpener=opener||null;
+ $("confirm").hidden=false;$("cfmno").focus();
+}
+function closeAsk(){
+ $("confirm").hidden=true;cfmFn=null;
+ if(cfmOpener){cfmOpener.focus();cfmOpener=null}
+}
+$("cfmno").addEventListener("click",closeAsk);
+$("cfmyes").addEventListener("click",function(){var f=cfmFn;closeAsk();if(f)f()});
+$("confirm").addEventListener("click",function(e){if(e.target===$("confirm"))closeAsk()});
+document.addEventListener("keydown",function(e){
+ if($("confirm").hidden)return;
+ if(e.key==="Escape"){closeAsk();return}
+ if(e.key==="Tab"){
+  var a=[$("cfmno"),$("cfmyes")],ix=a.indexOf(document.activeElement);
+  e.preventDefault();
+  a[(ix+(e.shiftKey?-1:1)+2)%2].focus();
+ }
+});
+
+btn.className="big icon";btn.innerHTML=ICON_RESET;btn.setAttribute("aria-label","Start new count");btn.title="Start new count";
 btn.addEventListener("click",function(){
- if(!armed){
-  armed=true;setBtn();showNotice("Tap again to clear all counts",true,5000);
-  clearTimeout(armTimer);armTimer=setTimeout(function(){armed=false;setBtn()},5000);
-  return;
- }
- clearTimeout(armTimer);armed=false;setBtn();
- ITEMS.forEach(function(it){S.counts[it.n]=0});
- paintAll();enqueueClear();
- $("announce").textContent=cap("All counts cleared");
- showNotice("\u2713 All counts cleared",false,6000);
+ ask("Start a new count?","This sets every count back to 0 on all devices.","Yes, clear all","red",function(){
+  ITEMS.forEach(function(it){S.counts[it.n]=0});
+  paintAll();enqueueClear();
+  $("announce").textContent=cap("All counts cleared");
+  showNotice("\u2713 All counts cleared",false,6000);
+ },btn);
 });
-setBtn();
-
-/* Send count to Discord: first tap arms it, second tap sends. */
-var dArmed=false,dTimer=null;
-function setDBtn(){
- dbtn.className="big icon"+(dArmed?" armed":"");
- dbtn.innerHTML=ICON_BELL;
- var l=dArmed?"Tap again to send to Discord":"Send count to Discord";
- dbtn.setAttribute("aria-label",l);dbtn.title=l;
-}
+dbtn.className="big icon";dbtn.innerHTML=ICON_BELL;dbtn.setAttribute("aria-label","Send count to Discord");dbtn.title="Send count to Discord";
 dbtn.addEventListener("click",function(){
- if(!dArmed){
-  dArmed=true;setDBtn();showNotice("Tap again to send to Discord",false,5000);
-  clearTimeout(dTimer);dTimer=setTimeout(function(){dArmed=false;setDBtn()},5000);
-  return;
- }
- clearTimeout(dTimer);dArmed=false;setDBtn();
- sendDiscord();
+ ask("Send the final count to Discord?","Everything in the list, with its status.","Send","green",sendDiscord,dbtn);
 });
-setDBtn();
+
+/* Back to top */
+var toTop=$("totop");
+window.addEventListener("scroll",function(){toTop.hidden=window.scrollY<300},{passive:true});
+toTop.addEventListener("click",function(){
+ var rm=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ window.scrollTo({top:0,behavior:rm?"auto":"smooth"});
+});
 
 /* ---- Connection and visibility ---- */
 window.addEventListener("online",function(){
