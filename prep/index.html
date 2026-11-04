@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-page="prep">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -88,6 +88,16 @@ button:focus-visible,input:focus-visible{outline:4px solid var(--brand);outline-
 header button:focus-visible{outline-color:var(--beige)}
 @media (max-width:900px){.pick{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:620px){header{padding:10px 14px}header .wm{display:none}.row{grid-template-columns:1fr}.ctl{justify-content:space-between}.ctl button{flex:1}.top h1{font-size:34px}}
+/* page menu */
+.mnbtn{min-height:56px;padding:0 18px;border:3px solid var(--beige);border-radius:2px;background:transparent;color:var(--beige);font-size:22px;display:inline-flex;align-items:center;gap:10px;cursor:pointer;text-transform:uppercase;font-family:inherit;font-weight:inherit}
+.mnbtn svg{width:26px;height:26px;display:block;flex:none}
+.mnbtn[aria-expanded="true"]{background:var(--beige);color:var(--brand)}
+.mnlist{position:fixed;z-index:40;min-width:290px;max-width:calc(100vw - 24px);background:var(--ink);border:4px solid var(--beige);border-radius:2px;padding:8px;display:grid;gap:8px;box-shadow:0 10px 28px rgba(0,0,0,.4)}
+.mnlist a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px;padding:0 18px;border-radius:2px;background:var(--ink);color:var(--beige);text-decoration:none;font-size:24px;text-transform:uppercase;box-shadow:inset 0 0 0 2px var(--beige)}
+.mnlist a[aria-current="page"]{background:var(--brand);box-shadow:none}
+.mnlist a:focus-visible{outline:4px solid var(--beige);outline-offset:2px}
+.mnbtn:focus-visible{outline:4px solid var(--beige);outline-offset:3px}
+@media (max-width:480px){.mnbtn{min-height:48px;padding:0 12px;font-size:16px;gap:8px}.mnbtn svg{width:22px;height:22px}.mnlist a{font-size:21px;min-height:64px}}
 </style>
 </head>
 <body>
@@ -559,6 +569,37 @@ setInterval(function(){
 },60000);
 setView(false);status();
 loadRemote().then(function(){if(S.queue.length)scheduleFlush(0)});
+})();
+</script>
+<script>
+(function(){
+/* Page menu: jump between Stock Count, Prep List and Recipes without going back. Pages sit side by side in the same site. */
+var PAGES=[["stock","Stock Count","../stock/"],["prep","Prep List","../prep/"],["recipes","Recipes","../recipes/"]];
+var here=document.documentElement.getAttribute("data-page")||"";
+var hd=document.querySelector("header"),sy=document.getElementById("sync");
+if(!hd)return;
+var btn=document.createElement("button");
+btn.type="button";btn.className="mnbtn";btn.id="mnbtn";
+btn.setAttribute("aria-expanded","false");btn.setAttribute("aria-controls","mnlist");btn.setAttribute("aria-haspopup","true");
+btn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M3 5h18v3H3zm0 5.5h18v3H3zM3 16h18v3H3z"/></svg><span>Menu</span>';
+var list=document.createElement("nav");
+list.id="mnlist";list.className="mnlist";list.hidden=true;list.setAttribute("aria-label","Pages");
+list.innerHTML=PAGES.map(function(p){return'<a href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'><span>'+p[1]+'</span>'+(p[0]===here?'<span aria-hidden="true">✓</span>':"")+'</a>'}).join("");
+if(sy)hd.insertBefore(btn,sy);else hd.appendChild(btn);
+document.body.appendChild(list);
+function place(){
+ var r=btn.getBoundingClientRect(),w=list.offsetWidth,vw=document.documentElement.clientWidth||window.innerWidth;
+ list.style.top=Math.round(r.bottom+8)+"px";
+ list.style.right="auto";
+ list.style.left=Math.round(Math.max(12,Math.min(r.right-w,vw-w-12)))+"px";
+}
+function open(){list.hidden=false;place();btn.setAttribute("aria-expanded","true");var c=list.querySelector('[aria-current]')||list.querySelector("a");if(c)c.focus()}
+function close(back){list.hidden=true;btn.setAttribute("aria-expanded","false");if(back)btn.focus()}
+btn.addEventListener("click",function(){list.hidden?open():close(true)});
+document.addEventListener("click",function(e){if(!list.hidden&&!list.contains(e.target)&&!btn.contains(e.target))close(false)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!list.hidden){e.stopPropagation();close(true)}},true);
+window.addEventListener("resize",function(){if(!list.hidden)place()});
+window.addEventListener("scroll",function(){if(!list.hidden)place()},{passive:true});
 })();
 </script>
 </body>
