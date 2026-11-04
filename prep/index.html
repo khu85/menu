@@ -98,6 +98,84 @@ header button:focus-visible{outline-color:var(--beige)}
 .mnlist a:focus-visible{outline:4px solid var(--beige);outline-offset:2px}
 .mnbtn:focus-visible{outline:4px solid var(--beige);outline-offset:3px}
 @media (max-width:480px){.mnbtn{min-height:48px;padding:0 12px;font-size:16px;gap:8px}.mnbtn svg{width:22px;height:22px}.mnlist a{font-size:21px;min-height:64px}}
+/* devices: iPhone 16 Pro, iPad, desktop; everything in capitals */
+*{text-transform:uppercase !important}
+header,main{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+main{padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+html{-webkit-text-size-adjust:100%}
+@media (hover:hover){.big:hover,.tile:hover,.tog button:hover,.step:hover,.bs button:hover,.ctl button:hover,.tm button:hover,.pc>button:hover,.cfmb:hover,.rl:hover{filter:brightness(1.18)}}
+@media (min-width:1100px){
+ body{font-size:18px}
+ main{max-width:1100px;padding-top:20px;padding-bottom:64px}
+ header{padding-top:10px;padding-bottom:10px}
+ header .logo{height:50px}header .wm{font-size:24px}
+ #sync{min-height:44px;font-size:16px;padding:4px 14px}
+ .mnbtn,.homebtn{min-height:44px;font-size:16px;padding:0 16px}.mnbtn svg{width:22px;height:22px}
+ .big{min-height:52px;font-size:20px;padding:0 22px}.big.icon{width:58px}.big.icon svg{width:32px;height:32px}
+ .top h1{font-size:32px}.intro{font-size:19px}
+ section{margin-top:22px}
+ section h2,main h2{font-size:21px;padding:8px 14px;margin-bottom:10px}
+ ul.list{gap:10px}
+ .nmbox{min-height:58px;padding:6px 12px 6px 14px}.nm{font-size:22px}.tg{font-size:16px}.chip{font-size:14px}
+ .rl{min-height:38px;font-size:15px;padding:0 12px}
+ .ctl button{width:64px;min-height:58px;font-size:36px}.ct{min-width:80px;font-size:34px}
+ .sum{padding:10px 14px}.sum h2{font-size:20px}.sum .sw{min-width:150px;font-size:16px}.sum .sn{font-size:20px}.sum .sd,.sum p{font-size:16px}
+ .empty{font-size:20px;padding:16px}
+ .pc>button{height:70px;font-size:17px}.tm{height:40px}.tm button{width:42px;font-size:24px}.tm input{font-size:17px}
+ .cfmbox{max-width:480px}.cfmtitle{font-size:26px}.cfmsub{font-size:18px}.cfmb{min-height:56px;font-size:21px}
+ .tiles{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+ .tile{min-height:84px}.tile .tn{font-size:21px}.tile .tt{font-size:15px}
+ .recipe{max-width:760px}.recipe h1{font-size:30px;padding:10px 16px}.yield{font-size:22px;padding:8px 16px}
+ h4{font-size:16px;margin-top:16px}
+ .tog button{min-height:52px;font-size:19px}
+ .bs button{width:72px;min-height:58px;font-size:38px}.bs .bv{font-size:34px}
+ ul.ing li{font-size:20px;padding:8px 14px}
+ .prog{font-size:18px}
+ .step{font-size:21px;min-height:66px;padding:8px 14px}.step .n{width:42px;height:42px;font-size:21px}
+ .reset{min-height:52px;font-size:19px;padding:0 22px}
+ .flag{font-size:17px;padding:9px 14px}
+ #totop{width:52px;height:52px}#totop svg{width:26px;height:26px}
+}
+@media (min-width:621px) and (max-width:1099px){
+ body{font-size:22px}
+ .nm{font-size:27px}.tile .tn{font-size:25px}.step{font-size:27px}
+}
+@media (max-width:620px){
+ header,main{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+}
+@media (max-width:480px){
+ body{font-size:19px}
+ header{gap:10px;padding-top:8px;padding-bottom:8px}
+ header .logo{height:46px}
+ #sync{min-height:44px;font-size:15px;line-height:1.15;padding:4px 12px;flex:1;min-width:0}
+ .mnbtn,.homebtn{min-height:48px;font-size:16px;padding:0 12px}
+ main{padding-top:14px;padding-bottom:64px}
+ .top{gap:10px}.top h1{font-size:26px}
+ .big{min-height:56px;font-size:20px;padding:0 16px}.big.icon{width:64px}.big.icon svg{width:36px;height:36px}
+ section{margin-top:20px}
+ section h2,main h2{font-size:20px;padding:8px 12px}
+ .intro{font-size:18px}
+ ul.list{gap:12px}
+ .nmbox{min-height:60px;padding:6px 10px 6px 12px}.nm{font-size:21px}.tg{font-size:15px}.chip{font-size:14px}
+ .rl{min-height:40px;font-size:15px;padding:0 10px}
+ .ctl{gap:8px}.ctl button{min-height:64px;font-size:40px}.ct{font-size:40px;min-width:72px}
+ .sum{padding:10px 12px}.sum h2{font-size:20px}.sum .sw{min-width:0;font-size:16px}.sum .sn{font-size:20px;flex-basis:100%}.sum .sd,.sum p{font-size:16px}
+ .empty{font-size:19px;padding:16px}
+ .pick{gap:10px 8px}.pc>button{height:72px;font-size:16px}.tm{height:44px}.tm button{width:44px}.tm input{font-size:18px}
+ .cfmbox{padding:16px}.cfmtitle{font-size:24px}.cfmsub{font-size:17px}.cfmb{min-height:60px;font-size:20px}
+ .tiles{grid-template-columns:1fr 1fr;gap:8px}
+ .tile{min-height:92px;padding:8px}.tile .tn{font-size:19px}.tile .tt{font-size:14px}
+ .recipe h1{font-size:25px;padding:10px 12px}.yield{font-size:20px;padding:8px 12px}
+ h4{font-size:16px}
+ .tog button{min-height:56px;font-size:20px}
+ .bs button{width:72px;min-height:64px;font-size:40px}.bs .bv{font-size:38px}
+ ul.ing li{font-size:20px;padding:9px 12px;gap:10px}
+ .prog{font-size:17px}
+ .step{font-size:21px;min-height:76px;padding:8px 12px;gap:12px}.step .n{width:44px;height:44px;font-size:22px}
+ .reset{min-height:56px;font-size:20px}
+ .flag{font-size:17px;padding:10px 12px}
+ #totop{width:56px;height:56px;right:12px}
+}
 </style>
 </head>
 <body>
