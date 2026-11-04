@@ -127,18 +127,87 @@ body.hasbar #totop{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
 button:focus-visible{outline:4px solid var(--brand);outline-offset:3px}
 header button:focus-visible,#bar button:focus-visible{outline-color:var(--beige)}
 @media (hover:hover){.big:hover,.tab:hover,.sec:hover,.stp:hover,.tile:hover,.log button:hover{filter:brightness(1.18)}}
+*{text-transform:uppercase !important}
+.row.edit{grid-template-columns:minmax(0,1fr) repeat(3,112px) 130px;align-items:stretch}
+.ecell{display:flex;flex-direction:column;gap:2px}
+.ecell .el{font-size:13px;text-align:center}
+.ecell .cin input{height:56px;font-size:28px}
+.ecell .cin{padding:0 4px}
+.eo{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-radius:2px;padding:4px 6px;background:var(--ink);color:var(--beige);font-size:15px;line-height:1.15}
+.eo b{font-weight:600;font-size:20px}
+.eo.neg{background:#f2c230;color:var(--ink)}
+.xp{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.big.sm{min-height:50px;font-size:18px;padding:0 16px}
+@media (min-width:761px){
+ body{font-size:20px}
+ .wkname{font-size:20px;padding:6px 14px}
+ .tab{min-height:52px;font-size:19px;padding:0 14px}
+ .sec{min-height:48px;font-size:18px}
+ .big{min-height:54px;font-size:20px;padding:0 20px}
+ .big.sm{min-height:46px;font-size:17px}
+ .nmbox{min-height:66px;padding:8px 14px}.nm{font-size:22px}.tg{font-size:16px}
+ .row{grid-template-columns:minmax(0,1fr) 170px;gap:8px 10px}
+ .row.three{grid-template-columns:minmax(0,1fr) 150px 130px}
+ .row.add{grid-template-columns:minmax(0,1fr) 270px}
+ .row.edit{grid-template-columns:minmax(0,1fr) repeat(3,104px) 120px}
+ .cin input{height:60px;font-size:30px}
+ .ecell .cin input{height:52px;font-size:25px}
+ .step{grid-template-columns:62px minmax(0,1fr) 62px}.stp{min-height:66px;font-size:34px}.step .cin input{font-size:30px}
+ .ob .on{font-size:23px}.ob .ol{font-size:14px}
+ h2.h{font-size:21px;padding:8px 14px}
+ .orow{padding:8px 14px;margin-bottom:6px}.orow .on{font-size:21px}.orow .sub{font-size:15px}.orow .q{font-size:23px}.orow .c{font-size:16px}
+ .stat .sv{font-size:28px}.stat .sl{font-size:14px}.stat{padding:8px 12px}
+ .note{font-size:18px;padding:10px 14px}.empty{font-size:20px;padding:16px}
+ .log li{font-size:17px}.log .q{font-size:20px}.log .t{font-size:15px;width:170px}.log button{min-height:42px;font-size:15px}
+ .tile{min-height:90px}.tile .tn{font-size:21px}.tile .tc{font-size:25px}.tile .ts{font-size:15px}
+ #bar .bi{font-size:19px}
+ .seg button{min-height:48px;font-size:17px;padding:0 18px}
+ .cfmtitle{font-size:26px}.cfmsub{font-size:18px}.cfml{font-size:17px}.cfmb{min-height:60px;font-size:21px}
+ .tiles{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+}
 @media (min-width:1100px){
- :root{--mw:1240px}
- ul.list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 18px}
- .row.add{grid-template-columns:minmax(0,1fr) 300px}
- .step{grid-template-columns:64px minmax(0,1fr) 64px}
- .tiles{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
- .orlist{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;align-items:stretch}
- .orlist .orsec{grid-column:1/-1}
- .orlist .orow{margin-bottom:0}
+ :root{--mw:980px}
+ body{font-size:17px}
+ header{padding-top:8px;padding-bottom:8px}
+ header .logo{height:50px}header .wm{font-size:24px}
+ #sync{min-height:42px;font-size:15px;padding:4px 14px}
+ header .mnbtn{min-height:42px;font-size:15px;padding:0 14px}header .mnbtn svg{width:20px;height:20px}
+ .tabwrap{padding-top:8px;padding-bottom:8px}
+ .wkname{font-size:17px;padding:5px 12px}
+ .tab{min-height:42px;font-size:15px;padding:0 12px}
+ .sec{min-height:40px;font-size:15px;padding:0 12px}
+ .big{min-height:44px;font-size:16px;padding:0 16px}
+ .big.sm{min-height:40px;font-size:15px}
+ main{padding-top:14px}
+ .nmbox{min-height:48px;padding:4px 12px}.nm{font-size:17px}.tg{font-size:13px}
+ .row{grid-template-columns:minmax(0,1fr) 150px;gap:6px 8px}
+ .row.three{grid-template-columns:minmax(0,1fr) 130px 120px}
+ .row.add{grid-template-columns:minmax(0,1fr) 220px}
+ .row.edit{grid-template-columns:minmax(0,1fr) repeat(3,92px) 110px}
+ ul.list{gap:8px}
+ .cin{border-width:2px}.cin input{height:44px;font-size:22px}
+ .ecell .cin input{height:42px;font-size:20px}.ecell .el{font-size:11px}
+ .step{grid-template-columns:46px minmax(0,1fr) 46px;gap:6px}.stp{min-height:48px;font-size:24px}.step .cin input{font-size:22px}
+ .ob .on{font-size:18px}.ob .ol{font-size:12px}
+ .eo{font-size:12px}.eo b{font-size:16px}
+ h2.h{font-size:17px;padding:6px 12px;margin-bottom:8px}
+ section{margin-top:18px}
+ .orow{padding:6px 12px;margin-bottom:5px}.orow .on{font-size:17px}.orow .sub{font-size:13px}.orow .q{font-size:19px}.orow .c{font-size:14px}
+ .stat .sv{font-size:22px}.stat .sl{font-size:12px}.stat{padding:6px 10px}
+ .note{font-size:15px;padding:8px 12px;margin-bottom:10px}.empty{font-size:17px;padding:12px}
+ .log li{font-size:15px;padding:5px 10px}.log .q{font-size:17px}.log .t{font-size:13px;width:150px}.log button{min-height:36px;font-size:13px}
+ .tile{min-height:72px;padding:8px 12px}.tile .tn{font-size:17px}.tile .tc{font-size:20px}.tile .ts{font-size:12px}
+ .tiles{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+ #bar{padding-top:8px;padding-bottom:8px}#bar .bi{font-size:16px}
+ .seg button{min-height:42px;font-size:15px;padding:0 16px}
+ .cfmbox{max-width:480px;padding:18px}.cfmtitle{font-size:22px}.cfmsub{font-size:16px}.cfml{font-size:15px}.cfmb{min-height:50px;font-size:18px}
+ #totop{width:48px;height:48px}#totop svg{width:24px;height:24px}
 }
 @media (max-width:760px){
  :root{--px:12px}
+ .row.edit{grid-template-columns:1fr 1fr 1fr}
+ .row.edit .nmbox,.row.edit .eo{grid-column:1/-1}
+ .ecell .el{font-size:12px}
  header{padding-top:10px;padding-bottom:10px}header .wm{display:none}
  .tabwrap{padding-top:8px;padding-bottom:8px}
  .tab{min-height:52px;font-size:18px;padding:0 10px}
@@ -148,6 +217,7 @@ header button:focus-visible,#bar button:focus-visible{outline-color:var(--beige)
  .nmbox{grid-column:1/-1;min-height:70px}
  .stats{grid-template-columns:1fr}
  .log .t{width:auto}.log li{flex-wrap:wrap}
+ .row.edit{grid-template-columns:1fr 1fr 1fr}
 }
 @media (max-width:480px){
  body{font-size:19px}
@@ -222,6 +292,7 @@ function persist(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 var $=function(id){return document.getElementById(id)};
 function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
 function r2(v){return Math.round(v*100)/100}
+function qtyText(n,unit){var u=String(unit||"").replace(/^(\d+(?:\.\d+)?)\s+([A-Za-z])/,"$1$2");return u?n+" x "+u:String(n)}
 function fmt(n){return String(Math.round(n*1000)/1000)}
 function money(n){return"$"+Number(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}
 function keyOf(it){return it.section+" / "+it.item}
@@ -265,6 +336,16 @@ function applyOp(w,op){
   });
  }else if(op.type==="rm"){
   w.additions=w.additions.filter(function(a){return a.id!==op.id});
+ }else if(op.type==="edit"){
+  if(op.field==="begin"||op.field==="end"){
+   var mm=op.field==="end"?w.end:w.begin;
+   if(op.value===null)delete mm[op.key];else mm[op.key]=op.value;
+  }else if(op.field==="added"){
+   var lid="edit-local-"+op.key;
+   w.additions=w.additions.filter(function(a){return a.id!==lid});
+   var dl=r2(op.value-addedOf(w,op.key));
+   if(dl!==0)w.additions.push({id:lid,time:op.time||new Date().toISOString(),key:op.key,qty:dl,note:"Edited"});
+  }
  }
 }
 function rebase(w){
@@ -275,8 +356,8 @@ function rebase(w){
 
 /* ---- Rendering ---- */
 function navList(){
- return editable()?[["added","Added","Added"],["ending","Ending count","Ending"],["report","Report","Report"],["order","Order list","Order"],["history","History","History"]]
-  :[["report","Report","Report"],["order","Order list","Order"],["history","History","History"]];
+ return editable()?[["added","Added","Added"],["ending","Ending count","Ending"],["report","Report","Report"],["order","Order list","Order"],["edit","Edit week","Edit"],["history","History","History"]]
+  :[["report","Report","Report"],["order","Order list","Order"],["edit","Edit week","Edit"],["history","History","History"]];
 }
 function curNav(){
  var l=navList(),ok=false;
@@ -327,7 +408,7 @@ function renderNav(){
 }
 function curSec(){var s=sections();return s.indexOf(S.sec)>=0?S.sec:(s[0]||"")}
 function renderSecs(){
- var show=(curNav()==="added"||curNav()==="ending")&&editable()&&S.items.length>0;
+ var show=((curNav()==="added"||curNav()==="ending")&&editable()||curNav()==="edit"&&!!wk())&&S.items.length>0;
  $("secs").hidden=!show;
  if(!show)return;
  var cs=curSec(),h="";
@@ -360,6 +441,7 @@ function renderView(){
  else if(nav==="ending"){v.innerHTML=endingHtml();var cs=curSec();S.items.forEach(function(it,i){if(it.section===cs)paintEnd(i)})}
  else if(nav==="report")v.innerHTML=reportHtml();
  else if(nav==="order")v.innerHTML=orderHtml();
+ else if(nav==="edit")v.innerHTML=editHtml();
  else v.innerHTML=historyHtml();
 }
 
@@ -382,7 +464,7 @@ function logHtml(w,canRemove){
  var h='<ul class="log">';
  l.forEach(function(a){
   var it=itemByKey(a.key);
-  h+='<li><span class="t">'+esc(timeText(a.time))+'</span><span class="n">'+esc(it?it.item:a.key)+(a.note?' <span class="u">('+esc(a.note)+')</span>':'')+'</span><span class="q">+'+esc(fmt(a.qty))+(it&&it.unit?' <span class="u">'+esc(it.unit)+'</span>':'')+'</span>'+(canRemove&&editable()?'<button type="button" data-rm="'+esc(a.id)+'" aria-label="'+esc("Remove "+(it?it.item:a.key)+" "+fmt(a.qty))+'">Remove</button>':'')+'</li>';
+  h+='<li><span class="t">'+esc(timeText(a.time))+'</span><span class="n">'+esc(it?it.item:a.key)+(a.note?' <span class="u">('+esc(a.note)+')</span>':'')+'</span><span class="q">'+(a.qty<0?"\u2212":"+")+esc(fmt(Math.abs(a.qty)))+(it&&it.unit?' <span class="u">'+esc(it.unit)+'</span>':'')+'</span>'+(canRemove&&editable()?'<button type="button" data-rm="'+esc(a.id)+'" aria-label="'+esc("Remove "+(it?it.item:a.key)+" "+fmt(a.qty))+'">Remove</button>':'')+'</li>';
  });
  return h+'</ul>';
 }
@@ -414,6 +496,23 @@ function endingHtml(){
  return h+'</ul>';
 }
 
+/* Edit week: fix beginning, added and ending for any week */
+function editHtml(){
+ var w=wk(),sec=curSec(),h='<p class="note">'+esc("Fix a mistake in "+w.label+". Changes save right away and the report, COGS and next week\u2019s beginning update.")+'</p><ul class="list">';
+ S.items.forEach(function(it){
+  if(it.section!==sec)return;
+  var k=keyOf(it),c=calc(w,it),a=addedOf(w,k);
+  h+='<li class="row edit" data-ek="'+esc(k)+'"><div class="nmbox"><div class="nm">'+esc(it.item)+'</div><div class="tg">'+(it.unit?'<span class="u">'+esc(it.unit)+'</span>':'')+'</div></div>'+
+   ecell("begin",k,it,"Begin",typeof w.begin[k]==="number"?w.begin[k]:0)+ecell("added",k,it,"Added",a)+ecell("end",k,it,"End",c.e===null?"":c.e)+
+   '<div class="eo'+(c.used!==null&&c.used<0?" neg":"")+'" id="eo'+esc(k)+'">'+eoInner(c)+'</div></li>';
+ });
+ return h+'</ul>';
+}
+function ecell(field,k,it,label,val){
+ return'<div class="ecell"><span class="el">'+label+'</span><label class="cin"><span class="sr">'+esc(label+": "+it.item)+'</span><input type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" autocorrect="off" spellcheck="false" data-edit="'+field+'" data-key="'+esc(k)+'" value="'+(val===""?"":esc(fmt(val)))+'" placeholder="\u2013"></label></div>';
+}
+function eoInner(c){return c.used===null?'<span>Not counted</span>':'<span>Used</span><b>'+esc(fmt(c.used))+'</b><span>'+esc(money(c.total))+'</span>'}
+
 /* Report */
 function sectionTotals(w){
  var out=[];
@@ -428,10 +527,11 @@ function sectionTotals(w){
 function totalCogs(w){var t=0;rows(w).forEach(function(r){if(r.total!==null)t+=r.total});return r2(t)}
 function reportHtml(){
  var w=wk(),u=uncounted(w),oc=orderCount(w);
- var h='<div class="stats"><div class="stat"><div class="sl">COGS'+(u?" so far":"")+'</div><div class="sv">'+esc(money(w.status==="closed"&&typeof w.total==="number"?w.total:totalCogs(w)))+'</div></div>'+
+ var h='<div class="stats"><div class="stat"><div class="sl">COGS'+(u?" so far":"")+'</div><div class="sv">'+esc(money(totalCogs(w)))+'</div></div>'+
   '<div class="stat'+(oc?" bad":" plain")+'"><div class="sl">Items to order</div><div class="sv">'+oc+'</div></div>'+
   '<div class="stat plain"><div class="sl">Not counted</div><div class="sv">'+u+'</div></div></div>';
  h+='<div class="actions"><button type="button" class="big light" id="copyreport">Copy report</button>'+(editable()?'<button type="button" class="big green" id="closeweek">Close week</button>':"")+'</div>';
+ h+=xp("report");
  if(u)h+='<p class="note">'+esc(u===1?"1 item has no ending count yet. Its cost is left out.":u+" items have no ending count yet. Their cost is left out.")+'</p>';
  sectionTotals(w).forEach(function(s){
   h+='<section><h2 class="h"><span>'+esc(s.section)+'</span><span>'+esc(money(s.total))+'</span></h2>';
@@ -447,7 +547,7 @@ function reportHtml(){
  return h;
 }
 function reportText(){
- var w=wk(),lines=["COGS report - "+w.label,"Total COGS: "+money(w.status==="closed"&&typeof w.total==="number"?w.total:totalCogs(w))];
+ var w=wk(),lines=["COGS report - "+w.label,"Total COGS: "+money(totalCogs(w))];
  sectionTotals(w).forEach(function(s){
   lines.push("","*"+s.section+"* "+money(s.total));
   s.rows.forEach(function(r){
@@ -482,6 +582,7 @@ function orderHtml(){
  var w=wk(),g=vendorGroups(w),u=uncounted(w),h="",n=orderRows(w).length;
  h+='<div class="seg" role="group" aria-label="Predict from"><button type="button" data-basis="week" aria-pressed="'+(S.basis==="week")+'">Last week</button><button type="button" data-basis="month" aria-pressed="'+(S.basis==="month")+'">Monthly average</button></div>';
  h+='<div class="actions"><button type="button" class="big light" id="copyorder"'+(g.length?"":" disabled")+'>Copy order list</button><button type="button" class="big green" id="sendorder"'+(HAS_API?"":" disabled")+'>Send to Discord</button></div>';
+ h+=xp("order");
  h+='<p class="note">'+esc("Suggested amount = "+(S.basis==="month"?"average weekly use over the last "+AVG+" weeks":"last week’s use")+" minus what you have left, rounded up. An item is listed when it won’t cover another week.")+'</p>';
  if(S.basis==="month"){
   var few=false;orderRows(w).forEach(function(r){if(r.samples<AVG)few=true});
@@ -495,7 +596,7 @@ function orderHtml(){
   vg.sections.forEach(function(sg){
    h+='<div class="sub orsec" style="font-size:20px;margin:6px 0 0;text-transform:uppercase;letter-spacing:1px">'+esc(sg.section)+'</div>';
    sg.rows.forEach(function(r){
-    h+='<div class="orow"><div class="l"><div class="on">'+esc(r.it.item)+'</div><div class="sub">Left '+esc(fmt(r.e))+' · Expect '+esc(fmt(r2(r.exp)))+' / week'+(S.basis==="month"?' · Used '+esc(fmt(r.used)):"")+'</div></div><div class="r"><div class="q">'+esc(String(r.sug))+(r.it.unit?' <span class="u">'+esc(r.it.unit)+'</span>':"")+'</div></div></div>';
+    h+='<div class="orow"><div class="l"><div class="on">'+esc(r.it.item)+'</div><div class="sub">Left '+esc(fmt(r.e))+' · Expect '+esc(fmt(r2(r.exp)))+' / week'+(S.basis==="month"?' · Used '+esc(fmt(r.used)):"")+'</div></div><div class="r"><div class="q">'+esc(qtyText(r.sug,r.it.unit))+'</div></div></div>';
    });
   });
   h+='</div></section>';
@@ -508,7 +609,7 @@ function orderText(){
   lines.push("","== "+vg.vendor+" ==");
   vg.sections.forEach(function(sg){
    lines.push("*"+sg.section+"*");
-   sg.rows.forEach(function(r){lines.push("- "+r.it.item+": "+r.sug+(r.it.unit?" "+r.it.unit:""))});
+   sg.rows.forEach(function(r){lines.push("- "+r.it.item+": "+qtyText(r.sug,r.it.unit))});
   });
  });
  return lines.join("\n");
@@ -557,7 +658,7 @@ function histToggle(){
 }
 function historyHtml(){
  if(S.hist==="months")return S.viewMonth?monthHtml(S.viewMonth):monthsHtml();
- var ws=S.weeks.slice().reverse(),h=histToggle()+'<p class="note">Tap a week to see its report, its order list and what was added.</p><div class="tiles">';
+ var ws=S.weeks.slice().reverse(),h=histToggle()+xp("weeks")+'<p class="note">Tap a week to see its report, its order list and what was added.</p><div class="tiles">';
  ws.forEach(function(w){
   var open=w.status==="open";
   h+='<button type="button" class="tile'+(open?" open":"")+'" data-week="'+esc(w.id)+'"><span class="tn">'+esc(w.label)+'</span><span class="ts">'+(open?"Open now":"Closed")+'</span>'+(open?"":'<span class="tc">'+esc(typeof w.total==="number"?money(w.total):"")+'</span>')+'</button>';
@@ -566,7 +667,7 @@ function historyHtml(){
  return h+'</div>';
 }
 function monthsHtml(){
- var ms=monthGroups(),h=histToggle()+'<p class="note">The cafe is open Thursday to Sunday, so a week counts toward the month its Thursday falls in. Oct 29 – Nov 1 is an October week.</p><div class="tiles">';
+ var ms=monthGroups(),h=histToggle()+xp("months")+'<p class="note">The cafe is open Thursday to Sunday, so a week counts toward the month its Thursday falls in. Oct 29 – Nov 1 is an October week.</p><div class="tiles">';
  ms.forEach(function(g,i){
   var prev=ms[i+1],delta="";
   if(prev&&prev.closed&&g.closed&&prev.total>0){var pc=Math.round((g.total/g.closed-prev.total/prev.closed)/(prev.total/prev.closed)*100);delta=(pc>0?"+":"")+pc+"% per week vs "+monthName(prev.month).split(" ")[0]}
@@ -580,7 +681,7 @@ function monthHtml(m){
  var g=monthByKey(m);
  if(!g)return histToggle()+monthsHtml();
  var secs=monthSums(g),avg=g.closed?r2(g.total/g.closed):0;
- var h='<div class="actions"><button type="button" class="big light" id="allmonths">All months</button><button type="button" class="big light" id="copymonth">Copy month report</button></div>';
+ var h='<div class="actions"><button type="button" class="big light" id="allmonths">All months</button><button type="button" class="big light" id="copymonth">Copy month report</button></div>'+xp("month");
  h+='<div class="stats"><div class="stat"><div class="sl">Month COGS</div><div class="sv">'+esc(money(g.total))+'</div></div><div class="stat plain"><div class="sl">Weeks closed</div><div class="sv">'+g.closed+'</div></div><div class="stat plain"><div class="sl">Average per week</div><div class="sv">'+esc(money(avg))+'</div></div></div>';
  if(g.open)h+='<p class="note">There is an open week in this month. It is added here once you close it.</p>';
  h+='<section><h2 class="h">Weeks</h2><div class="tiles">';
@@ -605,6 +706,63 @@ function monthText(m){
  });
  return lines.join("\n");
 }
+
+/* ---- Export for Google Sheets ---- */
+function cell(v,delim){
+ if(v===null||v===undefined)return"";
+ var t=String(v);
+ return(t.indexOf(delim)>=0||/["\n\r]/.test(t))?'"'+t.replace(/"/g,'""')+'"':t;
+}
+function toText(rows,delim){return rows.map(function(r){return r.map(function(v){return cell(v,delim)}).join(delim)}).join("\n")}
+function slug(t){return String(t).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
+function exportRows(kind){
+ var w=wk(),out=[];
+ if(kind==="report"){
+  out.push(["Section","Item","Unit","Begin","Added","End","Used","Unit cost","COGS"]);
+  rows(w).forEach(function(r){out.push([r.it.section,r.it.item,r.it.unit||"",r.b,r.a,r.e===null?"":r.e,r.used===null?"":r.used,r.cost,r.total===null?"":r.total])});
+  out.push(["Total","","","","","","","",totalCogs(w)]);
+  return{name:"report-"+slug(w.label),rows:out};
+ }
+ if(kind==="order"){
+  out.push(["Vendor","Section","Item","Order","Unit","Order (x unit)","Left","Expected per week","Unit cost","Estimated cost"]);
+  vendorGroups(w).forEach(function(vg){vg.sections.forEach(function(sg){sg.rows.forEach(function(r){
+   out.push([vg.vendor,sg.section,r.it.item,r.sug,r.it.unit||"",qtyText(r.sug,r.it.unit),r.e,r2(r.exp),r.it.cost||0,r2(r.sug*(r.it.cost||0))]);
+  })})});
+  return{name:"order-list-"+slug(w.label),rows:out};
+ }
+ if(kind==="month"){
+  var g=monthByKey(S.viewMonth);
+  out.push(["Section","Item","Unit","Used","Average per week","COGS"]);
+  if(g)monthSums(g).forEach(function(sc){sc.rows.forEach(function(r){out.push([sc.section,r.it.item,r.it.unit||"",r.used,r.avg,r.cost])})});
+  if(g)out.push(["Total","","","","",g.total]);
+  return{name:"month-"+S.viewMonth,rows:out};
+ }
+ if(kind==="weeks"){
+  out.push(["Week","Month","Status","COGS"]);
+  S.weeks.forEach(function(x){out.push([x.label,x.month||"",x.status,typeof x.total==="number"?x.total:""])});
+  return{name:"weeks",rows:out};
+ }
+ if(kind==="months"){
+  out.push(["Month","Weeks closed","COGS","Average per week"]);
+  monthGroups().forEach(function(g){out.push([monthName(g.month),g.closed,g.total,g.closed?r2(g.total/g.closed):""])});
+  return{name:"months",rows:out};
+ }
+ return{name:"export",rows:out};
+}
+function saveFile(name,text){
+ try{
+  var blob=new Blob(["\uFEFF"+text],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url)},4000);
+  showNotice("\u2713 Downloaded "+name,false,6000);
+ }catch(e){showNotice("\u26A0 Couldn\u2019t download. Use Copy for Google Sheets",true,8000)}
+}
+function doExport(mode,kind){
+ var x=exportRows(kind);
+ if(mode==="sheets")doCopy(toText(x.rows,"\t"),"Copied. Open Google Sheets and paste");
+ else saveFile("kinhfolk-"+x.name+".csv",toText(x.rows,","));
+}
+function xp(kind){return'<div class="xp"><button type="button" class="big light sm" data-x="sheets:'+kind+'">Copy for Google Sheets</button><button type="button" class="big light sm" data-x="csv:'+kind+'">Download CSV</button></div>'}
 
 /* ---- Clicks and typing ---- */
 $("nav").addEventListener("click",function(e){
@@ -632,6 +790,15 @@ function cleanNum(inp){
 }
 $("view").addEventListener("input",function(e){
  var inp=e.target;
+ if(inp.dataset&&inp.dataset.edit){
+  var w0=wk(),kk=inp.dataset.key,fld=inp.dataset.edit,n0=cleanNum(inp);
+  if(!w0||(n0===null&&(fld!=="end"||w0.status==="closed")))return;
+  var eop={type:"edit",week:w0.id,key:kk,field:fld,value:n0,time:new Date().toISOString()};
+  applyOp(w0,eop);enqueue(eop);
+  var itx=itemByKey(kk),box=document.getElementById("eo"+kk);
+  if(itx&&box){var cx=calc(w0,itx);box.innerHTML=eoInner(cx);box.className="eo"+(cx.used!==null&&cx.used<0?" neg":"")}
+  renderNav();return;
+ }
  if(inp.dataset&&inp.dataset.draft!==undefined){
   var n=cleanNum(inp);
   if(n===null||n<=0)delete S.drafts[inp.dataset.draft];else S.drafts[inp.dataset.draft]=n;
@@ -657,6 +824,8 @@ $("view").addEventListener("click",function(e){
   },rm);
   return;
  }
+ var xb=t.closest("button[data-x]");
+ if(xb){var xs=xb.dataset.x.split(":");doExport(xs[0],xs[1]);return}
  var sp=t.closest("button[data-step]");
  if(sp){
   var key=sp.dataset.key,cur0=S.drafts[key]||0,nx=r2(cur0+(+sp.dataset.step));
@@ -737,6 +906,7 @@ toTop.addEventListener("click",function(){
 });
 
 /* ---- Saving to the Google Apps Script web app ---- */
+var edited={},pendingRender=false;
 var inflight=null,flushing=false,flushTimer=null,retryMs=0,netErr=false,lastError="",loaded=false,stale=false,busy=false;
 function plural(n){return n===1?"1 change":n+" changes"}
 function status(){
@@ -761,6 +931,7 @@ function post(body){
   .then(function(d){clearTimeout(to);return d},function(e){clearTimeout(to);throw e});
 }
 function bodyFor(op){
+ if(op.type==="edit")return{action:"editWeek",week:op.week,key:op.key,field:op.field,value:op.value};
  if(op.type==="end")return{action:"setEnding",week:op.week,key:op.key,count:op.count};
  if(op.type==="begin")return{action:"setBeginning",week:op.week,key:op.key,count:op.count};
  if(op.type==="add")return{action:"addBatch",week:op.week,batch:op.batch,entries:op.entries};
@@ -768,7 +939,7 @@ function bodyFor(op){
 }
 function scheduleFlush(ms){clearTimeout(flushTimer);flushTimer=setTimeout(function(){flushTimer=null;flush()},ms)}
 function enqueue(op){
- if(op.type==="end"||op.type==="begin")S.queue=S.queue.filter(function(o){return(inflight&&o.qid===inflight.qid)||o.type!==op.type||o.key!==op.key||o.week!==op.week});
+ if(op.type==="end"||op.type==="begin"||op.type==="edit")S.queue=S.queue.filter(function(o){return(inflight&&o.qid===inflight.qid)||o.type!==op.type||o.key!==op.key||o.week!==op.week||o.field!==op.field});
  op.qid=++S.seq;S.queue.push(op);persist();status();scheduleFlush(600);
 }
 async function flush(){
@@ -780,12 +951,14 @@ async function flush(){
   try{
    var d=await post(bodyFor(op));
    S.queue=S.queue.filter(function(o){return o.qid!==op.qid});
+   if(op.type==="edit")edited[op.week]=true;
    if(d&&d.ok){netErr=false;lastError="";retryMs=0;stale=false}
    else{lastError=(d&&d.error)||"unknown error";rejected=true}
    persist();
   }catch(e){netErr=true;failed=true;break}
  }
  inflight=null;flushing=false;
+ if(!failed&&!S.queue.length&&Object.keys(edited).length){Object.keys(edited).forEach(function(id){delete S.cache[id]});edited={};loadRemote()}
  if(failed){retryMs=Math.min(60000,retryMs?retryMs*2:5000);scheduleFlush(retryMs)}
  status();
  if(rejected&&!failed)loadRemote(true);
@@ -807,14 +980,14 @@ async function loadRemote(force){
    var before=JSON.stringify([S.items,S.weeks,S.cur,S.usage]);
    S.items=d.items;S.weeks=d.weeks||[];S.usage=d.usage||{};
    S.cur=d.current?rebase(d.current):null;
-   if(d.week)S.cache[d.week.id]=d.week;
+   if(d.week)S.cache[d.week.id]=rebase(d.week);
    S.weeks.forEach(function(w){if(w.status==="open"&&S.cache[w.id])delete S.cache[w.id]});
    persist();stale=false;
    changed=before!==JSON.stringify([S.items,S.weeks,S.cur,S.usage]);
   }catch(e){stale=true}
  }
  var first=!loaded;loaded=true;
- if(first||changed||force)renderAll();
+ if(first||changed||force){var ae=document.activeElement;if(!first&&ae&&ae.tagName==="INPUT")pendingRender=true;else renderAll()}
  status();
 }
 async function openWeek(id){
@@ -823,7 +996,7 @@ async function openWeek(id){
  if(w.status==="open"){S.viewId="";S.nav="report";persist();renderAll();window.scrollTo(0,0);return}
  if(!S.cache[id]){
   if(!HAS_API||!navigator.onLine){showNotice("\u26A0 Connect to the internet to open an older week",true,7000);return}
-  try{var d=await fetchJson(API+"?week="+encodeURIComponent(id));if(d&&d.ok&&d.week)S.cache[id]=d.week;else throw new Error("no week")}
+  try{var d=await fetchJson(API+"?week="+encodeURIComponent(id));if(d&&d.ok&&d.week)S.cache[id]=rebase(d.week);else throw new Error("no week")}
   catch(e){showNotice("\u26A0 Couldn\u2019t load that week",true,7000);return}
  }
  S.viewId=id;S.nav="report";persist();renderAll();window.scrollTo(0,0);
@@ -839,7 +1012,7 @@ async function closeWeek(){
   if(d&&d.ok){
    await loadRemote(true);
    var dd=await fetchJson(API+"?week="+encodeURIComponent(id));
-   if(dd&&dd.week){S.cache[id]=dd.week;S.viewId=id;S.nav="report";persist()}
+   if(dd&&dd.week){S.cache[id]=rebase(dd.week);S.viewId=id;S.nav="report";persist()}
    renderAll();window.scrollTo(0,0);
    var dm=d.discord==="sent"?" Order list sent to Discord.":(d.discord==="not_set"?" Discord isn\u2019t set up yet.":(d.discord?" Discord problem: "+String(d.discord).replace(/^error: /,""):""));
    showNotice("\u2713 Week closed. Total COGS "+money(d.total)+"."+dm,!!(d.discord&&d.discord!=="sent"&&d.discord!=="not_set"),14000);
@@ -870,6 +1043,7 @@ async function startWeek(){
 window.addEventListener("online",function(){status();scheduleFlush(0);if(stale&&!S.queue.length)loadRemote()});
 window.addEventListener("offline",status);
 function idle(){var a=document.activeElement;return document.visibilityState==="visible"&&loaded&&!busy&&!S.queue.length&&!flushTimer&&!flushing&&navigator.onLine&&$("confirm").hidden&&!(a&&a.tagName==="INPUT")}
+document.addEventListener("focusout",function(){if(pendingRender)setTimeout(function(){var a=document.activeElement;if(pendingRender&&!(a&&a.tagName==="INPUT")){pendingRender=false;renderAll()}},150)});
 document.addEventListener("visibilitychange",function(){if(idle())loadRemote()});
 setInterval(function(){if(idle())loadRemote()},60000);
 
