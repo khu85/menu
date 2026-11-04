@@ -267,6 +267,13 @@ header button:focus-visible,#bar button:focus-visible{outline-color:var(--beige)
 .mnbtn:focus-visible{outline:4px solid var(--beige);outline-offset:3px}
 @media (max-width:480px){.mnbtn{min-height:48px;padding:0 12px;font-size:16px;gap:8px}.mnbtn svg{width:22px;height:22px}.mnlist a{font-size:21px;min-height:64px}}
 
+
+/* green headings with black text, ending-count rows */
+:root{--mint:#005949}
+h2.h{background:var(--mint) !important;color:#f1eedb !important}
+.row.end{grid-template-columns:minmax(0,1fr) 300px 140px}
+@media (min-width:1100px){.row.end{grid-template-columns:minmax(0,1fr) 230px 120px}}
+@media (max-width:760px){.row.end{grid-template-columns:1fr}.row.end .ob{flex-direction:row;gap:10px;min-height:46px}}
 </style>
 </head>
 <body>
@@ -285,9 +292,10 @@ var HAS_API=/^https:\/\/script\.google\.com\//.test(API);
 var KEY="kinhfolk-stock-v2";
 
 var AVG=4;
-var S={items:[],weeks:[],cur:null,drafts:{},queue:[],seq:0,nav:"added",sec:"",viewId:"",cache:{},usage:{},basis:"week",hist:"weeks",viewMonth:""};
+var S={items:[],weeks:[],cur:null,drafts:{},queue:[],seq:0,nav:"added",sec:"",viewId:"",cache:{},usage:{},basis:"week",hist:"weeks",viewMonth:"",edrafts:{},edw:""};
 try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&typeof p==="object"){for(var k0 in S)if(p[k0]!==undefined)S[k0]=p[k0]}}}catch(e){}
 S.viewId="";S.viewMonth="";
+(function(){var h=(location.hash||"").slice(1);if(["added","ending","report","order","edit","history"].indexOf(h)>=0)S.nav=h})();
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 var $=function(id){return document.getElementById(id)};
 function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
@@ -416,11 +424,12 @@ function renderSecs(){
  $("secs").innerHTML=h;
 }
 function renderBar(){
- var show=curNav()==="added"&&editable(),n=draftCount();
+ var nv=curNav(),isE=nv==="ending",show=(nv==="added"||isE)&&editable(),n=isE?edCount():draftCount();
  $("bar").hidden=!show;
  document.body.classList.toggle("hasbar",show);
  if(!show)return;
- $("bar").innerHTML='<span class="bi">'+esc(n?(n===1?"1 item typed, not saved yet":n+" items typed, not saved yet"):"Type what arrived, then confirm")+'</span><button type="button" class="big" id="confirmadd"'+(n?"":" disabled")+'>Confirm added items</button>';
+ var msg=isE?(n?(n===1?"1 count typed, not saved yet":n+" counts typed, not saved yet"):"Count each item, then confirm"):(n?(n===1?"1 item typed, not saved yet":n+" items typed, not saved yet"):"Type what arrived, then confirm");
+ $("bar").innerHTML='<span class="bi">'+esc(msg)+'</span><button type="button" class="big" id="'+(isE?"confirmend":"confirmadd")+'"'+(n?"":" disabled")+'>'+(isE?"Confirm ending count":"Confirm added items")+'</button>';
 }
 function renderAll(){
  renderBanner();renderNav();renderSecs();renderView();renderBar();
@@ -476,21 +485,33 @@ function chipBox(r){
  if(r.order)return{cls:"bad",label:"\u2715 Order",main:"Used "+fmt(r.used)};
  return{cls:"ok",label:"\u2713 Used",main:fmt(r.used)};
 }
+function calcDraft(w,it){
+ var c=calc(w,it);
+ if(S.edrafts[c.k]!==undefined){var e=S.edrafts[c.k];c.e=e;c.used=Math.round((c.b+c.a-e)*1000)/1000;c.total=r2(c.used*c.cost);c.order=c.used>e;c.check=c.used<0}
+ return c;
+}
+function edCount(){return Object.keys(S.edrafts).length}
+function setEd(it,n){
+ var k=keyOf(it),c=calc(S.cur,it);
+ if(n===null||(c.e!==null&&n===c.e))delete S.edrafts[k];else S.edrafts[k]=n;
+}
 function paintEnd(idx){
  var it=S.items[idx],box=$("e"+idx);
  if(!box)return;
- var c=chipBox(calc(S.cur,it));
+ var c=chipBox(calcDraft(S.cur,it));
  box.className="ob "+c.cls;
  box.innerHTML='<span class="ol">'+esc(c.label)+'</span><span class="on">'+esc(c.main)+'</span>';
 }
 function endingHtml(){
  var w=S.cur,sec=curSec(),total=S.items.length,left=uncounted(w);
- var h='<p class="note">'+esc((total-left)+" of "+total+" counted. Count every item, then open the Report.")+'</p><ul class="list">';
+ var h='<p class="note">'+esc((total-left)+" of "+total+" counted. Count each item with the + and − buttons or type it, then tap Confirm ending count.")+'</p><ul class="list">';
  S.items.forEach(function(it,i){
   if(it.section!==sec)return;
-  var c=calc(w,it);
-  h+='<li class="row three"><div class="nmbox"><div class="nm">'+esc(it.item)+'</div><div class="tg">Begin '+fmt(c.b)+' + Added '+fmt(c.a)+' = '+fmt(r2(c.b+c.a))+(it.unit?' <span class="u">'+esc(it.unit)+'</span>':"")+(it.note?' \u00B7 <span class="u">'+esc(it.note)+'</span>':"")+'</div></div>'+
-   '<label class="cin"><span class="sr">'+esc("Ending count: "+it.item)+'</span><input type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" autocorrect="off" spellcheck="false" data-end="'+i+'" value="'+(c.e===null?"":esc(fmt(c.e)))+'" placeholder="\u2013">'+(it.unit?'<span class="cu u" aria-hidden="true">'+esc(it.unit)+'</span>':"")+'</label>'+
+  var c=calc(w,it),k=keyOf(it),d=S.edrafts[k],val=d!==undefined?d:c.e;
+  h+='<li class="row end"><div class="nmbox"><div class="nm">'+esc(it.item)+'</div><div class="tg">Begin '+fmt(c.b)+' + Added '+fmt(c.a)+' = '+fmt(r2(c.b+c.a))+(it.unit?' <span class="u">'+esc(it.unit)+'</span>':"")+(it.note?' · <span class="u">'+esc(it.note)+'</span>':"")+'</div></div>'+
+   '<div class="step"><button type="button" class="stp" data-kind="e" data-step="-1" data-key="'+esc(k)+'" aria-label="'+esc("One less "+it.item)+'">−</button>'+
+   '<label class="cin'+(d!==undefined?" has":"")+'"><span class="sr">'+esc("Ending count: "+it.item)+'</span><input type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" autocorrect="off" spellcheck="false" data-ekey="'+esc(k)+'" value="'+(val===null||val===undefined?"":esc(fmt(val)))+'" placeholder="–"></label>'+
+   '<button type="button" class="stp plus" data-kind="e" data-step="1" data-key="'+esc(k)+'" aria-label="'+esc("One more "+it.item)+'">+</button></div>'+
    '<div class="ob none" id="e'+i+'" aria-live="polite"></div></li>';
  });
  return h+'</ul>';
@@ -804,12 +825,12 @@ $("view").addEventListener("input",function(e){
   if(n===null||n<=0)delete S.drafts[inp.dataset.draft];else S.drafts[inp.dataset.draft]=n;
   inp.parentNode.className="cin"+(S.drafts[inp.dataset.draft]?" has":"");
   persist();renderNav();renderBar();
- }else if(inp.dataset&&inp.dataset.end!==undefined){
-  var i=+inp.dataset.end,it=S.items[i],c=cleanNum(inp);
-  var op={type:"end",week:S.cur.id,key:keyOf(it),count:c};
-  applyOp(S.cur,op);enqueue(op);paintEnd(i);renderNav();
-  var left=uncounted(S.cur),nt=document.querySelector("#view .note");
-  if(nt)nt.textContent=(S.items.length-left)+" of "+S.items.length+" counted. Count every item, then open the Report.";
+ }else if(inp.dataset&&inp.dataset.ekey!==undefined){
+  var it2=itemByKey(inp.dataset.ekey),c2=cleanNum(inp);
+  if(!it2)return;
+  setEd(it2,c2);
+  inp.parentNode.className="cin"+(S.edrafts[inp.dataset.ekey]!==undefined?" has":"");
+  paintEnd(S.items.indexOf(it2));persist();renderNav();renderBar();
  }
 });
 $("view").addEventListener("click",function(e){
@@ -827,6 +848,16 @@ $("view").addEventListener("click",function(e){
  var xb=t.closest("button[data-x]");
  if(xb){var xs=xb.dataset.x.split(":");doExport(xs[0],xs[1]);return}
  var sp=t.closest("button[data-step]");
+ if(sp&&sp.dataset.kind==="e"){
+  var itE=itemByKey(sp.dataset.key);if(!itE)return;
+  var cE=calc(S.cur,itE),baseE=S.edrafts[sp.dataset.key]!==undefined?S.edrafts[sp.dataset.key]:(cE.e===null?0:cE.e);
+  var nxE=Math.min(99999,Math.max(0,r2(baseE+(+sp.dataset.step))));
+  setEd(itE,nxE);
+  var rowE=sp.closest(".step"),inE=rowE.querySelector("input");
+  inE.value=fmt(nxE);rowE.querySelector(".cin").className="cin"+(S.edrafts[sp.dataset.key]!==undefined?" has":"");
+  $("announce").textContent=itE.item+" "+fmt(nxE);
+  paintEnd(S.items.indexOf(itE));persist();renderNav();renderBar();return;
+ }
  if(sp){
   var key=sp.dataset.key,cur0=S.drafts[key]||0,nx=r2(cur0+(+sp.dataset.step));
   if(nx<=0)delete S.drafts[key];else S.drafts[key]=Math.min(99999,nx);
@@ -856,6 +887,18 @@ $("view").addEventListener("click",function(e){
  }
 });
 $("bar").addEventListener("click",function(e){
+ if(e.target.closest("#confirmend")){
+  var ek=Object.keys(S.edrafts);if(!ek.length)return;
+  var el=ek.map(function(k){var it=itemByKey(k);return(it?it.item:k)+"|"+fmt(S.edrafts[k])+(it&&it.unit?" "+it.unit:"")});
+  ask("Save these ending counts?","They are saved to "+S.cur.label+".","Save","green",function(){
+   var wid=S.cur.id,n=ek.length;
+   ek.forEach(function(k){var op={type:"end",week:wid,key:k,count:S.edrafts[k]};applyOp(S.cur,op);enqueue(op)});
+   S.edrafts={};persist();renderAll();
+   var left=uncounted(S.cur);
+   showNotice("\u2713 Saved "+n+(n===1?" count":" counts")+(left?". "+left+" still to count":". Every item is counted"),false,7000);
+  },$("confirmend"),el);
+  return;
+ }
  if(!e.target.closest("#confirmadd"))return;
  var keys=Object.keys(S.drafts);if(!keys.length)return;
  var lines=keys.map(function(k){var it=itemByKey(k);return(it?it.item:k)+"|+"+fmt(S.drafts[k])+(it&&it.unit?" "+it.unit:"")});
@@ -980,6 +1023,7 @@ async function loadRemote(force){
    var before=JSON.stringify([S.items,S.weeks,S.cur,S.usage]);
    S.items=d.items;S.weeks=d.weeks||[];S.usage=d.usage||{};
    S.cur=d.current?rebase(d.current):null;
+   if(S.cur&&S.edw!==S.cur.id){S.edrafts={};S.edw=S.cur.id}
    if(d.week)S.cache[d.week.id]=rebase(d.week);
    S.weeks.forEach(function(w){if(w.status==="open"&&S.cache[w.id])delete S.cache[w.id]});
    persist();stale=false;
@@ -1057,7 +1101,7 @@ loadRemote().then(function(){if(S.queue.length)scheduleFlush(0)});
 <script>
 (function(){
 /* Page menu: jump between Stock Count, Prep List and Recipes without going back. Pages sit side by side in the same site. */
-var PAGES=[["stock","Stock Count","../stock/"],["prep","Prep List","../prep/"],["recipes","Recipes","../recipes/"]];
+var PAGES=[["home","Home","../home/"],["stock","Stock Count","../stock/"],["prep","Prep List","../prep/"],["recipes","Recipes","../recipes/"]];
 var here=document.documentElement.getAttribute("data-page")||"";
 var hd=document.querySelector("header"),sy=document.getElementById("sync");
 if(!hd)return;
