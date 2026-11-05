@@ -7,7 +7,7 @@
 <script>
 /* ===== OWNER SETTINGS: paste your two values between the quotes, then save ===== */
 window.KF_OWNER_API="https://script.google.com/macros/s/AKfycbzTOvLavHT3T89vaWkYugUKBQCzoaO-XPlECqJNlvh4b18EhwQgbIl4OFy00FEVwqcohw/exec";
-window.KF_GOOGLE_CLIENT_ID="368132940725-jpec9ugjoo82fcsl6qt1vdgjrv8rikb8.apps.googleusercontent.com";
+window.KF_GOOGLE_CLIENT_ID="";
 /* ===== end of settings ===== */
 </script>
 <style>
@@ -925,6 +925,28 @@ body.skin #signin{margin:0 0 14px}
  body.skin #bar{padding-left:max(28px,calc((100% - 72px - 1240px)/2 + 28px)) !important;padding-right:max(28px,calc((100% - 72px - 1240px)/2 + 28px)) !important}
  body.skin .wkline{padding-left:28px}
 }
+
+/* larger logo: desktop/iPad rail and phone header */
+@media (min-width:761px){
+ .sb .sbl img,body.skin .sb .sbl img{height:58px !important}
+ .sb .sbl{padding:6px 0 22px !important;justify-content:center}
+}
+@media (max-width:760px){
+ body.skin header .wm::before{content:"";display:inline-block;width:27px;height:44px;margin-right:10px;vertical-align:middle;background:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjI3NiAyNDQgOTggMTYwIj48cGF0aCBmaWxsPSIjMDA1OTQ5IiBkPSJNMzM4LDI5MS4xYy02LjQtLjctMTAuNiwyLjctMTIuOSw1LjR2LTcuOWMzLjItLjUsNS43LTMuNCw1LjctNi44cy0zLjEtNi45LTYuOS02LjktNi45LDMuMS02LjksNi45LDIuNSw2LjIsNS43LDYuOHYxOC41Yy0uOS0uNC0xLjktLjYtMi45LS42LTEuOCwwLTMuNi43LTQuOSwyLTEuMywxLjMtMiwzLTIsNC45cy43LDMuNiwyLDQuOWMxLjMsMS4zLDMsMiw0LjksMnMuOSwwLDEuNC0uMWMtLjQsMiwuMSw0LjIsMS41LDUuOHY3LjFjLTYuNS04LTE2LjktNi4zLTE3LTYuMy0uNCwwLS43LjMtLjguNi0uMi4zLS4yLjcsMCwxLDAsLjEsNS4yLDkuOSwxNiw5LjlzMS4yLDAsMS45LS4xdjQuOWMtMS40LjItMi43LjktMy43LDEuOS0xLDEtMS43LDIuMy0xLjksMy43LTEuOCwwLTMuNS43LTQuOSwyLTIuNywyLjctMi43LDcsMCw5LjcsMS4zLDEuMywzLDIsNC45LDJoMGMuMiwxLjQuOSwyLjcsMS45LDMuNywxLjEsMSwyLjQsMS43LDMuNywxLjl2Ni4xYzAsLjYuNSwxLjEsMS4xLDEuMXMxLjEtLjUsMS4xLTEuMXYtNi4xYzEuNC0uMiwyLjctLjksMy43LTEuOSwxLjEtMSwxLjctMi40LDEuOS0zLjdoMGMxLjgsMCwzLjYtLjcsNC45LTIsMi43LTIuNywyLjctNywwLTkuN3MtMy4xLTItNC45LTJjLS4yLTEuNC0uOS0yLjctMS45LTMuNy0xLjEtMS0yLjQtMS43LTMuNy0xLjl2LTE1LjRjLjkuNCwxLjkuNywyLjkuNywxLjgsMCwzLjUtLjcsNC45LTJzMi0zLDItNC45LS43LTMuNi0yLTQuOS0zLTItNC45LTItLjksMC0xLjQuMWMuNC0yLS4xLTQuMi0xLjUtNS44di03LjRjMywwLDEwLjQtMSwxMy44LTguOC4xLS4zLjEtLjcsMC0xLS4yLS4zLS41LS41LS45LS42aDBaTTMwNy45LDMyOC44YzMuMiwwLDEwLC42LDE0LjIsNy4xLTcuNy42LTEyLjMtNC41LTE0LjItNy4xWk0zMTkuNCwyODEuOWMwLTIuNSwyLjEtNC42LDQuNi00LjZzNC42LDIuMSw0LjYsNC42LTIuMSw0LjYtNC42LDQuNi00LjYtMi00LjYtNC42Wk0zMTcuMiwzNjBjLTEuMiwwLTIuNC0uNC0zLjMtMS4zLTEuOC0xLjgtMS44LTQuNywwLTYuNS45LS45LDIuMS0xLjMsMy4yLTEuM2gwYy4yLDEuNC45LDIuNywxLjksMy43LjMuMy43LjYsMS4xLjktLjQuMi0uNy41LTEuMS45LTEsMS0xLjcsMi4zLTEuOSwzLjdoMFpNMzI3LjIsMzY0LjRjLTEuOCwxLjgtNC43LDEuOC02LjUsMC0uOS0uOS0xLjMtMi0xLjMtMy4ycy41LTIuNCwxLjMtMy4yLDIuMS0xLjMsMy4yLTEuMywyLjQuNSwzLjIsMS4zYzEuOCwxLjgsMS44LDQuNywwLDYuNWgwWk0zMzAuNywzNTAuOWgwYzEuMiwwLDIuNC41LDMuMiwxLjMsMS44LDEuOCwxLjgsNC43LDAsNi41LS45LjktMi4xLDEuNC0zLjMsMS4zLS4yLTEuNC0uOS0yLjctMS45LTMuNy0uMy0uMy0uNy0uNi0xLjEtLjkuNC0uMi43LS41LDEuMS0uOSwxLTEsMS43LTIuNCwxLjktMy43aDBaTTMyNy4yLDM0Ni41YzEuOCwxLjgsMS44LDQuNywwLDYuNS0xLjgsMS44LTQuNywxLjgtNi41LDBzLTEuOC00LjcsMC02LjVjLjktLjksMi4xLTEuMywzLjItMS4zczIuNC41LDMuMiwxLjNoMFpNMzI4LDMxNi45YzEuMiwwLDIuNC41LDMuMiwxLjMsMS44LDEuOCwxLjgsNC43LDAsNi41cy00LjcsMS44LTYuNSwwYy0xLjgtMS44LTEuOC00LjcsMC02LjUuOS0uOSwyLjEtMS4zLDMuMi0xLjNoMFpNMzE5LjksMzE4Yy0xLjIsMC0yLjQtLjUtMy4yLTEuMy0xLjgtMS44LTEuOC00LjcsMC02LjUuOS0uOSwyLTEuMywzLjItMS4zczIuNC41LDMuMiwxLjNjMS44LDEuOCwxLjgsNC43LDAsNi41LS45LjktMiwxLjMtMy4yLDEuM1pNMzI1LjksMjk5LjNjMS40LTIuMiw0LjYtNS44LDEwLjEtNS45LTIuOCw0LjgtNy41LDUuOC0xMC4xLDUuOVoiLz48cGF0aCBmaWxsPSIjMDA1OTQ5IiBkPSJNMzI0LDI0OS42Yy0yMy4zLDAtNDIuMywxOS00Mi4zLDQyLjN2NjQuMmMwLDIzLjMsMTksNDIuMyw0Mi4zLDQyLjNzNDIuMy0xOSw0Mi4zLTQyLjN2LTY0LjJjMC0yMy4zLTE5LTQyLjMtNDIuMy00Mi4zaDBaTTM2NCwzNTYuMWMwLDIyLTE3LjksNDAtNDAsNDBzLTQwLTE3LjktNDAtNDB2LTY0LjJjMC0yMiwxNy45LTQwLDQwLTQwczQwLDE3LjksNDAsNDB2NjQuMloiLz48L3N2Zz4=") center/contain no-repeat}
+ body.skin header .wm{display:flex !important;align-items:center}
+}
+body.skin .miscform{margin:0 0 14px}
+body.skin #mmsg{margin:0 0 10px}
+body.skin .miscform{margin:0 14px 14px}
+body.skin #mmsg{margin:0 14px 10px}
+@media (max-width:760px){body.skin .miscform{margin:0 12px 12px}}
+
+body.skin .seg{display:flex;gap:6px;margin:0 14px 10px}
+body.skin .seg button{min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+body.skin .seg button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+body.skin .seg button:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+body.skin #itemsnote{margin:0 14px 8px;font-size:12px;color:#8a8a93}
+body.skin #itemsnote:empty{display:none}
 </style>
 </head>
 <body>
@@ -940,9 +962,11 @@ body.skin #signin{margin:0 0 14px}
  <section class="card"><h2>Sales by week</h2><div class="body" id="wk"></div></section>
 </div>
 <div class="cards2">
- <section class="card"><h2>Items ordered this week</h2><div class="body" id="items"></div></section>
- <section class="card"><h2>Misc charges</h2><div class="body" id="misc"></div>
-  <form id="miscform" class="miscform" autocomplete="off"><label>Charge<input id="mlabelin" type="text" maxlength="60" placeholder="e.g. Repair"></label><label>Amount<input id="mamt" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00"></label><button type="submit">Add</button></form><p class="sub" id="mmsg" role="status"></p></section>
+ <section class="card"><h2>Items ordered</h2><div class="seg" role="group" aria-label="Week"><button type="button" id="iw-this" aria-pressed="true">This week</button><button type="button" id="iw-last" aria-pressed="false">Last week</button></div><p class="sub" id="itemsnote"></p><div class="body" id="items"></div></section>
+ <section class="card"><h2>Misc charges</h2>
+  <form id="miscform" class="miscform" autocomplete="off"><label>Charge<input id="mlabelin" type="text" maxlength="60" placeholder="e.g. Repair"></label><label>Amount<input id="mamt" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00"></label><button type="submit">Add</button></form><p class="sub" id="mmsg" role="status"></p>
+  <div class="body" id="misc"></div>
+</section>
 </div>
 <div class="cards2">
  <section class="card"><h2>Fixed costs</h2><div class="body" id="fixed"></div></section>
@@ -970,10 +994,11 @@ var SAMPLE={
  "2026-10":{sales:[5640,5920,6180,6410,5830],labor:12650,cogs:8120,f:1,nw:96,rt:212,misc:[{id:"s1",date:"2026-10-14",label:"Pest control",amount:85}]},
  "2026-11":{sales:[3200],labor:620,cogs:800,f:.13,nw:18,rt:41,misc:[{id:"s2",date:"2026-11-02",label:"Card reader",amount:49},{id:"s3",date:"2026-11-03",label:"Cleaning supplies",amount:62}]}
 };
+var ITEMS_LAST=[["Iced Phin Coffee",71],["Ube Cloud Latte",66],["Coconut Cold Brew",52],["Matcha Latte",44],["Pandan Coconut Latte",39],["Mango Sticky Rice Cloud",31],["Hot Phin Coffee",24],["Calamansi Soda",19]];
 var ITEMS=[["Ube Cloud Latte",64],["Iced Phin Coffee",58],["Coconut Cold Brew",47],["Pandan Coconut Latte",41],["Mango Sticky Rice Cloud",36],["Matcha Latte",33],["Hot Phin Coffee",21],["Calamansi Soda",18]];
 var FIXED=[["Rent",6200],["Insurance",450],["Utilities",620],["Software and POS",180],["Equipment loan",900],["Accountant",300]];
 var MONTHS=Object.keys(SAMPLE).sort(),mi=MONTHS.length-1;
-var weeksApi=[],LIVE=null,TOKEN="";
+var weeksApi=[],LIVE=null,TOKEN="",IW="this";
 function monthLabel(m){var p=m.split("-");return new Date(+p[0],+p[1]-1,1).toLocaleString("en-US",{month:"long",year:"numeric"})}
 function cogsFor(m){var t=0,n=0;weeksApi.forEach(function(w){if(w.status==="closed"&&w.month===m&&typeof w.total==="number"){t+=w.total;n++}});return n?r2(t):null}
 /* misc charges: sample mode keeps them in this browser; live mode keeps them in the owner Sheet */
@@ -984,7 +1009,7 @@ function api(body){return fetch(OWNER_API,{method:"POST",headers:{"Content-Type"
 function pc(v,base){return base>0&&v!==null?Math.round(v/base*100)+"%":"–"}
 function render(){
  var m=MONTHS[mi],S=SAMPLE[m],D=LIVE&&LIVE.month===m?LIVE:S;
- var sales=D.sales,labor=D.labor,nw=D.nw,rt=D.rt,fixedList=D.fixed||FIXED,items=D.items||ITEMS;
+ var sales=D.sales,labor=D.labor,nw=D.nw,rt=D.rt,fixedList=D.fixed||FIXED,items=(IW==="last"?(D.itemsLast||(D===LIVE?[]:ITEMS_LAST)):(D.items||ITEMS));var isSample=!(LIVE&&LIVE.month===m);
  $("mlabel").textContent=monthLabel(m);
  $("mprev").disabled=mi===0;$("mnext").disabled=mi===MONTHS.length-1;
  var net=sales.reduce(function(a,b){return a+b},0);
@@ -1006,10 +1031,13 @@ function render(){
  var mx=Math.max.apply(null,sales.concat([1]));
  $("wk").innerHTML='<div class="bars" role="img" aria-label="Sales by week">'+sales.map(function(v,i){return'<div class="bar"><b>'+esc(money0(v))+'</b><i style="height:'+Math.round(v/mx*100)+'%"></i><span>Wk '+(i+1)+'</span></div>'}).join("")+'</div>';
  var im=Math.max.apply(null,items.map(function(i){return i[1]}).concat([1]));
+ $("itemsnote").textContent=isSample?"Sample items, not your menu. Real items load after you sign in.":(items.length?"":"No items found for this week.");
+ $("iw-this").setAttribute("aria-pressed",IW==="this");$("iw-last").setAttribute("aria-pressed",IW==="last");
  $("items").innerHTML=items.map(function(it){return'<div class="fl"><div class="fh"><span>'+esc(it[0])+'</span><b>'+it[1]+'</b></div><div class="fb"><i class="p" style="width:'+Math.round(it[1]/im*100)+'%"></i></div></div>'}).join("");
  $("misc").innerHTML=(ml.length?ml.map(function(x){return'<div class="kv"><span>'+esc(x.label)+'<small>'+esc(x.date||"")+'</small></span><b>'+esc(money(+x.amount))+'</b><button type="button" class="x" data-id="'+esc(x.id)+'" aria-label="Delete '+esc(x.label)+'">&times;</button></div>'}).join("")+kv("Month total",money(misc),"tot"):'<div class="msg">No misc charges this month.</div>');
  $("fixed").innerHTML=fixedList.map(function(f){return kv(f[0],money0(f[1]))}).join("")+kv("Monthly total",money0(fixedFull),"tot");
 }
+$("iw-this").addEventListener("click",function(){IW="this";render()});$("iw-last").addEventListener("click",function(){IW="last";render()});
 $("mprev").addEventListener("click",function(){if(mi>0){mi--;load()}});
 $("mnext").addEventListener("click",function(){if(mi<MONTHS.length-1){mi++;load()}});
 $("miscform").addEventListener("submit",function(e){e.preventDefault();
