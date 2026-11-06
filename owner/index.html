@@ -1373,17 +1373,17 @@ function render(){
  var fixedFull=fixedList.reduce(function(a,b){return a+b[1]},0),fixed=Math.round(fixedFull);
  var ml=miscList(m),misc=ml.reduce(function(a,b){return a+(+b.amount||0)},0);
  var profit=net-(cogs||0)-labor-fixed-misc,margin=net?Math.round(profit/net*100):0;
- var tc=nw+rt;
+ var tc=(nw||0)+(rt||0),cl=(nw==null||rt==null);
  var K=[["Net sales",money0(net)],
   ["Labor (est.)",money0(labor),pc(labor,net)+" of sales · "+pc(labor,profit)+" of profit"],
   ["COGS",cogs===null?"–":money0(cogs),pc(cogs,net)+" of sales · "+pc(cogs,profit)+" of profit"],
   ["Misc charges",money0(misc),pc(misc,net)+" of sales"],
-  ["New customers",String(nw),tc?Math.round(nw/tc*100)+"% of customers":""],
-  ["Returning customers",String(rt),tc?Math.round(rt/tc*100)+"% of customers":""]];
+  ["New customers",cl?"–":String(nw),tc?Math.round(nw/tc*100)+"% of customers":""],
+  ["Returning customers",cl?"–":String(rt),tc?Math.round(rt/tc*100)+"% of customers":""]];
  $("kpis").innerHTML=K.map(function(k){return'<div class="kpi"><span>'+esc(k[0])+'</span><b>'+esc(k[1])+'</b>'+(k[2]?'<em>'+esc(k[2])+'</em>':"")+'</div>'}).join("")+
   '<div class="kpi big'+(profit<0?" neg":"")+'"><span>Estimated profit</span><b>'+esc(money0(profit))+'</b><em>'+margin+'% of sales'+((cogs===null||!fixed)?' · before '+(cogs===null&&!fixed?'COGS and fixed costs':cogs===null?'COGS':'fixed costs'):'')+'</em></div>';
  var rows=[["Net sales",net,"s"],["COGS",cogs||0,"c"],["Labor (est.)",labor,"c"],["Fixed costs",fixed,"c"],["Misc charges",misc,"c"],["Estimated profit",profit,profit<0?"n":"p"]];
- $("flow").innerHTML=rows.map(function(r){var w=net?Math.max(0,Math.min(100,Math.abs(r[1])/net*100)):0;return'<div class="fl"><div class="fh"><span>'+esc(r[0])+'</span><b>'+esc(money0(r[1]))+'</b></div><div class="fb"><i class="'+r[2]+'" style="width:'+w+'%"></i></div></div>'}).join("");
+ $("flow").innerHTML=rows.map(function(r){var w=net?Math.max(0,Math.min(100,Math.abs(r[1])/net*100)):0;return'<div class="fl"><div class="fh"><span>'+esc(r[0])+'</span><b>'+esc(money0(r[1]))+'</b></div></div>'}).join("");
  var barsHtml=function(list,lab){var mx=Math.max.apply(null,list.map(function(x){return x[1]}).concat([1]));return'<div class="bars" role="img" aria-label="'+lab+'">'+list.map(function(x){return'<div class="bar"><b>'+esc(money0(x[1]))+'</b><i style="height:'+Math.round(x[1]/mx*100)+'%"></i><span>'+esc(x[0])+'</span></div>'}).join("")+'</div>'};
  $("sm-week").setAttribute("aria-pressed",SM==="week");$("sm-month").setAttribute("aria-pressed",SM==="month");
  if(SM==="week")$("wk").innerHTML=barsHtml(sales.map(function(v,i){return["Wk "+(i+1),v]}),"Sales by week");
@@ -1392,7 +1392,7 @@ function render(){
  var im=Math.max.apply(null,items.map(function(i){return i[1]}).concat([1]));
  $("itemsnote").textContent=isSample?"Sample items, not your menu. Real items load after you sign in.":(items.length?"":"No items found for this week.");
  $("iw-this").setAttribute("aria-pressed",IW==="this");$("iw-last").setAttribute("aria-pressed",IW==="last");
- $("items").innerHTML=items.map(function(it){var sub=(it[2]||it[3])?'<small class="tmp">Iced '+(it[2]||0)+' &middot; Hot '+(it[3]||0)+'</small>':"";return'<div class="fl"><div class="fh"><span>'+esc(it[0])+sub+'</span><b>'+it[1]+'</b></div><div class="fb"><i class="p" style="width:'+Math.round(it[1]/im*100)+'%"></i></div></div>'}).join("");
+ $("items").innerHTML=items.map(function(it){var sub=(it[2]||it[3])?'<small class="tmp">Iced '+(it[2]||0)+' &middot; Hot '+(it[3]||0)+'</small>':"";return'<div class="fl"><div class="fh"><span>'+esc(it[0])+sub+'</span><b>'+it[1]+'</b></div></div>'}).join("");
  $("misc").innerHTML=(ml.length?ml.map(function(x){return'<div class="kv"><span>'+esc(x.label)+'<small>'+esc(x.date||"")+'</small></span><b>'+esc(money(+x.amount))+'</b><button type="button" class="x" data-id="'+esc(x.id)+'" aria-label="Delete '+esc(x.label)+'">&times;</button></div>'}).join("")+kv("Month total",money(misc),"tot"):'<div class="msg">No misc charges this month.</div>');
 }
 $("sm-week").addEventListener("click",function(){SM="week";render()});
@@ -1416,7 +1416,7 @@ $("misc").addEventListener("click",function(e){var b=e.target.closest("button.x"
 function renderAudit(a){var box=$("audit");if(!box)return;if(!a){box.hidden=true;return}
  var fm=function(n){n=Number(n||0);return(n<0?"-":"")+"$"+Math.abs(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})},L=a.labor||{};
  var rows=[["Dates counted (last date not included)",a.range],["Paid orders counted (both locations)",a.orders],["Item sales before discounts",fm(a.gross)],["Discounts",fm(-a.disc)],["Refunded item sales",fm(-a.ret)],["Net sales shown above",fm(a.gross-a.disc-a.ret)],["Not included: tax",fm(a.tax)],["Not included: tips",fm(a.tips)],["Not included: service charges",fm(a.svc)],
-  ["Orders where the customer or card was identified",a.withCustomer+" of "+a.orders],["Different customers (cash orders cannot be counted)",a.customers],["Customer history fully loaded",a.historyReady===false?"Not yet - reload to continue":"Yes"],
+  ["Orders where the customer or card was identified",a.withCustomer+" of "+a.orders],["Different customers (cash orders cannot be counted)",a.customers],["Customer lookup problem",a.custErr||"None"],["Orders paid by card but not identified",a.unident==null?"-":a.unident],["Customer history fully loaded",a.historyReady===false?"Not yet - reload to continue":"Yes"],
   ["Timecards found",L.cards],["Timecards counted",L.counted],["Skipped: still clocked in",L.open],["Skipped: no hourly rate",L.norate],["Hours counted",L.hours],["Burden multiplier",a.burden]];
  $("auditbody").innerHTML=rows.map(function(r){return'<div class="kv"><span>'+esc(r[0])+'</span><b>'+esc(String(r[1]))+'</b></div>'}).join("")+'<p class="sub">Compare these to Square for the same dates: Sales Summary for net sales, and Team, Timecards for hours.</p>';box.hidden=false}
 function load(){
@@ -1432,10 +1432,10 @@ function load(){
  Promise.all([get("sales"),get("labor"),get("items")]).then(function(a){
   if(stamp!==LOADSTAMP)return;
   var s=a[0],l=a[1],i=a[2],old=(LIVE&&LIVE.month===m)?LIVE:{};
-  var d={ok:true,month:m,sales:s.sales,f:s.f,nw:old.nw||0,rt:old.rt||0,labor:l.labor,misc:l.misc,fixed:l.fixed,items:i.items,itemsLast:i.itemsLast};
+  var d={ok:true,month:m,sales:s.sales,f:s.f,nw:(old.nw==null?null:old.nw),rt:(old.rt==null?null:old.rt),labor:l.labor,misc:l.misc,fixed:l.fixed,items:i.items,itemsLast:i.itemsLast};
   d.audit=Object.assign({},s.audit,{labor:l.laborAudit,burden:l.burden,historyReady:old.audit&&old.audit.historyReady});
   LIVE=d;save();renderAudit(d.audit);$("sync").textContent="Updating customers…";render();
-  get("cust").then(function(c){if(stamp!==LOADSTAMP)return;LIVE.nw=c.nw;LIVE.rt=c.rt;LIVE.audit.historyReady=c.historyReady;save();renderAudit(LIVE.audit);$("sync").textContent="Owners only";render()}).catch(function(e){$("sync").textContent="Owners only"})
+  get("cust").then(function(c){if(stamp!==LOADSTAMP)return;LIVE.nw=c.nw;LIVE.rt=c.rt;LIVE.audit.historyReady=c.historyReady;save();renderAudit(LIVE.audit);$("sync").textContent="Owners only";render()}).catch(function(e){$("sync").textContent="Owners only";LIVE.audit.custErr=e.message;renderAudit(LIVE.audit)})
  }).catch(fail)}
 function jwtExp(t){try{return JSON.parse(atob(t.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"))).exp*1000}catch(e){return 0}}
 function saveTok(t){try{sessionStorage.setItem("kf-tok",t)}catch(e){}}
