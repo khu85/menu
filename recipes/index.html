@@ -1282,6 +1282,16 @@ body.skin .log button{border-radius:8px}
 .sb .sbi .nbd{top:4px;right:6px;border-color:#fff}
 .bnav a .nbd{top:2px;left:calc(50% + 6px);right:auto}
 @media (max-width:760px){.drawer .sb .sbi .nbd{position:static;margin-left:auto}}
+
+/* added-items rows: no box behind the stepper; compact name + unit */
+body.skin .row.add .step{background:none;border:0;box-shadow:none;padding:0}
+.row.add .nm .u{font-size:.62em;font-weight:700;color:#6f6c68;letter-spacing:.04em;margin-left:6px;white-space:nowrap}
+body.skin .row.add .nmbox{display:flex;flex-direction:column;justify-content:center;min-height:0}
+
+body.skin .row.add{min-height:0;padding-top:8px;padding-bottom:8px}
+body.skin .row.add .stp{min-height:56px;font-size:30px}
+body.skin .row.add .cin input{min-height:56px;font-size:26px}
+.row.add .nm .u.ad{color:var(--brand)}
 </style>
 </head>
 <body>
