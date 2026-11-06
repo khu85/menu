@@ -968,9 +968,9 @@ body.skin #signin .sub{margin:0;font-size:13px}
 .evgrid{display:grid;gap:14px;grid-template-columns:1fr}
 .evpanel[hidden]{display:none}
 .evpanel .card{margin-bottom:14px}.evgrid .card{margin-bottom:0}
-.tgl,.stp{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:52px;padding:8px 2px;border-bottom:1px solid #eceadb}
-.tgl small,.stp span small,.chk small,.erow small,.prow small{display:block;color:#6b6869;font-size:12px;margin-top:2px;letter-spacing:.3px}
-.stp span small{display:block}
+.tgl,.evpanel .stp{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:52px;padding:8px 2px;border-bottom:1px solid #eceadb}
+.tgl small,.evpanel .stp span small,.chk small,.erow small,.prow small{display:block;color:#6b6869;font-size:12px;margin-top:2px;letter-spacing:.3px}
+.evpanel .stp span small{display:block}
 .tgl input{appearance:none;-webkit-appearance:none;width:52px;height:30px;border-radius:999px;background:#cfcdbd;position:relative;flex:none;cursor:pointer;transition:background .15s}
 .tgl input::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:transform .15s}
 .tgl input:checked{background:var(--brand,#005949)}.tgl input:checked::after{transform:translateX(22px)}
@@ -1259,6 +1259,40 @@ html[data-page="events"] body.skin #sync{grid-area:s;justify-self:end;align-self
 .rst{width:36px;height:36px;border:0;border-radius:50%;background:#efeee6;color:#005949;display:inline-grid;place-items:center;padding:0;cursor:pointer;flex:none}
 .rst svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .rst:focus-visible{outline:3px solid #005949;outline-offset:2px}
+
+.audit{margin-top:14px}.audit summary{cursor:pointer;min-height:44px;display:flex;align-items:center;padding:0 16px;font-size:13px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#6b6869}
+.audit .body{padding:0 16px 14px}.audit .kv{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #eceadb;font-size:14px}.audit .kv b{text-align:right}
+/* overview v2 */
+body.skin .seg{border-radius:8px!important}
+body.skin .seg button{border-radius:6px!important}
+.fh span small.tmp{display:block;font-size:12px;color:#6b6869;font-weight:600;letter-spacing:.3px;margin-top:2px;text-transform:uppercase}
+.alertsum .body{padding:16px 16px 8px}
+.alrow{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:16px}
+.alrow b{font-weight:800;letter-spacing:.4px;text-transform:uppercase}
+.alrow span{font-weight:700}
+.alrow.bad b,.alrow.bad span{color:#c0392b}
+.card .seg{margin:0 16px 10px}
+.hsearch{display:none!important}
+/* stock count: tab bars like the events tabs */
+html[data-page="stock"] body.skin .secs{display:grid!important;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin:0 0 14px!important;padding:0!important;overflow:visible!important}
+html[data-page="stock"] body.skin .secs .sec{width:100%;min-height:56px!important;padding:4px 8px 0!important;border-radius:6px!important;font-size:14px!important;letter-spacing:.2px;white-space:normal;text-align:center;line-height:1.15;display:flex;align-items:center;justify-content:center}
+@media (max-width:760px){
+ html[data-page="stock"] body.skin .secs{display:flex!important;flex-wrap:wrap;gap:8px}
+ html[data-page="stock"] body.skin .secs .sec{flex:1 1 calc(50% - 4px)!important;width:auto;min-height:44px!important;font-size:13px!important}
+}
+@media (min-width:761px){
+ html[data-page="stock"] body.skin .titlebar{flex-wrap:nowrap}
+ html[data-page="stock"] body.skin .titlebar #nav{flex:1;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-left:12px}
+ html[data-page="stock"] body.skin .titlebar #nav .tab{min-height:48px;border-radius:6px;padding:4px 12px 0;font-size:14px;justify-content:center;text-align:center}
+}
+body.skin .log button{border-radius:8px}
+
+/* page link notification badges */
+.sbi,.bnav a{position:relative}
+.nbd{position:absolute;top:2px;right:2px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#c0392b;color:#fff;font-style:normal;font-size:11px;font-weight:800;line-height:18px;text-align:center;box-sizing:border-box;border:2px solid #fff;line-height:14px}
+.sb .sbi .nbd{top:4px;right:6px;border-color:#fff}
+.bnav a .nbd{top:2px;left:calc(50% + 6px);right:auto}
+@media (max-width:760px){.drawer .sb .sbi .nbd{position:static;margin-left:auto}}
 </style>
 </head>
 <body>
@@ -1269,10 +1303,11 @@ html[data-page="events"] body.skin #sync{grid-area:s;justify-self:end;align-self
 <p class="sample" id="sample">Sample numbers until Square is connected. Stock alerts are live, and COGS will come from your closed weeks once connected.</p>
 <div id="signin" hidden><p class="sub" id="signmsg" role="status"></p><div id="signbtn"></div></div>
 <div class="kpis" id="kpis"></div>
+<section class="card alertsum" id="alertcard"><div class="body" id="alerts"><div class="msg">Loading&hellip;</div></div><a class="go" href="./stock/">Open stock sheet</a></section>
 <section class="card evup"><h2>Upcoming events</h2><div class="body" id="upcoming"></div><a class="go" href="./events/">Open events</a></section>
 <div class="cards2">
  <section class="card"><h2>Where the money went</h2><div class="body" id="flow"></div></section>
- <section class="card"><h2>Sales by week</h2><div class="body" id="wk"></div></section>
+ <section class="card"><h2>Sales</h2><div class="seg" role="group" aria-label="Chart range"><button type="button" id="sm-week" aria-pressed="true">Weekly</button><button type="button" id="sm-month" aria-pressed="false">Monthly</button></div><div class="body" id="wk"></div></section>
 </div>
 <div class="cards2">
  <section class="card"><h2>Items ordered</h2><div class="seg" role="group" aria-label="Week"><button type="button" id="iw-this" aria-pressed="true">This week</button><button type="button" id="iw-last" aria-pressed="false">Last week</button></div><p class="sub" id="itemsnote"></p><div class="body" id="items"></div></section>
@@ -1281,10 +1316,7 @@ html[data-page="events"] body.skin #sync{grid-area:s;justify-self:end;align-self
   <div class="body" id="misc"></div>
 </section>
 </div>
-<div class="cards2">
- <section class="card"><h2>Fixed costs</h2><div class="body" id="fixed"></div></section>
- <section class="card"><h2>Stock alerts</h2><div class="body" id="alerts"><div class="msg">Loading&hellip;</div></div><a class="go" href="./stock/">Open stock admin</a></section>
-</div>
+<details class="card audit" id="audit" hidden><summary>How these numbers are calculated</summary><div class="body" id="auditbody"></div></details>
 </main>
 
 <script>
@@ -1307,9 +1339,10 @@ var SAMPLE={
  "2026-10":{sales:[5640,5920,6180,6410,5830],labor:12650,cogs:8120,f:1,nw:96,rt:212,misc:[{id:"s1",date:"2026-10-14",label:"Pest control",amount:85}]},
  "2026-11":{sales:[3200],labor:620,cogs:800,f:.13,nw:18,rt:41,misc:[{id:"s2",date:"2026-11-02",label:"Card reader",amount:49},{id:"s3",date:"2026-11-03",label:"Cleaning supplies",amount:62}]}
 };
-var ITEMS_LAST=[["Iced Phin Coffee",71],["Ube Cloud Latte",66],["Coconut Cold Brew",52],["Matcha Latte",44],["Pandan Coconut Latte",39],["Mango Sticky Rice Cloud",31],["Hot Phin Coffee",24],["Calamansi Soda",19]];
-var ITEMS=[["Ube Cloud Latte",64],["Iced Phin Coffee",58],["Coconut Cold Brew",47],["Pandan Coconut Latte",41],["Mango Sticky Rice Cloud",36],["Matcha Latte",33],["Hot Phin Coffee",21],["Calamansi Soda",18]];
-var FIXED=[["Rent",6200],["Insurance",450],["Utilities",620],["Software and POS",180],["Equipment loan",900],["Accountant",300]];
+var ITEMS_LAST=[["Phin Coffee",95,71,24],["Ube Cloud Latte",66,52,14],["Coconut Cold Brew",52,52,0],["Matcha Latte",44,36,8],["Pandan Coconut Latte",39,30,9],["Mango Sticky Rice Cloud",31,31,0],["Calamansi Soda",19,19,0]];
+var ITEMS=[["Ube Cloud Latte",64,50,14],["Phin Coffee",79,58,21],["Coconut Cold Brew",47,47,0],["Pandan Coconut Latte",41,33,8],["Mango Sticky Rice Cloud",36,36,0],["Matcha Latte",33,27,6],["Calamansi Soda",18,18,0]];
+var FIXED_MONTHLY=6926.9; /* all fixed costs combined; calculated into profit, not displayed */
+var SM="week",MONTHLY=null;
 var MONTHS=Object.keys(SAMPLE).sort(),mi=MONTHS.length-1;
 var weeksApi=[],LIVE=null,TOKEN="",IW="this";
 function monthLabel(m){var p=m.split("-");return new Date(+p[0],+p[1]-1,1).toLocaleString("en-US",{month:"long",year:"numeric"})}
@@ -1322,7 +1355,7 @@ function api(body){return fetch(OWNER_API,{method:"POST",headers:{"Content-Type"
 function pc(v,base){return base>0&&v!==null?Math.round(v/base*100)+"%":"–"}
 function render(){
  var m=MONTHS[mi],S=SAMPLE[m],D=LIVE&&LIVE.month===m?LIVE:S;
- var sales=D.sales,labor=D.labor,nw=D.nw,rt=D.rt,fixedList=D.fixed||FIXED,items=(IW==="last"?(D.itemsLast||(D===LIVE?[]:ITEMS_LAST)):(D.items||ITEMS));var isSample=!(LIVE&&LIVE.month===m);
+ var sales=D.sales,labor=D.labor,nw=D.nw,rt=D.rt,fixedList=(D.fixed&&D.fixed.length)?D.fixed:[["Fixed costs",FIXED_MONTHLY]],items=(IW==="last"?(D.itemsLast||(D===LIVE?[]:ITEMS_LAST)):(D.items||ITEMS));var isSample=!(LIVE&&LIVE.month===m);
  $("mlabel").textContent=monthLabel(m);
  $("mprev").disabled=mi===0;$("mnext").disabled=mi===MONTHS.length-1;
  var net=sales.reduce(function(a,b){return a+b},0);
@@ -1338,18 +1371,22 @@ function render(){
   ["New customers",String(nw),tc?Math.round(nw/tc*100)+"% of customers":""],
   ["Returning customers",String(rt),tc?Math.round(rt/tc*100)+"% of customers":""]];
  $("kpis").innerHTML=K.map(function(k){return'<div class="kpi"><span>'+esc(k[0])+'</span><b>'+esc(k[1])+'</b>'+(k[2]?'<em>'+esc(k[2])+'</em>':"")+'</div>'}).join("")+
-  '<div class="kpi big'+(profit<0?" neg":"")+'"><span>Est. profit</span><b>'+esc(money0(profit))+'</b><em>'+margin+'% of sales</em></div>';
- var rows=[["Net sales",net,"s"],["COGS",cogs||0,"c"],["Labor (est.)",labor,"c"],["Fixed costs",fixed,"c"],["Misc charges",misc,"c"],["Est. profit",profit,profit<0?"n":"p"]];
+  '<div class="kpi big'+(profit<0?" neg":"")+'"><span>Estimated profit</span><b>'+esc(money0(profit))+'</b><em>'+margin+'% of sales'+((cogs===null||!fixed)?' · before '+(cogs===null&&!fixed?'COGS and fixed costs':cogs===null?'COGS':'fixed costs'):'')+'</em></div>';
+ var rows=[["Net sales",net,"s"],["COGS",cogs||0,"c"],["Labor (est.)",labor,"c"],["Fixed costs",fixed,"c"],["Misc charges",misc,"c"],["Estimated profit",profit,profit<0?"n":"p"]];
  $("flow").innerHTML=rows.map(function(r){var w=net?Math.max(0,Math.min(100,Math.abs(r[1])/net*100)):0;return'<div class="fl"><div class="fh"><span>'+esc(r[0])+'</span><b>'+esc(money0(r[1]))+'</b></div><div class="fb"><i class="'+r[2]+'" style="width:'+w+'%"></i></div></div>'}).join("");
- var mx=Math.max.apply(null,sales.concat([1]));
- $("wk").innerHTML='<div class="bars" role="img" aria-label="Sales by week">'+sales.map(function(v,i){return'<div class="bar"><b>'+esc(money0(v))+'</b><i style="height:'+Math.round(v/mx*100)+'%"></i><span>Wk '+(i+1)+'</span></div>'}).join("")+'</div>';
+ var barsHtml=function(list,lab){var mx=Math.max.apply(null,list.map(function(x){return x[1]}).concat([1]));return'<div class="bars" role="img" aria-label="'+lab+'">'+list.map(function(x){return'<div class="bar"><b>'+esc(money0(x[1]))+'</b><i style="height:'+Math.round(x[1]/mx*100)+'%"></i><span>'+esc(x[0])+'</span></div>'}).join("")+'</div>'};
+ $("sm-week").setAttribute("aria-pressed",SM==="week");$("sm-month").setAttribute("aria-pressed",SM==="month");
+ if(SM==="week")$("wk").innerHTML=barsHtml(sales.map(function(v,i){return["Wk "+(i+1),v]}),"Sales by week");
+ else{var ml2=MONTHLY||MONTHS.map(function(k){return[k,SAMPLE[k].sales.reduce(function(a,b){return a+b},0)]});
+  $("wk").innerHTML=MONTHLY===false?'<div class="msg">Loading monthly sales&hellip;</div>':barsHtml(ml2.map(function(x){var p=x[0].split("-");return[new Date(+p[0],+p[1]-1,1).toLocaleString("en-US",{month:"short"}),x[1]]}),"Sales by month")}
  var im=Math.max.apply(null,items.map(function(i){return i[1]}).concat([1]));
  $("itemsnote").textContent=isSample?"Sample items, not your menu. Real items load after you sign in.":(items.length?"":"No items found for this week.");
  $("iw-this").setAttribute("aria-pressed",IW==="this");$("iw-last").setAttribute("aria-pressed",IW==="last");
- $("items").innerHTML=items.map(function(it){return'<div class="fl"><div class="fh"><span>'+esc(it[0])+'</span><b>'+it[1]+'</b></div><div class="fb"><i class="p" style="width:'+Math.round(it[1]/im*100)+'%"></i></div></div>'}).join("");
+ $("items").innerHTML=items.map(function(it){var sub=(it[2]||it[3])?'<small class="tmp">Iced '+(it[2]||0)+' &middot; Hot '+(it[3]||0)+'</small>':"";return'<div class="fl"><div class="fh"><span>'+esc(it[0])+sub+'</span><b>'+it[1]+'</b></div><div class="fb"><i class="p" style="width:'+Math.round(it[1]/im*100)+'%"></i></div></div>'}).join("");
  $("misc").innerHTML=(ml.length?ml.map(function(x){return'<div class="kv"><span>'+esc(x.label)+'<small>'+esc(x.date||"")+'</small></span><b>'+esc(money(+x.amount))+'</b><button type="button" class="x" data-id="'+esc(x.id)+'" aria-label="Delete '+esc(x.label)+'">&times;</button></div>'}).join("")+kv("Month total",money(misc),"tot"):'<div class="msg">No misc charges this month.</div>');
- $("fixed").innerHTML=fixedList.map(function(f){return kv(f[0],money0(f[1]))}).join("")+kv("Monthly total",money0(fixedFull),"tot");
 }
+$("sm-week").addEventListener("click",function(){SM="week";render()});
+$("sm-month").addEventListener("click",function(){SM="month";if(OWNER_API&&TOKEN&&!MONTHLY){MONTHLY=false;render();fetch(OWNER_API+"?action=monthly&idToken="+encodeURIComponent(TOKEN),{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){MONTHLY=d.ok?d.monthly:null;render()}).catch(function(){MONTHLY=null;render()})}else render()});
 $("iw-this").addEventListener("click",function(){IW="this";render()});$("iw-last").addEventListener("click",function(){IW="last";render()});
 $("mprev").addEventListener("click",function(){if(mi>0){mi--;load()}});
 $("mnext").addEventListener("click",function(){if(mi<MONTHS.length-1){mi++;load()}});
@@ -1366,11 +1403,17 @@ $("misc").addEventListener("click",function(e){var b=e.target.closest("button.x"
  else{lsSet("kf-misc-"+m,miscList(m).filter(function(x){return x.id!==id}));render()}});
 
 /* ---- Live Square data (only when OWNER_API is set) ---- */
+function renderAudit(a){var box=$("audit");if(!box)return;if(!a){box.hidden=true;return}
+ var fm=function(n){n=Number(n||0);return(n<0?"-":"")+"$"+Math.abs(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})},L=a.labor||{};
+ var rows=[["Dates counted (last date not included)",a.range],["Paid orders counted (both locations)",a.orders],["Item sales before discounts",fm(a.gross)],["Discounts",fm(-a.disc)],["Refunded item sales",fm(-a.ret)],["Net sales shown above",fm(a.gross-a.disc-a.ret)],["Not included: tax",fm(a.tax)],["Not included: tips",fm(a.tips)],["Not included: service charges",fm(a.svc)],
+  ["Orders with a customer attached",a.withCustomer+" of "+a.orders],["Different customers",a.customers],
+  ["Timecards found",L.cards],["Timecards counted",L.counted],["Skipped: still clocked in",L.open],["Skipped: no hourly rate",L.norate],["Hours counted",L.hours],["Burden multiplier",a.burden]];
+ $("auditbody").innerHTML=rows.map(function(r){return'<div class="kv"><span>'+esc(r[0])+'</span><b>'+esc(String(r[1]))+'</b></div>'}).join("")+'<p class="sub">Compare these to Square for the same dates: Sales Summary for net sales, and Team, Timecards for hours.</p>';box.hidden=false}
 function load(){
  if(!OWNER_API||!TOKEN){render();return}
  var m=MONTHS[mi];$("sync").textContent="Loading…";
  fetch(OWNER_API+"?action=summary&month="+m+"&idToken="+encodeURIComponent(TOKEN),{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){
-  if(!d.ok)throw new Error(d.error||"error");LIVE=d;LIVE.month=m;$("sync").textContent="Owners only";render()}).catch(function(e){$("sync").textContent="Owners only";render();if(needsSignin(e.message)){clearTok();LIVE=null;showSignin(e.message&&/not an owner/i.test(e.message)?"That Google account is not an owner. Sign in with an owner account.":"Your sign-in expired. Sign in again to load Square data.");return}$("sample").hidden=false;$("sample").textContent="Couldn’t load Square data ("+e.message+"). Showing sample numbers."})}
+  if(!d.ok)throw new Error(d.error||"error");LIVE=d;LIVE.month=m;renderAudit(d.audit);$("sync").textContent="Owners only";render()}).catch(function(e){$("sync").textContent="Owners only";render();if(needsSignin(e.message)){clearTok();LIVE=null;showSignin(e.message&&/not an owner/i.test(e.message)?"That Google account is not an owner. Sign in with an owner account.":"Your sign-in expired. Sign in again to load Square data.");return}$("sample").hidden=false;$("sample").textContent="Couldn’t load Square data ("+e.message+"). Showing sample numbers."})}
 function jwtExp(t){try{return JSON.parse(atob(t.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"))).exp*1000}catch(e){return 0}}
 function saveTok(t){try{sessionStorage.setItem("kf-tok",t)}catch(e){}}
 function loadTok(){try{var t=sessionStorage.getItem("kf-tok");return t&&jwtExp(t)>Date.now()+60000?t:""}catch(e){return ""}}
@@ -1398,20 +1441,12 @@ else if(OWNER_API||GOOGLE_CLIENT_ID){$("sample").hidden=false;$("sample").textCo
 
 /* ---- Stock alerts (live) ---- */
 function alertsCard(d){
- var items=d.items||[],cur=d.current,h="";weeksApi=d.weeks||[];
+ var cur=d.current,h="";weeksApi=d.weeks||[];
  var low=(cur&&cur.alerts||[]).filter(function(a){return a.status==="active"});
- h+=kv("Low stock",low.length?low.length+(low.length===1?" item":" items"):"None flagged",low.length?"bad":"");
- low.forEach(function(a){var f=null;items.forEach(function(it){if(it.section+" / "+it.item===a.key)f=it});
-  var u=f&&f.unit?String(f.unit).replace(/^(\d+(?:\.\d+)?)\s+([A-Za-z])/,"$1$2"):"";
-  h+=kv(f?f.item:a.key,typeof a.count==="number"?a.count+(u?" "+u:"")+" left":"","low")});
- var toOrder={},n=0;
- if(cur){var add={};(cur.additions||[]).forEach(function(a){add[a.key]=(add[a.key]||0)+a.qty});
-  items.forEach(function(it){var k=it.section+" / "+it.item,e=cur.end[k];if(typeof e!=="number")return;var used=(cur.begin[k]||0)+(add[k]||0)-e;if(Math.ceil(used-e-1e-9)>0){n++;var v=it.vendor||"No vendor set";toOrder[v]=(toOrder[v]||0)+1}})}
- h+=kv("To order",n+(n===1?" item":" items"),n?"bad":"");
- Object.keys(toOrder).sort().forEach(function(v){h+=kv(v,toOrder[v]+(toOrder[v]===1?" item":" items"))});
+ h=low.length?'<div class="alrow bad"><b>Low stock alert</b><span>'+low.length+(low.length===1?" item":" items")+'</span></div>':'<div class="alrow"><b>Low stock</b><span>None flagged</span></div>';
  $("alerts").innerHTML=h;render();
 }
-fetch(STOCK_API,{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.ok)alertsCard(d);else throw 0}).catch(function(){$("alerts").innerHTML='<div class="msg">'+esc("Couldn’t load stock alerts. Open the stock admin instead.")+'</div>'});
+fetch(STOCK_API,{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(d&&d.ok)alertsCard(d);else throw 0}).catch(function(){$("alerts").innerHTML='<div class="alrow"><b>Low stock</b><span>Couldn’t load</span></div>'});
 })();
 
 /* ---- Upcoming events (this month). Sample mode reads the events saved on the Events page in this browser. ---- */
@@ -1422,7 +1457,8 @@ fetch(STOCK_API,{cache:"no-store"}).then(function(r){return r.json()}).then(func
  function f12(v){var p=v.split(":"),h=+p[0],ap=h>=12?"PM":"AM";h=h%12||12;return h+":"+p[1]+" "+ap}
  var now=new Date(),y=now.getFullYear(),m=now.getMonth(),today=y+"-"+pad(m+1)+"-"+pad(now.getDate()),pre=y+"-"+pad(m+1)+"-";
  var list=[];try{list=JSON.parse(localStorage.getItem("kf-evlist"))||[]}catch(e){}
- if(!list.length){list=[{id:"s1",date:pre+"14",name:"Williamsburg Wedding",start:"16:00",end:"20:00",guests:150,hours:4,total:3918.41,pay:"paid"},{id:"s2",date:pre+"21",name:"Pratt Alumni Brunch",start:"10:00",end:"12:00",guests:100,hours:2,total:1837.16,pay:"deposit",due:918.58},{id:"s3",date:pre+"28",name:"Brooklyn Museum Gala",start:"18:00",end:"21:00",guests:300,hours:3,total:3468.76,pay:"unpaid",due:3468.76}]}
+ var DEMO=/[?&]demo/.test(location.search);if(!DEMO)list=list.filter(function(e){return !/^s[1-4]$/.test(e.id||"")});
+ if(!list.length&&DEMO){list=[{id:"s1",date:pre+"14",name:"Williamsburg Wedding",start:"16:00",end:"20:00",guests:150,hours:4,total:3918.41,pay:"paid"},{id:"s2",date:pre+"21",name:"Pratt Alumni Brunch",start:"10:00",end:"12:00",guests:100,hours:2,total:1837.16,pay:"deposit",due:918.58},{id:"s3",date:pre+"28",name:"Brooklyn Museum Gala",start:"18:00",end:"21:00",guests:300,hours:3,total:3468.76,pay:"unpaid",due:3468.76}]}
  var up=list.filter(function(e){return e.date.indexOf(pre)===0&&e.date>=today}).sort(function(a,b){return a.date<b.date?-1:1});
  if(!up.length){el.innerHTML='<div class="msg">No upcoming events this month.</div>';return}
  var tot=0;
@@ -1482,11 +1518,11 @@ function svg(k){return'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="fa
 var src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjI3NiAyNDQgOTggMTYwIj48cGF0aCBmaWxsPSIjMDA1OTQ5IiBkPSJNMzM4LDI5MS4xYy02LjQtLjctMTAuNiwyLjctMTIuOSw1LjR2LTcuOWMzLjItLjUsNS43LTMuNCw1LjctNi44cy0zLjEtNi45LTYuOS02LjktNi45LDMuMS02LjksNi45LDIuNSw2LjIsNS43LDYuOHYxOC41Yy0uOS0uNC0xLjktLjYtMi45LS42LTEuOCwwLTMuNi43LTQuOSwyLTEuMywxLjMtMiwzLTIsNC45cy43LDMuNiwyLDQuOWMxLjMsMS4zLDMsMiw0LjksMnMuOSwwLDEuNC0uMWMtLjQsMiwuMSw0LjIsMS41LDUuOHY3LjFjLTYuNS04LTE2LjktNi4zLTE3LTYuMy0uNCwwLS43LjMtLjguNi0uMi4zLS4yLjcsMCwxLDAsLjEsNS4yLDkuOSwxNiw5LjlzMS4yLDAsMS45LS4xdjQuOWMtMS40LjItMi43LjktMy43LDEuOS0xLDEtMS43LDIuMy0xLjksMy43LTEuOCwwLTMuNS43LTQuOSwyLTIuNywyLjctMi43LDcsMCw5LjcsMS4zLDEuMywzLDIsNC45LDJoMGMuMiwxLjQuOSwyLjcsMS45LDMuNywxLjEsMSwyLjQsMS43LDMuNywxLjl2Ni4xYzAsLjYuNSwxLjEsMS4xLDEuMXMxLjEtLjUsMS4xLTEuMXYtNi4xYzEuNC0uMiwyLjctLjksMy43LTEuOSwxLjEtMSwxLjctMi40LDEuOS0zLjdoMGMxLjgsMCwzLjYtLjcsNC45LTIsMi43LTIuNywyLjctNywwLTkuN3MtMy4xLTItNC45LTJjLS4yLTEuNC0uOS0yLjctMS45LTMuNy0xLjEtMS0yLjQtMS43LTMuNy0xLjl2LTE1LjRjLjkuNCwxLjkuNywyLjkuNywxLjgsMCwzLjUtLjcsNC45LTJzMi0zLDItNC45LS43LTMuNi0yLTQuOS0zLTItNC45LTItLjksMC0xLjQuMWMuNC0yLS4xLTQuMi0xLjUtNS44di03LjRjMywwLDEwLjQtMSwxMy44LTguOC4xLS4zLjEtLjcsMC0xLS4yLS4zLS41LS41LS45LS42aDBaTTMwNy45LDMyOC44YzMuMiwwLDEwLC42LDE0LjIsNy4xLTcuNy42LTEyLjMtNC41LTE0LjItNy4xWk0zMTkuNCwyODEuOWMwLTIuNSwyLjEtNC42LDQuNi00LjZzNC42LDIuMSw0LjYsNC42LTIuMSw0LjYtNC42LDQuNi00LjYtMi00LjYtNC42Wk0zMTcuMiwzNjBjLTEuMiwwLTIuNC0uNC0zLjMtMS4zLTEuOC0xLjgtMS44LTQuNywwLTYuNS45LS45LDIuMS0xLjMsMy4yLTEuM2gwYy4yLDEuNC45LDIuNywxLjksMy43LjMuMy43LjYsMS4xLjktLjQuMi0uNy41LTEuMS45LTEsMS0xLjcsMi4zLTEuOSwzLjdoMFpNMzI3LjIsMzY0LjRjLTEuOCwxLjgtNC43LDEuOC02LjUsMC0uOS0uOS0xLjMtMi0xLjMtMy4ycy41LTIuNCwxLjMtMy4yLDIuMS0xLjMsMy4yLTEuMywyLjQuNSwzLjIsMS4zYzEuOCwxLjgsMS44LDQuNywwLDYuNWgwWk0zMzAuNywzNTAuOWgwYzEuMiwwLDIuNC41LDMuMiwxLjMsMS44LDEuOCwxLjgsNC43LDAsNi41LS45LjktMi4xLDEuNC0zLjMsMS4zLS4yLTEuNC0uOS0yLjctMS45LTMuNy0uMy0uMy0uNy0uNi0xLjEtLjkuNC0uMi43LS41LDEuMS0uOSwxLTEsMS43LTIuNCwxLjktMy43aDBaTTMyNy4yLDM0Ni41YzEuOCwxLjgsMS44LDQuNywwLDYuNS0xLjgsMS44LTQuNywxLjgtNi41LDBzLTEuOC00LjcsMC02LjVjLjktLjksMi4xLTEuMywzLjItMS4zczIuNC41LDMuMiwxLjNoMFpNMzI4LDMxNi45YzEuMiwwLDIuNC41LDMuMiwxLjMsMS44LDEuOCwxLjgsNC43LDAsNi41cy00LjcsMS44LTYuNSwwYy0xLjgtMS44LTEuOC00LjcsMC02LjUuOS0uOSwyLjEtMS4zLDMuMi0xLjNoMFpNMzE5LjksMzE4Yy0xLjIsMC0yLjQtLjUtMy4yLTEuMy0xLjgtMS44LTEuOC00LjcsMC02LjUuOS0uOSwyLTEuMywzLjItMS4zczIuNC41LDMuMiwxLjNjMS44LDEuOCwxLjgsNC43LDAsNi41LS45LjktMiwxLjMtMy4yLDEuM1pNMzI1LjksMjk5LjNjMS40LTIuMiw0LjYtNS44LDEwLjEtNS45LTIuOCw0LjgtNy41LDUuOC0xMC4xLDUuOVoiLz48cGF0aCBmaWxsPSIjMDA1OTQ5IiBkPSJNMzI0LDI0OS42Yy0yMy4zLDAtNDIuMywxOS00Mi4zLDQyLjN2NjQuMmMwLDIzLjMsMTksNDIuMyw0Mi4zLDQyLjNzNDIuMy0xOSw0Mi4zLTQyLjN2LTY0LjJjMC0yMy4zLTE5LTQyLjMtNDIuMy00Mi4zaDBaTTM2NCwzNTYuMWMwLDIyLTE3LjksNDAtNDAsNDBzLTQwLTE3LjktNDAtNDB2LTY0LjJjMC0yMiwxNy45LTQwLDQwLTQwczQwLDE3LjksNDAsNDB2NjQuMloiLz48L3N2Zz4=";
 var sb=d.createElement("aside");sb.className="sb";sb.setAttribute("aria-label","Kinhfolk pages");
 sb.innerHTML='<div class="sbl">'+(src?'<img alt="" src="'+src+'">':"")+'<span>Kinhfolk</span></div>'+
- P.map(function(p){return'<a class="sbi" title="'+p[1]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1]+'</span></a>'}).join("")+
+ P.map(function(p){return'<a class="sbi" data-pg="'+p[0]+'" title="'+p[1]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1]+'</span></a>'}).join("")+
  '<div class="sbg" id="sbg" hidden></div><div id="sbhost"></div><div class="sbf">Brooklyn, NY</div>'+(here==="stock"?'<button type="button" class="sbfab" id="sbfab" aria-label="Report a low item" title="Report a low item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>':"");
 b.insertBefore(sb,b.firstChild);
 var bn=d.createElement("nav");bn.className="bnav";bn.setAttribute("aria-label","Pages");
-bn.innerHTML=P.map(function(p){return'<a href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1].replace("Stock count","Stock")+'</span></a>'}).join("");
+bn.innerHTML=P.map(function(p){return'<a data-pg="'+p[0]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1].replace("Stock count","Stock")+'</span></a>'}).join("");
 b.appendChild(bn);
 function reportLow(){
  window.scrollTo(0,0);
@@ -1559,6 +1595,30 @@ function put(){if(nav.querySelector(".pglnk"))return;
  others.forEach(function(p){var a=d.createElement("a");a.className="tab pglnk";a.setAttribute("data-pg",p[0]);a.href=p[2];a.setAttribute("aria-label",p[1]);a.innerHTML='<span class="sh">'+p[1].replace("Stock count","Stock").replace("Prep list","Prep")+'</span>';
   nav.appendChild(a)})}
 put();new MutationObserver(put).observe(nav,{childList:true})})();
+
+/* red notification badges on the page links: low stock items, and events in the next 7 days that are not paid */
+(function(){
+ var STOCK_API="https://script.google.com/macros/s/AKfycbwD87ttdlNAqROnHrWgwhuJUxsB43yG55RJUuLiObC6Uet0E3jCI727FF25FP2odyFs/exec";
+ function setBadge(pg,n,what){d.querySelectorAll('[data-pg="'+pg+'"]').forEach(function(a){
+  var e=a.querySelector(".nbd");
+  if(!n){if(e)e.remove();return}
+  if(!e){e=d.createElement("i");e.className="nbd";a.appendChild(e)}
+  e.textContent=n>99?"99+":String(n);e.setAttribute("aria-label",n+" "+what);e.title=n+" "+what})}
+ function events(){
+  if(site!=="owner")return;
+  var list=[];try{list=JSON.parse(localStorage.getItem("kf-evlist"))||[]}catch(e){}
+  var now=new Date(),pad=function(n){return(n<10?"0":"")+n},iso=function(t){return t.getFullYear()+"-"+pad(t.getMonth()+1)+"-"+pad(t.getDate())};
+  var today=iso(now),lim=iso(new Date(now.getTime()+7*86400000));
+  var n=list.filter(function(e){return e&&e.date&&e.date>=today&&e.date<=lim&&e.pay!=="paid"&&!/^s[1-4]$/.test(e.id||"")}).length;
+  setBadge("events",n,n===1?"event needs attention":"events need attention")}
+ function stock(n){setBadge("stock",n,n===1?"low stock item":"low stock items")}
+ events();
+ try{fetch(STOCK_API,{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){
+  var low=((j&&j.current&&j.current.alerts)||[]).filter(function(a){return a.status==="active"}).length;stock(low)}).catch(function(){})}catch(e){}
+ var lb=d.getElementById("lowbox");
+ if(lb&&window.MutationObserver)new MutationObserver(function(){stock(d.querySelectorAll("#lowbox .orow.low").length)}).observe(lb,{childList:true,subtree:true});
+ window.addEventListener("storage",events);
+})();
 })();
 </script>
 </body>
