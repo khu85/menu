@@ -1313,8 +1313,8 @@ body.skin .row.add .cin input{min-height:56px;font-size:26px}
 <p class="sample" id="sample">Sample numbers until Square is connected. Stock alerts are live, and COGS will come from your closed weeks once connected.</p>
 <div id="signin" hidden><p class="sub" id="signmsg" role="status"></p><div id="signbtn"></div></div>
 <div class="kpis" id="kpis"></div>
-<section class="card alertsum" id="alertcard"><div class="body" id="alerts"><div class="msg">Loading&hellip;</div></div><a class="go" href="./stock/">Open stock sheet</a></section>
-<section class="card evup"><h2>Upcoming events</h2><div class="body" id="upcoming"></div><a class="go" href="./events/">Open events</a></section>
+<section class="card alertsum" id="alertcard"><div class="body" id="alerts"><div class="msg">Loading&hellip;</div></div></section>
+<section class="card evup"><h2>Upcoming events</h2><div class="body" id="upcoming"></div></section>
 <div class="cards2">
  <section class="card"><h2>Where the money went</h2><div class="body" id="flow"></div></section>
  <section class="card"><h2>Sales</h2><div class="seg" role="group" aria-label="Chart range"><button type="button" id="sm-week" aria-pressed="true">Weekly</button><button type="button" id="sm-month" aria-pressed="false">Monthly</button></div><div class="body" id="wk"></div></section>
@@ -1354,7 +1354,7 @@ var ITEMS=[["Ube Cloud Latte",64,50,14],["Phin Coffee",79,58,21],["Coconut Cold 
 var FIXED_MONTHLY=6926.9; /* all fixed costs combined; calculated into profit, not displayed */
 var SM="week",MONTHLY=null;
 var MONTHS=Object.keys(SAMPLE).sort(),mi=MONTHS.length-1;
-var weeksApi=[],LIVE=null,TOKEN="",IW="this";
+var weeksApi=[],LIVE=null,LOADSTAMP=0,TOKEN="",IW="this";
 function monthLabel(m){var p=m.split("-");return new Date(+p[0],+p[1]-1,1).toLocaleString("en-US",{month:"long",year:"numeric"})}
 function cogsFor(m){var t=0,n=0;weeksApi.forEach(function(w){if(w.status==="closed"&&w.month===m&&typeof w.total==="number"){t+=w.total;n++}});return n?r2(t):null}
 /* misc charges: sample mode keeps them in this browser; live mode keeps them in the owner Sheet */
@@ -1370,7 +1370,7 @@ function render(){
  $("mprev").disabled=mi===0;$("mnext").disabled=mi===MONTHS.length-1;
  var net=sales.reduce(function(a,b){return a+b},0);
  var cogs=LIVE_COGS?cogsFor(m):S.cogs;
- var fixedFull=fixedList.reduce(function(a,b){return a+b[1]},0),fixed=Math.round(fixedFull*(D.f||S.f||1));
+ var fixedFull=fixedList.reduce(function(a,b){return a+b[1]},0),fixed=Math.round(fixedFull);
  var ml=miscList(m),misc=ml.reduce(function(a,b){return a+(+b.amount||0)},0);
  var profit=net-(cogs||0)-labor-fixed-misc,margin=net?Math.round(profit/net*100):0;
  var tc=nw+rt;
@@ -1405,11 +1405,11 @@ $("miscform").addEventListener("submit",function(e){e.preventDefault();
  if(!l||!(a>0)){$("mmsg").textContent="Enter a name and an amount.";return}
  var d=new Date(),dt=m+"-"+("0"+Math.min(d.getDate(),28)).slice(-2);if(d.toISOString().slice(0,7)===m)dt=d.toISOString().slice(0,10);
  var x={id:"m"+Date.now(),date:dt,label:l,amount:r2(a)};$("mmsg").textContent="";
- if(LIVE&&LIVE.month===m){api({action:"addMisc",month:m,item:x}).then(function(r){if(!r.ok)throw 0;LIVE.misc=r.misc;render()}).catch(function(){$("mmsg").textContent="Couldn’t save. Try again."})}
+ if(LIVE&&LIVE.month===m){$("mmsg").textContent="Saving…";api({action:"addMisc",month:m,item:x}).then(function(r){if(!r.ok)throw new Error(r.error||"error");LIVE.misc=r.misc;try{localStorage.setItem("kf-live-"+m,JSON.stringify(LIVE))}catch(e){}$("mmsg").textContent="";render()}).catch(function(e){$("mmsg").textContent="Couldn’t save ("+e.message+"). Try again."})}
  else{var L=miscList(m).slice();L.push(x);lsSet("kf-misc-"+m,L);render()}
  $("mlabelin").value="";$("mamt").value=""});
 $("misc").addEventListener("click",function(e){var b=e.target.closest("button.x");if(!b)return;var id=b.getAttribute("data-id"),m=MONTHS[mi];
- if(LIVE&&LIVE.month===m){api({action:"deleteMisc",month:m,id:id}).then(function(r){if(r.ok){LIVE.misc=r.misc;render()}})}
+ if(LIVE&&LIVE.month===m){api({action:"deleteMisc",month:m,id:id}).then(function(r){if(r.ok){LIVE.misc=r.misc;try{localStorage.setItem("kf-live-"+m,JSON.stringify(LIVE))}catch(e){}render()}else $("mmsg").textContent="Couldn’t remove ("+(r.error||"error")+")."}).catch(function(){$("mmsg").textContent="Couldn’t remove. Try again."})}
  else{lsSet("kf-misc-"+m,miscList(m).filter(function(x){return x.id!==id}));render()}});
 
 /* ---- Live Square data (only when OWNER_API is set) ---- */
@@ -1421,16 +1421,22 @@ function renderAudit(a){var box=$("audit");if(!box)return;if(!a){box.hidden=true
  $("auditbody").innerHTML=rows.map(function(r){return'<div class="kv"><span>'+esc(r[0])+'</span><b>'+esc(String(r[1]))+'</b></div>'}).join("")+'<p class="sub">Compare these to Square for the same dates: Sales Summary for net sales, and Team, Timecards for hours.</p>';box.hidden=false}
 function load(){
  if(!OWNER_API||!TOKEN){render();return}
- var m=MONTHS[mi],ck="kf-live-"+m,shown=false;
+ var m=MONTHS[mi],ck="kf-live-"+m,shown=false,stamp=Date.now();LOADSTAMP=stamp;
  try{var cv=JSON.parse(localStorage.getItem(ck)||"null");if(cv&&cv.sales&&cv.items){LIVE=cv;LIVE.month=m;renderAudit(cv.audit);render();shown=true}}catch(e){}
  $("sync").textContent=shown?"Updating…":"Loading…";
  var base=OWNER_API+"?action=summary&idToken="+encodeURIComponent(TOKEN)+"&part=";
  var get=function(part){return fetch(base+part+"&month="+m,{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){if(!d.ok)throw new Error(d.error||"error");return d})};
+ var fail=function(e){if(stamp!==LOADSTAMP)return;if(needsSignin(e.message)){$("sync").textContent="Owners only";clearTok();LIVE=null;showSignin(e.message&&/not an owner/i.test(e.message)?"That Google account is not an owner. Sign in with an owner account.":"Your sign-in expired. Sign in again to load Square data.");return}
+  $("sync").textContent="Couldn’t refresh";if(shown)return;render();$("sample").hidden=false;$("sample").textContent="Couldn’t load Square data ("+e.message+"). Showing sample numbers."};
+ var save=function(){try{localStorage.setItem(ck,JSON.stringify(LIVE))}catch(e){}};
  Promise.all([get("sales"),get("labor"),get("items")]).then(function(a){
-  var s=a[0],l=a[1],i=a[2],d={ok:true,sales:s.sales,nw:s.nw,rt:s.rt,f:s.f,labor:l.labor,misc:l.misc,fixed:l.fixed,items:i.items,itemsLast:i.itemsLast};
-  d.audit=Object.assign({},s.audit,{labor:l.laborAudit,burden:l.burden});
-  d.month=m;LIVE=d;try{localStorage.setItem(ck,JSON.stringify(d))}catch(e){}
-  renderAudit(d.audit);$("sync").textContent="Owners only";render()}).catch(function(e){$("sync").textContent="Owners only";if(!shown)render();if(needsSignin(e.message)){clearTok();LIVE=null;showSignin(e.message&&/not an owner/i.test(e.message)?"That Google account is not an owner. Sign in with an owner account.":"Your sign-in expired. Sign in again to load Square data.");return}if(shown)return;$("sample").hidden=false;$("sample").textContent="Couldn’t load Square data ("+e.message+"). Showing sample numbers."})}
+  if(stamp!==LOADSTAMP)return;
+  var s=a[0],l=a[1],i=a[2],old=(LIVE&&LIVE.month===m)?LIVE:{};
+  var d={ok:true,month:m,sales:s.sales,f:s.f,nw:old.nw||0,rt:old.rt||0,labor:l.labor,misc:l.misc,fixed:l.fixed,items:i.items,itemsLast:i.itemsLast};
+  d.audit=Object.assign({},s.audit,{labor:l.laborAudit,burden:l.burden,historyReady:old.audit&&old.audit.historyReady});
+  LIVE=d;save();renderAudit(d.audit);$("sync").textContent="Updating customers…";render();
+  get("cust").then(function(c){if(stamp!==LOADSTAMP)return;LIVE.nw=c.nw;LIVE.rt=c.rt;LIVE.audit.historyReady=c.historyReady;save();renderAudit(LIVE.audit);$("sync").textContent="Owners only";render()}).catch(function(e){$("sync").textContent="Owners only"})
+ }).catch(fail)}
 function jwtExp(t){try{return JSON.parse(atob(t.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"))).exp*1000}catch(e){return 0}}
 function saveTok(t){try{sessionStorage.setItem("kf-tok",t)}catch(e){}}
 function loadTok(){try{var t=sessionStorage.getItem("kf-tok");return t&&jwtExp(t)>Date.now()+60000?t:""}catch(e){return ""}}
