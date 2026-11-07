@@ -297,6 +297,12 @@ h2.h{background:var(--mint) !important;color:#f1eedb !important}
 /* low stock box */
 #lowbox:empty{display:none}
 #lowbox{margin:0 0 16px}
+
+/* Report a low item: popup, closes on Cancel / outside tap / Escape */
+.lowmodal{position:fixed;inset:0;z-index:60;background:rgba(51,49,50,.5);display:flex;align-items:flex-start;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px 16px;overflow:auto}
+.lowdlg{background:#fff;border-radius:14px;width:100%;max-width:520px;padding:18px 18px 16px;box-shadow:0 12px 40px rgba(0,0,0,.28);margin-top:6vh}
+.lowdt{margin:0 0 10px;font-size:20px;letter-spacing:.4px;text-transform:uppercase}
+.lowdlg .lowform{margin:0;border:0;padding:0;background:transparent}
 .lowsec{border:3px solid var(--ink);border-radius:2px;background:#fff;display:grid;gap:8px;padding:0 0 10px}
 .lowsec.has{border-color:#b3261e}
 .lowsec .h{margin:0}
@@ -1508,8 +1514,8 @@ html[data-page="stock"] body.skin .secs .sec{width:100%;min-height:56px!importan
  html[data-page="stock"] body.skin .secs .sec{flex:1 1 calc(50% - 4px)!important;width:auto;min-height:44px!important;font-size:13px!important}
 }
 @media (min-width:761px){
- html[data-page="stock"] body.skin .titlebar{flex-wrap:nowrap}
- html[data-page="stock"] body.skin .titlebar #nav{flex:1;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-left:12px}
+ html[data-page="stock"] body.skin .titlebar{flex-wrap:wrap;row-gap:12px}
+ html[data-page="stock"] body.skin .titlebar #nav{flex:1 1 100%;order:5;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-left:0}
  html[data-page="stock"] body.skin .titlebar #nav .tab{min-height:48px;border-radius:6px;padding:4px 12px 0;font-size:14px;justify-content:center;text-align:center}
 }
 body.skin .log button{border-radius:8px}
@@ -1530,6 +1536,95 @@ body.skin .row.add{min-height:0;padding-top:8px;padding-bottom:8px}
 body.skin .row.add .stp{min-height:56px;font-size:30px}
 body.skin .row.add .cin input{min-height:56px;font-size:26px}
 .row.add .nm .u.ad{color:var(--brand)}
+
+/* +box button next to the steppers */
+.step:has(.stp.box){grid-template-columns:78px minmax(0,1fr) 78px auto!important}
+@media (max-width:760px){.step:has(.stp.box){grid-template-columns:62px minmax(0,1fr) 62px auto!important}}
+body.skin .step .stp.box{width:auto;min-width:0;padding:0 12px;font-size:12px!important;font-weight:800;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;margin:0;background:var(--brand);color:#fff;line-height:1.1}
+@media (min-width:761px){.row.add:has(.stp.box){grid-template-columns:minmax(0,1fr) 420px!important}.row.end:has(.stp.box){grid-template-columns:minmax(0,1fr) 300px!important}}
+body.skin .lowdlg .lowform{box-shadow:none !important;border:0 !important;padding:0 !important;background:transparent !important;border-radius:0 !important}
+body.skin .lowdlg{padding:20px 20px 18px}
+
+/* ONE desktop / iPad layout: title at the same height, tabs right under it, content on the same grid */
+@media (min-width:761px){
+ body.skin header:not(:has(#sync,.warn)) .titlebar{margin-top:40px}
+ body.skin .hello.intb{display:none}
+ body.skin .titlebar .tbx{margin-left:auto;align-self:center}
+ body.skin .titlebar .dt{font-size:13px;letter-spacing:.8px;color:#8a8788;text-transform:uppercase}
+ body.skin .evtabs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;overflow:visible;margin:0 0 16px;padding:0}
+ body.skin .evtabs button{min-height:48px;min-width:0;border-radius:6px;font-size:14px;flex:none}
+}
+@media (min-width:1100px){body.skin .tabwrap .inner{padding:0 28px}}
+@media (min-width:761px){html[data-page="home"] body.skin header .wm{visibility:visible !important}}
+@media (min-width:761px){body.skin .wkline{padding-left:0 !important;padding-right:0 !important}}
+@media (min-width:761px){.sb .sbl img,body.skin .sb .sbl img{height:78px !important}.sb .sbl{padding-bottom:22px}}
+@media (max-width:760px){body.skin header .wm::before{width:36px;height:58px;margin-right:12px}}
+/* steppers match the Remove button size */
+body.skin .row.add .stp,body.skin .row.end .stp{min-height:44px;height:44px;font-size:24px;border-radius:10px}
+body.skin .row.add .cin input,body.skin .row.end .cin input{min-height:44px;height:44px;font-size:20px;border-radius:10px}
+body.skin .row.add .step:not(:has(.stp.box)),body.skin .row.end .step:not(:has(.stp.box)){grid-template-columns:44px minmax(0,1fr) 44px;gap:8px;align-items:center}
+body.skin .log button{min-height:44px;height:44px}
+@media (min-width:1100px){body.skin .row.add .stp,body.skin .row.end .stp,body.skin .row.add .cin input,body.skin .row.end .cin input,body.skin .log button{min-height:40px;height:40px}body.skin .row.add .step:not(:has(.stp.box)),body.skin .row.end .step:not(:has(.stp.box)){grid-template-columns:40px minmax(0,1fr) 40px}}
+
+/* low-stock alert icon (bell) instead of a plus */
+body.skin .sbfab svg,body.skin .hplus svg,.sbfab svg,.hplus svg{fill:currentColor !important;stroke:none !important;width:24px !important;height:24px !important}
+/* no box around the - / + count controls */
+body.skin .row.end .step,body.skin .row .step{background:none !important;border:0 !important;box-shadow:none !important;padding:0 !important}
+/* Weekly / monthly toggles: no beige box behind the pills; hidden section chips stay hidden */
+body.skin .seg,body.skin .tog{background:none !important;border:0 !important;box-shadow:none !important;padding:0 !important;gap:8px}
+html[data-page="stock"] body.skin .secs[hidden]{display:none !important}
+body.skin .seg,body.skin .tog{margin-left:0 !important}
+
+@media (max-width:760px){
+ html[data-page="stock"] body.skin #bar{bottom:var(--navh,84px) !important;padding:8px 12px !important;gap:10px;min-height:56px;box-sizing:border-box}
+ html[data-page="stock"] body.skin #bar .bi{font-size:13px;line-height:1.2;letter-spacing:.2px}
+ html[data-page="stock"] body.skin #bar .big{min-height:44px;padding:0 14px;font-size:14px;white-space:nowrap;flex:0 0 auto}
+ html[data-page="stock"] body.skin.hasbar main{padding-bottom:calc(var(--navh,84px) + 90px)}
+}
+
+/* No rounded pills: one square-ish button shape everywhere */
+body.skin .tab:not(.sb .tab),body.skin .tab,body.skin .sec,body.skin .seg button,body.skin .tog button,body.skin .pc>button,body.skin .wkname,body.skin .big,body.skin .reset,body.skin .go,body.skin .backbtn,body.skin .homebtn,body.skin .links a,body.skin .rl,body.skin .cfmb,body.skin .evtabs button,body.skin .titlebar #nav .tab,body.skin .chip,body.skin .lowin{border-radius:6px !important}
+body.skin .seg,body.skin .tog,body.skin .mnav,body.skin #sync,body.skin .warn,body.skin .pill{border-radius:8px !important}
+/* recipe page: single back button on top, back-to-top button bottom right (phone: only at the very bottom) */
+body.skin #totop{border-radius:6px !important;background:#fff !important;color:var(--ink) !important;border:1px solid var(--line) !important;width:48px !important;height:48px !important;box-shadow:0 4px 14px rgba(40,45,35,.18)}
+body.skin #totop svg{width:22px !important;height:22px !important}
+body.skin #totop[hidden]{display:none !important}
+body.skin .recipe .reset{margin-top:14px;width:100%}
+@media (max-width:760px){body.skin #totop{bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important;right:16px !important}}
+@media (max-width:760px){body.skin .recipe{padding-bottom:84px}}
+
+body.skin .tipl{margin:0;padding:0 0 0 22px;display:grid;gap:10px;font-size:16px;line-height:1.35;font-weight:600;color:var(--ink)}
+body.skin .tipl li::marker{color:var(--brand);font-weight:800}
+/* one type scale: list item names 17px, section headings 16px (14px on phone), same spacing everywhere */
+body.skin main .row .nm,body.skin main .orow .on,body.skin main .nmbox .nm,body.skin main .tile .tn,body.skin main .log .n{font-size:17px !important;line-height:1.2}
+body.skin main .row .tg .u,body.skin main .row .u{font-size:13px !important}
+body.skin main h2.h,body.skin main section>h2,body.skin main .card h2,body.skin main .box h2,body.skin main .evpanel h2,body.skin main h2{font-size:16px !important;letter-spacing:.3px !important;color:var(--ink) !important}
+body.skin main section>h2,body.skin main h2.h{margin:22px 2px 10px !important}
+body.skin main section:first-child>h2,body.skin main section:first-child>h2.h{margin-top:0 !important}
+body.skin main .lowsec h2.h{margin:0 !important}
+@media (max-width:760px){body.skin main h2.h,body.skin main section>h2,body.skin main .card h2,body.skin main .box h2,body.skin main .evpanel h2,body.skin main h2{font-size:14px !important}body.skin main section>h2,body.skin main h2.h{margin:18px 2px 8px !important}}
+/* SOP page: same layout + type scale as Recipes */
+html[data-page="sop"] body.skin section{margin-bottom:34px}
+html[data-page="sop"] body.skin section>h2{margin-bottom:12px}
+html[data-page="sop"] body.skin h1{font-size:24px}
+html[data-page="sop"] body.skin .box:has(.sopl){background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:16px 20px 18px}
+html[data-page="sop"] body.skin .sopl li{font-size:16px !important;padding:0;background:none;border:0;box-shadow:none;line-height:1.45}
+html[data-page="sop"] body.skin .sopl li.warn{color:var(--brand);font-weight:700;background:none;border:0}
+html[data-page="sop"] body.skin .sbox input{font-size:16px !important;min-height:48px;border:1px solid var(--line);border-radius:6px;box-shadow:var(--sh)}
+html[data-page="sop"] body.skin .rn{font-size:17px}
+html[data-page="sop"] body.skin .rs{font-size:15px}
+html[data-page="sop"] body.skin .rc{border-color:var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+html[data-page="sop"] body.skin .cat{font-size:13px}
+html[data-page="sop"] body.skin .box h4{font-size:14px}
+/* Recipes: search box + two-column recipe detail on desktop */
+html[data-page="recipes"] body.skin .sbox{margin:0 0 22px}
+html[data-page="recipes"] body.skin .sbox input{width:100%;min-height:48px;font:inherit;font-size:16px;padding:0 16px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);box-shadow:var(--sh)}
+html[data-page="recipes"] body.skin .sr{position:absolute;left:-9999px}
+html[data-page="recipes"] body.skin .none{font-size:16px}
+@media (min-width:1100px){
+ html[data-page="recipes"] body.skin .recipe{max-width:none}
+ html[data-page="recipes"] body.skin .recipe .cols{display:block}
+}
 </style>
 </head>
 <body>
@@ -1559,10 +1654,14 @@ function r2(v){return Math.round(v*100)/100}
 function qtyText(n,unit){var u=String(unit||"").replace(/^(\d+(?:\.\d+)?)\s+([A-Za-z])/,"$1$2");return u?n+" x "+u:String(n)}
 function fmt(n){return String(Math.round(n*1000)/1000)}
 function money(n){return"$"+Number(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}
-function keyOf(it){return it.section+" / "+it.item}
+function keyOf(it){return it.section+" / "+(it.rawItem||it.item)}
 function stepOf(it){return it&&/syrup/i.test(it.item)?0.25:1}
 function itemByKey(k){for(var i=0;i<S.items.length;i++)if(keyOf(S.items[i])===k)return S.items[i];return null}
-function sections(){var o=[];S.items.forEach(function(it){if(o.indexOf(it.section)<0)o.push(it.section)});return o}
+var GRP={"beans + matcha":"Coffee + Matcha","milk + juices":"Milks","syrups + garnish":"Syrups","cups":"Cups","dry goods":"Cups","cleaning":"Supplies","paper goods":"Supplies"};
+function grp(it){var k=String(it.section||"").toLowerCase();return GRP[k]||it.section}
+function counted(it){return !it.alertOnly}
+function required(it){return !it.optional}
+function sections(){var o=[];S.items.forEach(function(it){var g=grp(it);if(counted(it)&&o.indexOf(g)<0)o.push(g)});var pr=["Coffee + Matcha","Milks","Syrups","Cups","Supplies","Retail"];return o.sort(function(a,b){var x=pr.indexOf(a),y=pr.indexOf(b);return(x<0?9:x)-(y<0?9:y)})}
 function timeText(iso){
  if(!iso)return"";
  var d=new Date(iso);
@@ -1582,11 +1681,11 @@ function calc(w,it){
   order:used!==null&&used>e,check:used!==null&&used<0,need:used!==null&&used>e?Math.ceil(used-e-1e-9):0};
 }
 function weekItems(w){
- if(w===S.cur)return S.items;
- return S.items.filter(function(it){var k=keyOf(it);return typeof w.begin[k]==="number"||typeof w.end[k]==="number"||addedOf(w,k)>0});
+ if(w===S.cur)return S.items.filter(counted);
+ return S.items.filter(function(it){if(!counted(it))return false;var k=keyOf(it);return typeof w.begin[k]==="number"||typeof w.end[k]==="number"||addedOf(w,k)>0});
 }
 function rows(w){return weekItems(w).map(function(it){var c=calc(w,it);c.it=it;return c})}
-function uncounted(w){return rows(w).filter(function(r){return r.e===null}).length}
+function uncounted(w){return rows(w).filter(function(r){return r.e===null&&required(r.it)}).length}
 
 /* ---- Applying changes (also used to rebuild after a reload) ---- */
 function applyOp(w,op){
@@ -1629,12 +1728,12 @@ function rebase(w){
 /* ---- Rendering ---- */
 var ROLE=document.documentElement.getAttribute("data-site")==="owner"?"owner":"staff";
 function navList(){
- return ROLE==="owner"?[["added","Added","Added"],["ending","Ending count","Ending"],["order","Order list","Order"],["report","Report","Report"],["edit","Edit week","Edit"]]
+ return ROLE==="owner"?[["added","Added","Added"],["ending","Ending count","Ending"],["order","Order list","Order"],["report","Report","Report"]]
   :[["added","Added","Added"],["ending","Ending count","Ending"]];
 }
 function curNav(){
  if(S.nav==="history"){S.nav="report";S.rv="past"}
- var l=navList(),ok=false;
+ var l=navList(),ok=ROLE==="owner"&&S.nav==="edit";
  l.forEach(function(x){if(x[0]===S.nav)ok=true});
  return ok?S.nav:l[0][0];
 }
@@ -1678,7 +1777,7 @@ function renderNav(){
    if(x[0]==="order"){var o=orderCount(w);bd=o?o:""}
    if(x[0]==="added"){var d=draftCount();bd=d?d:""}
   }
-  h+='<button type="button" class="tab" role="tab" data-nav="'+x[0]+'" aria-selected="'+(cur===x[0])+'">'+'<span class="lg">'+esc(x[1])+'</span><span class="sh">'+esc(x[2])+'</span>'+(bd!==""?'<span class="bd" aria-hidden="true">'+bd+'</span>':"")+'</button>';
+  h+='<button type="button" class="tab" role="tab" data-nav="'+x[0]+'" aria-selected="'+(cur===x[0]||(cur==="edit"&&x[0]==="report"))+'">'+'<span class="lg">'+esc(x[1])+'</span><span class="sh">'+esc(x[2])+'</span>'+(bd!==""?'<span class="bd" aria-hidden="true">'+bd+'</span>':"")+'</button>';
  });
  $("nav").innerHTML=h;
 }
@@ -1715,10 +1814,10 @@ function renderView(){
   return;
  }
  if(nav==="added")v.innerHTML=addedHtml();
- else if(nav==="ending"){v.innerHTML=endingHtml();var cs=curSec();S.items.forEach(function(it,i){if(it.section===cs)paintEnd(i)})}
- else if(nav==="report")v.innerHTML=(viewing()?"":rvToggle())+((S.rv==="past"&&!viewing())?pastHtml():reportHtml());
+ else if(nav==="ending"){v.innerHTML=endingHtml();var cs=curSec();S.items.forEach(function(it,i){if(counted(it)&&grp(it)===cs)paintEnd(i)})}
+ else if(nav==="report")v.innerHTML=(ROLE==="owner"?'<div class="actions"><button type="button" class="big light" id="editwk">Edit '+esc(wk().label)+'</button></div>':"")+(viewing()?"":rvToggle())+((S.rv==="past"&&!viewing())?pastHtml():reportHtml());
  else if(nav==="order")v.innerHTML=orderHtml();
- else if(nav==="edit")v.innerHTML=editHtml();
+ else if(nav==="edit")v.innerHTML='<div class="actions"><button type="button" class="big light" id="editdone">Done editing, back to report</button></div>'+editHtml();
  else v.innerHTML=reportHtml();
 }
 
@@ -1726,12 +1825,12 @@ function renderView(){
 function addedHtml(){
  var w=S.cur,sec=curSec(),h='<p class="note">Type what arrived for each item. Nothing is saved until you tap <b>Confirm added items</b>.</p><ul class="list">';
  S.items.forEach(function(it){
-  if(it.section!==sec)return;
+  if(!counted(it)||grp(it)!==sec)return;
   var k=keyOf(it),d=S.drafts[k],a=addedOf(w,k);
-  h+='<li class="row add"><div class="nmbox"><div class="nm">'+esc(it.item)+(it.unit?' <span class="u">'+esc(it.unit)+'</span>':'')+(a?' <span class="u ad">\u00B7 '+fmt(a)+' added</span>':'')+(alertFor(w,k)?' <span class="chip bad">Low stock</span>':'')+'</div></div>'+
+  h+='<li class="row add"><div class="nmbox"><div class="nm">'+esc(it.item)+(it.unit?' <span class="u">'+esc(it.unit)+'</span>':'')+(it.perBox?' <span class="u">\u00B7 '+fmt(it.perBox)+' per box</span>':'')+(a?' <span class="u ad">\u00B7 '+fmt(a)+' added</span>':'')+(alertFor(w,k)?' <span class="chip bad">Low stock</span>':'')+'</div></div>'+
    '<div class="step"><button type="button" class="stp" data-step="'+(-stepOf(it))+'" data-key="'+esc(k)+'" aria-label="'+esc((stepOf(it)<1?"A quarter less ":"One less ")+it.item)+'">\u2212</button>'+
    '<label class="cin'+(d?" has":"")+'"><span class="sr">'+esc("Arrived now: "+it.item)+'</span><input type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" autocorrect="off" spellcheck="false" data-draft="'+esc(k)+'" value="'+(d?esc(fmt(d)):"")+'" placeholder="0"></label>'+
-   '<button type="button" class="stp plus" data-step="'+stepOf(it)+'" data-key="'+esc(k)+'" aria-label="'+esc((stepOf(it)<1?"A quarter more ":"One more ")+it.item)+'">+</button></div></li>';
+   '<button type="button" class="stp plus" data-step="'+stepOf(it)+'" data-key="'+esc(k)+'" aria-label="'+esc((stepOf(it)<1?"A quarter more ":"One more ")+it.item)+'">+</button>'+(it.perBox?'<button type="button" class="stp box" data-step="'+it.perBox+'" data-key="'+esc(k)+'" aria-label="'+esc("Add one box ("+fmt(it.perBox)+") of "+it.item)+'">+ box</button>':'')+'</div></li>';
  });
  return h+'</ul><section><h2 class="h">Added this week</h2>'+logHtml(w,true)+'</section>';
 }
@@ -1771,15 +1870,15 @@ function paintEnd(idx){
  box.innerHTML='<span class="ol">'+esc(c.label)+'</span><span class="on">'+esc(c.main)+'</span>';
 }
 function endingHtml(){
- var w=S.cur,sec=curSec(),total=S.items.length,left=uncounted(w);
+ var w=S.cur,sec=curSec(),total=S.items.filter(function(x){return counted(x)&&required(x)}).length,left=uncounted(w);
  var h='<p class="note">'+esc((total-left)+" of "+total+" counted. Count each item with the + and − buttons or type it, then tap Confirm ending count.")+'</p><ul class="list">';
  S.items.forEach(function(it,i){
-  if(it.section!==sec)return;
+  if(!counted(it)||grp(it)!==sec)return;
   var c=calc(w,it),k=keyOf(it),d=S.edrafts[k],val=d!==undefined?d:c.e;
-  h+='<li class="row end"><div class="nmbox"><div class="nm">'+esc(it.item)+'</div><div class="tg">Begin '+fmt(c.b)+' + Added '+fmt(c.a)+' = '+fmt(r2(c.b+c.a))+(it.unit?' <span class="u">'+esc(it.unit)+'</span>':"")+(it.note?' · <span class="u">'+esc(it.note)+'</span>':"")+'</div></div>'+
+  h+='<li class="row end"><div class="nmbox"><div class="nm">'+esc(it.item)+'</div><div class="tg">Begin '+fmt(c.b)+' + Added '+fmt(c.a)+' = '+fmt(r2(c.b+c.a))+(it.unit?' <span class="u">'+esc(it.unit)+'</span>':"")+(it.perBox?' · <span class="u">'+fmt(it.perBox)+' per box</span>':"")+(it.note?' · <span class="u">'+esc(it.note)+'</span>':"")+'</div></div>'+
    '<div class="step"><button type="button" class="stp" data-kind="e" data-step="'+(-stepOf(it))+'" data-key="'+esc(k)+'" aria-label="'+esc((stepOf(it)<1?"A quarter less ":"One less ")+it.item)+'">−</button>'+
    '<label class="cin'+(d!==undefined?" has":"")+'"><span class="sr">'+esc("Ending count: "+it.item)+'</span><input type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" autocorrect="off" spellcheck="false" data-ekey="'+esc(k)+'" value="'+(val===null||val===undefined?"":esc(fmt(val)))+'" placeholder="–"></label>'+
-   '<button type="button" class="stp plus" data-kind="e" data-step="'+stepOf(it)+'" data-key="'+esc(k)+'" aria-label="'+esc((stepOf(it)<1?"A quarter more ":"One more ")+it.item)+'">+</button></div>'+
+   '<button type="button" class="stp plus" data-kind="e" data-step="'+stepOf(it)+'" data-key="'+esc(k)+'" aria-label="'+esc((stepOf(it)<1?"A quarter more ":"One more ")+it.item)+'">+</button>'+(it.perBox?'<button type="button" class="stp box" data-kind="e" data-step="'+it.perBox+'" data-key="'+esc(k)+'" aria-label="'+esc("Add one box ("+fmt(it.perBox)+") of "+it.item)+'">+ box</button>':'')+'</div>'+
    '<div class="ob none" id="e'+i+'" aria-live="polite"></div></li>';
  });
  return h+'</ul>';
@@ -1793,7 +1892,7 @@ function lowMatches(q){
  if(!toks.length)return[];
  var out=[];
  S.items.forEach(function(it){
-  var hay=(it.item+" "+it.section+" "+(it.vendor||"")).toLowerCase(),ok=true;
+  var hay=(it.item+" "+grp(it)+" "+(it.vendor||"")).toLowerCase(),ok=true;
   toks.forEach(function(t){if(hay.indexOf(t)<0)ok=false});
   if(ok)out.push({it:it,starts:it.item.toLowerCase().indexOf(toks[0])===0?0:1});
  });
@@ -1804,7 +1903,7 @@ function lowListHtml(q){
  var m=lowMatches(q),w=S.cur;
  if(!m.length)return q.trim()?'<li class="lownone" role="presentation">'+esc("No item matches. Check the spelling.")+'</li>':"";
  return m.map(function(it,i){var k=keyOf(it),al=alertFor(w,k);
-  return'<li role="presentation"><button type="button" role="option" id="lo'+i+'" aria-selected="false" data-pick="'+esc(k)+'"><span>'+esc(it.item)+'</span><small>'+esc(it.section+(it.vendor?" \u00B7 "+it.vendor:"")+(al?" \u00B7 already flagged":""))+'</small></button></li>';
+  return'<li role="presentation"><button type="button" role="option" id="lo'+i+'" aria-selected="false" data-pick="'+esc(k)+'"><span>'+esc(it.item)+'</span><small>'+esc(grp(it)+(it.vendor?" \u00B7 "+it.vendor:"")+(al?" \u00B7 already flagged":""))+'</small></button></li>';
  }).join("");
 }
 function lowUnit(key){var it=key?itemByKey(key):null;return it&&it.unit?String(it.unit).replace(/^(\d+(?:\.\d+)?)\s+([A-Za-z])/,"$1$2"):""}
@@ -1850,8 +1949,7 @@ function lowFormHtml(){
 function renderLow(){
  var el=$("lowbox");if(!el)return;
  if(!editable()||!S.items.length){el.innerHTML="";return}
- var w=S.cur,act=activeAlerts(w),h='<section class="lowsec'+(act.length?" has":"")+'" aria-labelledby="lowh"><h2 class="h low" id="lowh"><span>'+esc("⚠ Low stock")+'</span><span>'+act.length+'</span></h2>';
- if(!act.length)h+='<p class="lowempty">'+esc("✓ Nothing flagged low right now.")+'</p>';
+ var w=S.cur,act=activeAlerts(w),h='<section class="lowsec'+(act.length?" has":"")+'" aria-labelledby="lowh"><h2 class="h low" id="lowh"><span>'+esc("⚠ Low stock")+'</span><span>'+act.length+'</span></h2>'+(act.length?'':'<p class="lowempty">'+esc("✓ Nothing flagged low right now.")+'</p>');
  act.forEach(function(a){
   var it=itemByKey(a.key),u=lowUnit(a.key),pn=projNeed(a.key),parts=[];
   if(typeof a.count==="number")parts.push(a.count+" left");
@@ -1860,8 +1958,9 @@ function renderLow(){
   var dt=lowDate(a.time);
   h+='<div class="orow low"><div class="l"><div class="on">'+esc(it?it.item:a.key)+'</div>'+(parts.length?'<div class="sub cnt">'+esc(parts.join(" - "))+'</div>':"")+(meta.length?'<div class="sub">'+esc(meta.join(" \u00B7 "))+'</div>':"")+(a.note?'<div class="sub">'+esc(a.note)+'</div>':"")+'</div><div class="tm"><span>'+esc(dt[0])+'</span><span>'+esc(dt[1])+'</span>'+(a.by?'<span class="by">Added by '+esc(a.by)+'</span>':"")+'</div><div class="r"><button type="button" class="big light sm" data-lowadd="'+esc(a.id)+'" aria-expanded="'+(S.lowAdd&&S.lowAdd.id===a.id)+'">Add stock</button></div>'+(S.lowAdd&&S.lowAdd.id===a.id?lowAddHtml(a,u):"")+'</div>';
  });
- h+=S.lowOpen?lowFormHtml():'<div class="lowact"><button type="button" class="big light" id="lowopen">Report a low item</button></div>';
  h+='</section>';
+ h+='<button type="button" id="lowopen" hidden tabindex="-1" aria-hidden="true">Report a low item</button>';
+ if(S.lowOpen)h+='<div class="lowmodal" id="lowmodal"><div class="lowdlg" role="dialog" aria-modal="true" aria-labelledby="lowdt"><h2 id="lowdt" class="lowdt">'+esc("Report a low item")+'</h2>'+lowFormHtml()+'</div></div>';
  el.innerHTML=h;
  if(S.lowOpen&&lowText&&!S.lowSel){var l=$("lowlist");l.innerHTML=lowListHtml(lowText);l.hidden=!l.innerHTML}
 }
@@ -1879,7 +1978,7 @@ function pickLow(key){
 function editHtml(){
  var w=wk(),sec=curSec(),h='<p class="note">'+esc("Fix a mistake in "+w.label+". Changes save right away and the report, COGS and next week\u2019s beginning update.")+'</p><ul class="list">';
  S.items.forEach(function(it){
-  if(it.section!==sec)return;
+  if(!counted(it)||grp(it)!==sec)return;
   var k=keyOf(it),c=calc(w,it),a=addedOf(w,k);
   h+='<li class="row edit" data-ek="'+esc(k)+'"><div class="nmbox"><div class="nm">'+esc(it.item)+'</div><div class="tg">'+(it.unit?'<span class="u">'+esc(it.unit)+'</span>':'')+'</div></div>'+
    ecell("begin",k,it,"Begin",typeof w.begin[k]==="number"?w.begin[k]:0)+ecell("added",k,it,"Added",a)+ecell("end",k,it,"End",c.e===null?"":c.e)+
@@ -1896,7 +1995,7 @@ function eoInner(c){return c.used===null?'<span>Not counted</span>':'<span>Used<
 function sectionTotals(w){
  var out=[];
  sections().forEach(function(s){
-  var rs=rows(w).filter(function(r){return r.it.section===s});
+  var rs=rows(w).filter(function(r){return grp(r.it)===s});
   if(!rs.length)return;
   var t=0;rs.forEach(function(r){if(r.total!==null)t+=r.total});
   out.push({section:s,rows:rs,total:r2(t)});
@@ -1948,8 +2047,8 @@ function vendorGroups(w){
  return names.map(function(v){
   var secs=[];
   by[v].forEach(function(r){
-   var g=null;secs.forEach(function(x){if(x.section===r.it.section)g=x});
-   if(!g){g={section:r.it.section,rows:[]};secs.push(g)}
+   var g=null;secs.forEach(function(x){if(x.section===grp(r.it))g=x});
+   if(!g){g={section:grp(r.it),rows:[]};secs.push(g)}
    g.rows.push(r);
   });
   return{vendor:v,sections:secs};
@@ -2023,7 +2122,7 @@ function monthSums(g){
  sections().forEach(function(sec){
   var rs=[],t=0;
   S.items.forEach(function(it){
-   if(it.section!==sec)return;
+   if(!counted(it)||grp(it)!==sec)return;
    var x=items[keyOf(it)];
    if(!x||(x.used===0&&x.cost===0))return;
    rs.push({it:it,used:r2(x.used),avg:r2(x.used/Math.max(1,g.closed)),cost:r2(x.cost)});t+=x.cost;
@@ -2104,7 +2203,7 @@ function exportRows(kind){
  var w=wk(),out=[];
  if(kind==="report"){
   out.push(["Section","Item","Unit","Begin","Added","End","Used","Unit cost","COGS"]);
-  rows(w).forEach(function(r){out.push([r.it.section,r.it.item,r.it.unit||"",r.b,r.a,r.e===null?"":r.e,r.used===null?"":r.used,r.cost,r.total===null?"":r.total])});
+  rows(w).forEach(function(r){out.push([grp(r.it),r.it.item,r.it.unit||"",r.b,r.a,r.e===null?"":r.e,r.used===null?"":r.used,r.cost,r.total===null?"":r.total])});
   out.push(["Total","","","","","","","",totalCogs(w)]);
   return{name:"report-"+slug(w.label),rows:out};
  }
@@ -2250,6 +2349,9 @@ $("main").addEventListener("click",function(e){
   return;
  }
  if(t.closest("#lowopen")){S.lowOpen=true;renderLow();var q0=$("lowq");if(q0)q0.focus();return}
+ if(t.closest("#editwk")){S.nav="edit";persist();renderAll();window.scrollTo(0,0);return}
+ if(t.closest("#editdone")){S.nav="report";persist();renderAll();window.scrollTo(0,0);return}
+ if(t.id==="lowmodal"){S.lowOpen=false;S.lowSel="";lowText="";lowCount="";renderLow();return}
  if(t.closest("#lowcancel")){S.lowOpen=false;S.lowSel="";lowText="";lowCount="";renderLow();return}
  var pk=t.closest("button[data-pick]");
  if(pk){pickLow(pk.dataset.pick);return}
@@ -2374,7 +2476,7 @@ function closeAsk(){$("confirm").hidden=true;cfmFn=null;if(cfmOpener&&document.b
 $("cfmno").addEventListener("click",closeAsk);
 $("cfmyes").addEventListener("click",function(){var f=cfmFn;closeAsk();if(f)f()});
 $("confirm").addEventListener("click",function(e){if(e.target===$("confirm"))closeAsk()});
-document.addEventListener("keydown",function(e){
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&S.lowOpen){var cb=$("lowcancel");if(cb)cb.click();return}
  if($("confirm").hidden)return;
  if(e.key==="Escape"){closeAsk();return}
  if(e.key==="Tab"){var a=[$("cfmno"),$("cfmyes")],ix=a.indexOf(document.activeElement);e.preventDefault();a[(ix+(e.shiftKey?-1:1)+2)%2].focus()}
@@ -2467,7 +2569,7 @@ async function loadRemote(force){
    var d=await fetchJson(API+(S.viewId&&!S.cache[S.viewId]?"?week="+encodeURIComponent(S.viewId):""));
    if(!d||!d.ok||!Array.isArray(d.items))throw new Error("bad response");
    var before=JSON.stringify([S.items,S.weeks,S.cur,S.usage]);
-   S.items=d.items;S.weeks=d.weeks||[];S.usage=d.usage||{};
+   S.items=d.items;S.items.forEach(function(it){if(!it.rawItem)it.rawItem=it.item;it.item=it.rawItem.replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters").replace(/ - single origin$/i," - VSO");if(it.vendor)it.vendor=it.vendor.replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters");if(/^retail$/i.test(it.section)&&/^C\u00e0ph\u00ea Roasters/.test(it.item))it.item+=" (Retail Bag)";if(/syrup/i.test(it.item)&&/^500\s*ml$/i.test(it.unit||""))it.unit="550g bottle"});S.weeks=d.weeks||[];S.usage=d.usage||{};
    S.cur=d.current?rebase(d.current):null;
    if(S.cur&&S.edw!==S.cur.id){S.edrafts={};S.edw=S.cur.id}
    if(d.week)S.cache[d.week.id]=rebase(d.week);
@@ -2586,6 +2688,7 @@ var I={
  prep:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h6"/>',
  events:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h3"/>',
  more:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',
+ sop:'<path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
  recipes:'<path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M9 7h6"/>'
 };
 var site=d.documentElement.getAttribute("data-site")||"staff",root=d.documentElement.getAttribute("data-root")||"../";
@@ -2596,7 +2699,7 @@ var src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwM
 var sb=d.createElement("aside");sb.className="sb";sb.setAttribute("aria-label","Kinhfolk pages");
 sb.innerHTML='<div class="sbl">'+(src?'<img alt="" src="'+src+'">':"")+'<span>Kinhfolk</span></div>'+
  P.map(function(p){return'<a class="sbi" data-pg="'+p[0]+'" title="'+p[1]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1]+'</span></a>'}).join("")+
- '<div class="sbg" id="sbg" hidden></div><div id="sbhost"></div><div class="sbf">Brooklyn, NY</div>'+(here==="stock"?'<button type="button" class="sbfab" id="sbfab" aria-label="Report a low item" title="Report a low item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>':"");
+ '<div class="sbg" id="sbg" hidden></div><div id="sbhost"></div><div class="sbf">Brooklyn, NY</div>'+(here==="stock"?'<button type="button" class="sbfab" id="sbfab" aria-label="Report a low item" title="Report a low item"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 3.2c.7 0 1.3.4 1.7 1l8 14c.8 1.4-.2 3.1-1.7 3.1H4c-1.5 0-2.5-1.7-1.7-3.1l8-14c.4-.6 1-1 1.7-1zM11 9v5.2h2V9h-2zm0 7.3v2h2v-2h-2z"/></svg></button>':"");
 b.insertBefore(sb,b.firstChild);
 var bn=d.createElement("nav");bn.className="bnav";bn.setAttribute("aria-label","Pages");
 bn.innerHTML=P.map(function(p){return'<a data-pg="'+p[0]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1].replace("Stock count","Stock")+'</span></a>'}).join("");
@@ -2617,7 +2720,7 @@ scrim.addEventListener("click",function(){drawer(false)});
 d.addEventListener("keydown",function(e){if(e.key==="Escape")drawer(false)});
 if(here==="stock"&&hd){
  var hp=d.createElement("button");hp.type="button";hp.className="hplus";hp.setAttribute("aria-label","Report a low item");
- hp.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+ hp.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 3.2c.7 0 1.3.4 1.7 1l8 14c.8 1.4-.2 3.1-1.7 3.1H4c-1.5 0-2.5-1.7-1.7-3.1l8-14c.4-.6 1-1 1.7-1zM11 9v5.2h2V9h-2zm0 7.3v2h2v-2h-2z"/></svg>';
  hd.appendChild(hp);hp.addEventListener("click",reportLow);
  var top=d.getElementById("top"),tw=d.querySelector(".tabwrap"),ph=window.matchMedia("(max-width:760px)");
  var sc=d.createElement("div");sc.className="statcard";
@@ -2644,8 +2747,11 @@ if(hd){
  var tb=d.createElement("div");tb.className="titlebar";hd.appendChild(tb);
  var mqd=window.matchMedia("(min-width:761px)");
  var layout=function(){
-  if(mqd.matches){if(wm)tb.appendChild(wm);if(nav)tb.appendChild(nav);if(hb2)tb.appendChild(hb2)}
-  else{if(wm)hd.insertBefore(wm,syn||tb);if(nav&&navHome)navHome.appendChild(nav);if(hb2)hd.insertBefore(hb2,tb)}
+  var hl=d.querySelector("main .hello"),h1=hl&&hl.querySelector("h1");
+  if(mqd.matches){if(wm)tb.appendChild(wm);if(nav)tb.appendChild(nav);if(hb2)tb.appendChild(hb2);
+   if(hl&&h1&&wm){if(!wm.hasAttribute("data-t"))wm.setAttribute("data-t",wm.textContent);wm.textContent=h1.textContent;hl.classList.add("intb");Array.prototype.slice.call(hl.children).forEach(function(c){if(c!==h1){c.classList.add("tbx");tb.appendChild(c)}})}}
+  else{if(wm)hd.insertBefore(wm,syn||tb);if(nav&&navHome)navHome.appendChild(nav);if(hb2)hd.insertBefore(hb2,tb);
+   if(hl&&h1&&wm){if(wm.hasAttribute("data-t"))wm.textContent=wm.getAttribute("data-t");hl.classList.remove("intb");Array.prototype.slice.call(tb.querySelectorAll(".tbx")).forEach(function(c){c.classList.remove("tbx");hl.appendChild(c)})}}
  };
  layout();if(mqd.addEventListener)mqd.addEventListener("change",layout);else mqd.addListener(layout);
  var inp=q.querySelector("input"),last="";
@@ -2696,6 +2802,14 @@ put();new MutationObserver(put).observe(nav,{childList:true})})();
  if(lb&&window.MutationObserver)new MutationObserver(function(){stock(d.querySelectorAll("#lowbox .orow.low").length)}).observe(lb,{childList:true,subtree:true});
  window.addEventListener("storage",events);
 })();
+})();
+
+/* iPhone: keep the confirm bar above the bottom navigation, whatever its real height */
+(function(){var d=document,nv=d.getElementById("nav");if(!nv)return;
+ var set=function(){var r=nv.getBoundingClientRect();var f=getComputedStyle(nv).position==="fixed";d.documentElement.style.setProperty("--navh",f?Math.ceil(window.innerHeight-r.top)+"px":"0px")};
+ set();window.addEventListener("resize",set);window.addEventListener("orientationchange",set);
+ if(window.ResizeObserver)new ResizeObserver(set).observe(nv);setTimeout(set,400);setTimeout(set,1500)
+try{if("serviceWorker" in navigator&&location.protocol==="https:"&&site==="staff"){navigator.serviceWorker.register((d.documentElement.getAttribute("data-root")||"../")+"sw.js")}}catch(e){}
 })();
 </script>
 </body>

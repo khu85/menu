@@ -1281,8 +1281,8 @@ html[data-page="stock"] body.skin .secs .sec{width:100%;min-height:56px!importan
  html[data-page="stock"] body.skin .secs .sec{flex:1 1 calc(50% - 4px)!important;width:auto;min-height:44px!important;font-size:13px!important}
 }
 @media (min-width:761px){
- html[data-page="stock"] body.skin .titlebar{flex-wrap:nowrap}
- html[data-page="stock"] body.skin .titlebar #nav{flex:1;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-left:12px}
+ html[data-page="stock"] body.skin .titlebar{flex-wrap:wrap;row-gap:12px}
+ html[data-page="stock"] body.skin .titlebar #nav{flex:1 1 100%;order:5;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-left:0}
  html[data-page="stock"] body.skin .titlebar #nav .tab{min-height:48px;border-radius:6px;padding:4px 12px 0;font-size:14px;justify-content:center;text-align:center}
 }
 body.skin .log button{border-radius:8px}
@@ -1303,6 +1303,95 @@ body.skin .row.add{min-height:0;padding-top:8px;padding-bottom:8px}
 body.skin .row.add .stp{min-height:56px;font-size:30px}
 body.skin .row.add .cin input{min-height:56px;font-size:26px}
 .row.add .nm .u.ad{color:var(--brand)}
+
+/* +box button next to the steppers */
+.step:has(.stp.box){grid-template-columns:78px minmax(0,1fr) 78px auto!important}
+@media (max-width:760px){.step:has(.stp.box){grid-template-columns:62px minmax(0,1fr) 62px auto!important}}
+body.skin .step .stp.box{width:auto;min-width:0;padding:0 12px;font-size:12px!important;font-weight:800;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;margin:0;background:var(--brand);color:#fff;line-height:1.1}
+@media (min-width:761px){.row.add:has(.stp.box){grid-template-columns:minmax(0,1fr) 420px!important}.row.end:has(.stp.box){grid-template-columns:minmax(0,1fr) 300px!important}}
+body.skin .lowdlg .lowform{box-shadow:none !important;border:0 !important;padding:0 !important;background:transparent !important;border-radius:0 !important}
+body.skin .lowdlg{padding:20px 20px 18px}
+
+/* ONE desktop / iPad layout: title at the same height, tabs right under it, content on the same grid */
+@media (min-width:761px){
+ body.skin header:not(:has(#sync,.warn)) .titlebar{margin-top:40px}
+ body.skin .hello.intb{display:none}
+ body.skin .titlebar .tbx{margin-left:auto;align-self:center}
+ body.skin .titlebar .dt{font-size:13px;letter-spacing:.8px;color:#8a8788;text-transform:uppercase}
+ body.skin .evtabs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;overflow:visible;margin:0 0 16px;padding:0}
+ body.skin .evtabs button{min-height:48px;min-width:0;border-radius:6px;font-size:14px;flex:none}
+}
+@media (min-width:1100px){body.skin .tabwrap .inner{padding:0 28px}}
+@media (min-width:761px){html[data-page="home"] body.skin header .wm{visibility:visible !important}}
+@media (min-width:761px){body.skin .wkline{padding-left:0 !important;padding-right:0 !important}}
+@media (min-width:761px){.sb .sbl img,body.skin .sb .sbl img{height:78px !important}.sb .sbl{padding-bottom:22px}}
+@media (max-width:760px){body.skin header .wm::before{width:36px;height:58px;margin-right:12px}}
+/* steppers match the Remove button size */
+body.skin .row.add .stp,body.skin .row.end .stp{min-height:44px;height:44px;font-size:24px;border-radius:10px}
+body.skin .row.add .cin input,body.skin .row.end .cin input{min-height:44px;height:44px;font-size:20px;border-radius:10px}
+body.skin .row.add .step:not(:has(.stp.box)),body.skin .row.end .step:not(:has(.stp.box)){grid-template-columns:44px minmax(0,1fr) 44px;gap:8px;align-items:center}
+body.skin .log button{min-height:44px;height:44px}
+@media (min-width:1100px){body.skin .row.add .stp,body.skin .row.end .stp,body.skin .row.add .cin input,body.skin .row.end .cin input,body.skin .log button{min-height:40px;height:40px}body.skin .row.add .step:not(:has(.stp.box)),body.skin .row.end .step:not(:has(.stp.box)){grid-template-columns:40px minmax(0,1fr) 40px}}
+
+/* low-stock alert icon (bell) instead of a plus */
+body.skin .sbfab svg,body.skin .hplus svg,.sbfab svg,.hplus svg{fill:currentColor !important;stroke:none !important;width:24px !important;height:24px !important}
+/* no box around the - / + count controls */
+body.skin .row.end .step,body.skin .row .step{background:none !important;border:0 !important;box-shadow:none !important;padding:0 !important}
+/* Weekly / monthly toggles: no beige box behind the pills; hidden section chips stay hidden */
+body.skin .seg,body.skin .tog{background:none !important;border:0 !important;box-shadow:none !important;padding:0 !important;gap:8px}
+html[data-page="stock"] body.skin .secs[hidden]{display:none !important}
+body.skin .seg,body.skin .tog{margin-left:0 !important}
+
+@media (max-width:760px){
+ html[data-page="stock"] body.skin #bar{bottom:var(--navh,84px) !important;padding:8px 12px !important;gap:10px;min-height:56px;box-sizing:border-box}
+ html[data-page="stock"] body.skin #bar .bi{font-size:13px;line-height:1.2;letter-spacing:.2px}
+ html[data-page="stock"] body.skin #bar .big{min-height:44px;padding:0 14px;font-size:14px;white-space:nowrap;flex:0 0 auto}
+ html[data-page="stock"] body.skin.hasbar main{padding-bottom:calc(var(--navh,84px) + 90px)}
+}
+
+/* No rounded pills: one square-ish button shape everywhere */
+body.skin .tab:not(.sb .tab),body.skin .tab,body.skin .sec,body.skin .seg button,body.skin .tog button,body.skin .pc>button,body.skin .wkname,body.skin .big,body.skin .reset,body.skin .go,body.skin .backbtn,body.skin .homebtn,body.skin .links a,body.skin .rl,body.skin .cfmb,body.skin .evtabs button,body.skin .titlebar #nav .tab,body.skin .chip,body.skin .lowin{border-radius:6px !important}
+body.skin .seg,body.skin .tog,body.skin .mnav,body.skin #sync,body.skin .warn,body.skin .pill{border-radius:8px !important}
+/* recipe page: single back button on top, back-to-top button bottom right (phone: only at the very bottom) */
+body.skin #totop{border-radius:6px !important;background:#fff !important;color:var(--ink) !important;border:1px solid var(--line) !important;width:48px !important;height:48px !important;box-shadow:0 4px 14px rgba(40,45,35,.18)}
+body.skin #totop svg{width:22px !important;height:22px !important}
+body.skin #totop[hidden]{display:none !important}
+body.skin .recipe .reset{margin-top:14px;width:100%}
+@media (max-width:760px){body.skin #totop{bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important;right:16px !important}}
+@media (max-width:760px){body.skin .recipe{padding-bottom:84px}}
+
+body.skin .tipl{margin:0;padding:0 0 0 22px;display:grid;gap:10px;font-size:16px;line-height:1.35;font-weight:600;color:var(--ink)}
+body.skin .tipl li::marker{color:var(--brand);font-weight:800}
+/* one type scale: list item names 17px, section headings 16px (14px on phone), same spacing everywhere */
+body.skin main .row .nm,body.skin main .orow .on,body.skin main .nmbox .nm,body.skin main .tile .tn,body.skin main .log .n{font-size:17px !important;line-height:1.2}
+body.skin main .row .tg .u,body.skin main .row .u{font-size:13px !important}
+body.skin main h2.h,body.skin main section>h2,body.skin main .card h2,body.skin main .box h2,body.skin main .evpanel h2,body.skin main h2{font-size:16px !important;letter-spacing:.3px !important;color:var(--ink) !important}
+body.skin main section>h2,body.skin main h2.h{margin:22px 2px 10px !important}
+body.skin main section:first-child>h2,body.skin main section:first-child>h2.h{margin-top:0 !important}
+body.skin main .lowsec h2.h{margin:0 !important}
+@media (max-width:760px){body.skin main h2.h,body.skin main section>h2,body.skin main .card h2,body.skin main .box h2,body.skin main .evpanel h2,body.skin main h2{font-size:14px !important}body.skin main section>h2,body.skin main h2.h{margin:18px 2px 8px !important}}
+/* SOP page: same layout + type scale as Recipes */
+html[data-page="sop"] body.skin section{margin-bottom:34px}
+html[data-page="sop"] body.skin section>h2{margin-bottom:12px}
+html[data-page="sop"] body.skin h1{font-size:24px}
+html[data-page="sop"] body.skin .box:has(.sopl){background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:16px 20px 18px}
+html[data-page="sop"] body.skin .sopl li{font-size:16px !important;padding:0;background:none;border:0;box-shadow:none;line-height:1.45}
+html[data-page="sop"] body.skin .sopl li.warn{color:var(--brand);font-weight:700;background:none;border:0}
+html[data-page="sop"] body.skin .sbox input{font-size:16px !important;min-height:48px;border:1px solid var(--line);border-radius:6px;box-shadow:var(--sh)}
+html[data-page="sop"] body.skin .rn{font-size:17px}
+html[data-page="sop"] body.skin .rs{font-size:15px}
+html[data-page="sop"] body.skin .rc{border-color:var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+html[data-page="sop"] body.skin .cat{font-size:13px}
+html[data-page="sop"] body.skin .box h4{font-size:14px}
+/* Recipes: search box + two-column recipe detail on desktop */
+html[data-page="recipes"] body.skin .sbox{margin:0 0 22px}
+html[data-page="recipes"] body.skin .sbox input{width:100%;min-height:48px;font:inherit;font-size:16px;padding:0 16px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);box-shadow:var(--sh)}
+html[data-page="recipes"] body.skin .sr{position:absolute;left:-9999px}
+html[data-page="recipes"] body.skin .none{font-size:16px}
+@media (min-width:1100px){
+ html[data-page="recipes"] body.skin .recipe{max-width:none}
+ html[data-page="recipes"] body.skin .recipe .cols{display:block}
+}
 </style>
 </head>
 <body>
@@ -1321,7 +1410,7 @@ body.skin .row.add .cin input{min-height:56px;font-size:26px}
 <div id="p-pricing" role="tabpanel" aria-labelledby="t-pricing" class="evpanel">
  <div class="evgrid">
   <section class="card"><h2>Add-ons</h2><div class="body" id="addons"></div></section>
-  <section class="card"><h2>Quote</h2><div class="body" id="quote"></div><label class="fld evname">Event name<input id="evname" type="text" placeholder="Client or venue" autocomplete="off"></label><div class="actions2"><button type="button" class="pri" id="savevent">Save event</button><button type="button" id="copyquote">Copy quote</button><span class="sub" id="copymsg" role="status"></span></div></section>
+  <section class="card"><h2>Quote</h2><div class="body" id="quote"></div><label class="fld evname">Event name<input id="evname" type="text" placeholder="Client or venue" autocomplete="off"></label><div class="actions2"><button type="button" class="pri" id="savevent">Save event</button><button type="button" id="copyquote">Copy quote</button><button type="button" id="proposalpdf">Proposal PDF</button><span class="sub" id="copymsg" role="status"></span></div></section>
  </div>
  <details class="card rates"><summary>Rate sheet</summary><div class="body" id="rates"></div></details>
 </div>
@@ -1346,11 +1435,11 @@ body.skin .row.add .cin input{min-height:56px;font-size:26px}
 
 
 <script>
-var DRINKS=[{"s":"caphe","n":"Classic Vietnamese Coffee","i":[["Phin brewed coffee","120 g"],["Condensed milk","30 g"],["Ice","Full cup"]]},{"s":"caphe","n":"Saigon Latte","i":[["Espresso (iced)","Double shot"],["Condensed milk","15 g"],["Milk","50 g"],["Ice","Full cup"]],"h":[["Espresso (hot)","Double shot"],["Condensed milk","15 g"],["Milk","210 g"]]},{"s":"classic","n":"Latte","i":[["Espresso (hot)","Double shot"],["Milk (chosen milk)","120 g"],["Ice","Full cup"]],"h":[["Espresso (hot)","Double shot"],["Milk of choice","220 g"],["Cup","10 oz to go cup or 10 oz hot cup"]]},{"s":"classic","n":"Americano","i":[["Espresso (hot)","Double shot"],["Room temperature water","120 g"],["Ice","Full cup"]],"h":[["Espresso (hot)","Double shot"],["Hot water (175°F)","120 g"]]},{"s":"classic","n":"Cortado","i":[["Espresso (hot)","Double shot"],["Milk of choice","60 g"],["Ice","3/4 cup"]],"h":[["Espresso (hot)","Double shot"],["Milk of choice","10 oz pitcher"],["Cup","8 oz to go cup or 4.5 oz glass cup"]]},{"s":"classic","n":"Cappuccino","i":[["Espresso (hot)","Double shot"],["Milk of choice","100 g"],["Ice","3/4 cup"]],"h":[["Espresso (hot)","Double shot"],["Milk of choice","10 oz pitcher"],["Cup","8 oz to go cup or 8 oz to stay cup"]]},{"s":"classic","n":"Flat White","i":[["Espresso (hot)","Double shot"],["Milk of choice","100 g"],["Ice","3/4 cup"]],"h":[["Espresso (hot)","Double shot"],["Milk of choice","10 oz pitcher"],["Cup","8 oz to go cup or 8 oz to stay cup"]]},{"s":"caphe","n":"Sea Salt Iced Coffee","i":[["Phin brewed coffee","100 g"],["Condensed milk","20 g"],["Sea salt cream top","40 g"],["Cocoa powder","2 dashes"],["Ice","3/4 full"]]},{"s":"signature","n":"Pandan Coconut Coffee","i":[["Espresso (iced)","Double shot"],["Pandan syrup","15 g"],["Pandan coconut milk mixture","65 g"],["Pandan coconut cloud","40 g"],["Ice","Full cup"]],"h":[["Espresso (hot)","Double shot"],["Pandan syrup","15 g"],["Coconut milk mixture","210 g"]]},{"s":"signature","n":"Pho Spiced Latte","i":[["Espresso (iced)","Double shot"],["Pho syrup","20 g"],["Milk","110 g"],["Sea salt cream top","35 g"],["Ice","3/4 cup"],["Cinnamon powder","2 dashes"]],"h":[["Espresso (hot)","Double shot"],["Pho syrup","20 g"],["Cinnamon powder","1 dash"],["Milk of choice","210 g"]]},{"s":"matcha","n":"Matcha Latte","i":[["Matcha","3.3 g"],["Water (175°F)","40 g"],["Milk of choice","120 g"],["Ice","Full cup"]]},{"s":"matcha","n":"Kyoto Fog","i":[["Matcha","3.3 g"],["Water (175°F)","40 g"],["Earl grey syrup","22 g"],["Milk","110 g"],["Ice","Full cup"]],"h":[["Matcha","3.3 g"],["Water (175°F)","40 g"],["Earl grey syrup","22 g"],["Milk","210 g"]]},{"s":"matcha","n":"Matcha Americano","i":[["Matcha","3.3 g"],["Hot water (bowl)","40 g"],["Room temperature water","120 g"],["Ice","Full cup"]],"h":[["Matcha","3.3 g"],["Water (bowl)","40 g"],["Water (cup)","120 g"]]},{"s":"signature","n":"Earl Grey Latte","i":[],"h":[]},{"s":"caphe","n":"Coconut Iced Coffee","i":[]},{"s":"matcha","n":"Pandan Matcha Latte","i":[],"h":[]},{"s":"matcha","n":"Jasmine Matcha Latte","i":[],"h":[]}];
+var DRINKS=[{"s":"caphe","n":"Classic Vietnamese Coffee","i":[["Phin brewed coffee","120 g"],["Condensed milk","30 g"],["Ice","Full cup"]]},{"s":"caphe","n":"Saigon Latte","i":[["Espresso (iced)","Double shot"],["Condensed milk","15 g"],["Milk","50 g"],["Ice","Full cup"]],"h":[["Espresso (hot)","Double shot"],["Condensed milk","15 g"],["Milk","210 g"]]},{"s":"classic","n":"Latte","i":[["Espresso (hot)","Double shot"],["Milk (chosen milk)","120 g"],["Ice","Full cup"]],"h":[["Espresso (hot)","Double shot"],["Milk of choice","220 g"],["Cup","10 oz to go cup or 10 oz hot cup"]]},{"s":"classic","n":"Americano","i":[["Espresso (hot)","Double shot"],["Room temperature water","120 g"],["Ice","Full cup"]],"h":[["Espresso (hot)","Double shot"],["Hot water (175\u00b0F)","120 g"]]},{"s":"classic","n":"Cortado","i":[["Espresso (hot)","Double shot"],["Milk of choice","60 g"],["Ice","3/4 cup"]],"h":[["Espresso (hot)","Double shot"],["Milk of choice","10 oz pitcher"],["Cup","8 oz to go cup or 4.5 oz glass cup"]]},{"s":"classic","n":"Cappuccino","i":[["Espresso (hot)","Double shot"],["Milk of choice","100 g"],["Ice","3/4 cup"]],"h":[["Espresso (hot)","Double shot"],["Milk of choice","10 oz pitcher"],["Cup","8 oz to go cup or 8 oz to stay cup"]]},{"s":"classic","n":"Flat White","i":[["Espresso (hot)","Double shot"],["Milk of choice","100 g"],["Ice","3/4 cup"]],"h":[["Espresso (hot)","Double shot"],["Milk of choice","10 oz pitcher"],["Cup","8 oz to go cup or 8 oz to stay cup"]]},{"s":"caphe","n":"Sea Salt Iced Coffee","i":[["Phin brewed coffee","100 g"],["Condensed milk","20 g"],["Sea salt cream top","40 g"],["Cocoa powder","2 dashes"],["Ice","3/4 full"]]},{"s":"signature","n":"Pandan Coconut Coffee","i":[["Espresso (iced)","Double shot"],["Pandan syrup","15 g"],["Pandan coconut milk mixture","65 g"],["Pandan coconut cloud","40 g"],["Ice","Full cup"]],"h":[["Espresso (hot)","Double shot"],["Pandan syrup","15 g"],["Coconut milk mixture","210 g"]]},{"s":"signature","n":"Pho Spiced Latte","i":[["Espresso (iced)","Double shot"],["Pho syrup","20 g"],["Milk","110 g"],["Sea salt cream top","35 g"],["Ice","3/4 cup"],["Cinnamon powder","2 dashes"]],"h":[["Espresso (hot)","Double shot"],["Pho syrup","20 g"],["Cinnamon powder","1 dash"],["Milk of choice","210 g"]]},{"s":"matcha","n":"Matcha Latte","i":[["Matcha","3.3 g"],["Water (175\u00b0F)","40 g"],["Milk of choice","120 g"],["Ice","Full cup"]]},{"s":"matcha","n":"Kyoto Fog","i":[["Matcha","3.3 g"],["Water (175\u00b0F)","40 g"],["Earl grey syrup","22 g"],["Milk","110 g"],["Ice","Full cup"]],"h":[["Matcha","3.3 g"],["Water (175\u00b0F)","40 g"],["Earl grey syrup","22 g"],["Milk","210 g"]]},{"s":"matcha","n":"Matcha Americano","i":[["Matcha","3.3 g"],["Hot water (bowl)","40 g"],["Room temperature water","120 g"],["Ice","Full cup"]],"h":[["Matcha","3.3 g"],["Water (bowl)","40 g"],["Water (cup)","120 g"]]},{"s":"signature","n":"Earl Grey Latte","i":[["Espresso (iced)","Double shot"],["Earl grey syrup","15 g"],["Milk of choice","110 g"],["Ice","Full cup"]],"h":[["Espresso (hot)","Double shot"],["Earl grey syrup","15 g"],["Milk of choice","210 g"]]},{"s":"caphe","n":"Coconut Iced Coffee","i":[]},{"s":"matcha","n":"Pandan Matcha Latte","i":[["Matcha","3.3 g"],["Water (175\u00b0F)","40 g"],["Pandan syrup","25 g"],["Milk of choice","110 g"],["Ice","Full cup"]],"h":[["Matcha","3.3 g"],["Water (175\u00b0F)","40 g"],["Pandan syrup","25 g"],["Milk of choice","210 g"]]},{"s":"matcha","n":"Jasmine Matcha Latte","i":[],"h":[]}];
 
 /* ===== Kinhfolk event pricing and planning. Edit the numbers in this block to change prices. ===== */
 var TIERS=[ /* guests, baristas, transportation, barista pay, drink cost per guest */
- {g:100,b:2,t:200,p:400,r:8.30},{g:150,b:2,t:200,p:400,r:7},{g:200,b:2,t:400,p:400,r:7},{g:250,b:2,t:300,p:400,r:7},
+ {g:100,b:2,t:200,p:400,r:8.30},{g:150,b:2,t:200,p:400,r:7},{g:200,b:2,t:300,p:400,r:7},{g:250,b:2,t:300,p:400,r:7},
  {g:300,b:3,t:300,p:600,r:6},{g:350,b:2,t:400,p:400,r:6},{g:400,b:3,t:400,p:600,r:6}];
 var BASE_HOURS=2,GRAT=0.18,TAX=0.08875;
 var ADDONS=[
@@ -1428,6 +1517,41 @@ function plan(sel,iced){
  return {T:T,cups:cups,flags:flags,drinks:drinks};
 }
 function fmtG(g){return g>=1000?(Math.ceil(g/10)/100).toFixed(2)+" kg":Math.ceil(g/5)*5+" g"}
+
+/* ===== Proposal PDF: fills page 4 (offering details + prices) of proposal-template.pdf ===== */
+async function makeProposal(PL,fk,tpl,fonts,q,S,ADD){
+ var pdf=await PL.PDFDocument.load(tpl),rgb=PL.rgb,pg=pdf.getPage(3),reg,semi;
+ try{pdf.registerFontkit(fk);reg=await pdf.embedFont(fonts[0],{subset:true});semi=await pdf.embedFont(fonts[1],{subset:true})}
+ catch(e){reg=await pdf.embedFont(PL.StandardFonts.Helvetica);semi=await pdf.embedFont(PL.StandardFonts.HelveticaBold)}
+ var ink=rgb(.1373,.1216,.1255),H=1080;
+ pg.drawRectangle({x:56,y:H-800,width:800,height:545,color:rgb(.94757,.93707,.86201)});
+ function T(t,x,y0,f,sz){pg.drawText(String(t),{x:x,y:H-y0-sz*.92,size:sz,font:f||reg,color:ink})}
+ var ex=Math.max(0,(S.hours||2)-2),on=S.on||{},money=function(v){return"$"+(Math.abs(v-Math.round(v))<.005?String(Math.round(v)):v.toFixed(2))};
+ var T0=q.tier,baristas=T0.b+(on.barista?1:0);
+ T("Unlimited drinks for up to",72-0,277,reg,25);T("•",72-0,277,reg,25);
+ /* left column */
+ pg.drawRectangle({x:56,y:H-340,width:400,height:70,color:rgb(.94757,.93707,.86201)});
+ T("•  Unlimited drinks for up to",72,277,reg,25);T("   "+q.guests+" people",72,307,reg,25);
+ T("•  "+S.hours+" hours of beverage service",72,377,reg,25);
+ T("•  Set up / breakdown included",72,476,reg,25);
+ T("•  "+baristas+" barista(s)",520,278,reg,25);
+ T("•  "+(on.cart?"Custom branded cart":"Coffee cart"),520,377,reg,25);
+ var svc=[];if(on.espresso)svc.push("Full espresso bar");if(on.matcha)svc.push("Matcha service");
+ svc.forEach(function(t,i){T("\u2022  "+t,520,476+i*34,reg,25)});
+ /* price block */
+ var rows=[["Subtotal :",money(q.sub-T0.t)]];
+ if(ex>0)rows.push(["Additional time :",money(ex*250)]);
+ var nm={espresso:"Full espresso bar :",matcha:"Matcha service :",cart:"Custom branded cart :",weekend:"Weekend :",printer:"Latte art printer :",barista:"Extra barista :"};
+ ADD.forEach(function(a){if(!on[a.id])return;rows.push([nm[a.id]||a.name+" :",money(a.price+(a.perHour?a.perHour*ex:0))])});
+ rows.push(["Travel:",money(T0.t)],["Gratuity:",money(q.grat)],["NY Tax:",money(q.tax)]);
+ var y0=rows.length>6?585:603,step=Math.min(30,(800-y0)/(rows.length-1)),sz=step<28?Math.max(20,Math.floor(step*.92)):25,mw=0;
+ rows.forEach(function(r){mw=Math.max(mw,reg.widthOfTextAtSize(r[0],sz))});
+ var vx=Math.max(488,274+mw+22);
+ T("Total :",274,541,semi,27);T(money(q.total),vx,541,semi,27);
+ rows.forEach(function(r,i){T(r[0],274,y0+i*step,reg,sz);T(r[1],vx,y0+i*step,reg,sz)});
+ pdf.setTitle("Kinhfolk proposal - "+(S.name||"Event"));pdf.setAuthor("Kinhfolk");
+ return pdf.save();
+}
 
 (function(){
 var $=function(id){return document.getElementById(id)};
@@ -1557,7 +1681,7 @@ $("copyquote").addEventListener("click",function(){var m=$("copymsg");
  try{navigator.clipboard.writeText(lastQuote).then(ok,function(){m.textContent="Couldn’t copy."})}catch(e){m.textContent="Couldn’t copy."}});
 
 /* ---------- menu ---------- */
-DRINKS.forEach(function(d){if(d.n==="Pandan Coconut Coffee"){d.p=d.i.map(function(r){return /^espresso/i.test(r[0])?["Phin brewed coffee","65 g"]:r})}});
+DRINKS.forEach(function(d){if((d.n==="Pandan Coconut Coffee"||d.n==="Saigon Latte"||d.n==="Coconut Iced Coffee")&&d.i.length){d.p=d.i.map(function(r){return /^espresso/i.test(r[0])?["Phin brewed coffee","65 g"]:r})}});
 function picked(){var vk={};evVisible().forEach(function(m){vk[m[0]]=1});var base=0,n=0;DRINKS.forEach(function(d){if(S.pick[d.n]&&vk[d.n])n++});
  var total=Math.round(S.guests*S.dpg);base=n?Math.ceil(total/n):0;
  return DRINKS.filter(function(d){return S.pick[d.n]&&vk[d.n]}).map(function(d){var o=S.sv[d.n];return {d:(!S.on.espresso&&d.p)?Object.assign({},d,{i:d.p}):d,sv:(o===undefined||o===""||isNaN(o))?base:+o,auto:(o===undefined||o===""||isNaN(o))}})}
@@ -1692,6 +1816,22 @@ function equipRows(P){
 renderAddons();times();calcHours();renderQuote();renderRates();renderMenu();
 var first=(location.hash||"").slice(1);show(TABS.indexOf(first)>=0?first:"pricing");
 window.__kfPrice=price;
+/* Proposal PDF button: loads pdf-lib on demand, fills page 4 of proposal-template.pdf, downloads the file */
+(function(){
+ var PDFLIB="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js",FONTKIT="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js",FN="https://cdn.jsdelivr.net/npm/@fontsource/figtree@5.0.19/files/figtree-latin-";
+ function js(u,ok){return ok()?Promise.resolve():new Promise(function(r,j){var s=document.createElement("script");s.src=u;s.onload=r;s.onerror=function(){j(new Error("Couldn\u2019t load "+u.split("/")[2]))};document.head.appendChild(s)})}
+ function bin(u,must){return fetch(u).then(function(r){if(!r.ok)throw new Error(u);return r.arrayBuffer()}).catch(function(e){if(must)throw new Error("Couldn\u2019t load the proposal template.");return null})}
+ $("proposalpdf").addEventListener("click",function(){
+  var m=$("copymsg"),btn=this;m.textContent="Building PDF\u2026";btn.disabled=true;
+  var q=price({guests:S.guests,extraHours:Math.max(0,S.hours-BASE_HOURS),on:S.on,other:0});
+  js(PDFLIB,function(){return window.PDFLib}).then(function(){return js(FONTKIT,function(){return window.fontkit})}).catch(function(){return 0})
+  .then(function(){return Promise.all([bin("./proposal-template.pdf",true),bin(FN+"400-normal.woff"),bin(FN+"600-normal.woff")])})
+  .then(function(a){if(!window.PDFLib)throw new Error("Couldn\u2019t load the PDF tool. Check your connection.");return makeProposal(window.PDFLib,window.fontkit,a[0],[a[1],a[2]],q,S,ADDONS)})
+  .then(function(bytes){var url=URL.createObjectURL(new Blob([bytes],{type:"application/pdf"})),a=document.createElement("a"),nm=(S.name||"Event").replace(/[^\w .-]+/g,"").trim()||"Event";
+   a.href=url;a.download="Kinhfolk Proposal - "+nm+".pdf";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(url);a.remove()},4000);m.textContent="PDF downloaded."})
+  .catch(function(e){m.textContent=e.message||"Couldn\u2019t build the PDF."})
+  .then(function(){btn.disabled=false;setTimeout(function(){m.textContent=""},4000)})})
+})();
 })();
 </script>
 <script>
@@ -1736,6 +1876,7 @@ var I={
  prep:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h6"/>',
  events:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h3"/>',
  more:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',
+ sop:'<path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
  recipes:'<path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M9 7h6"/>'
 };
 var site=d.documentElement.getAttribute("data-site")||"staff",root=d.documentElement.getAttribute("data-root")||"../";
@@ -1746,7 +1887,7 @@ var src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwM
 var sb=d.createElement("aside");sb.className="sb";sb.setAttribute("aria-label","Kinhfolk pages");
 sb.innerHTML='<div class="sbl">'+(src?'<img alt="" src="'+src+'">':"")+'<span>Kinhfolk</span></div>'+
  P.map(function(p){return'<a class="sbi" data-pg="'+p[0]+'" title="'+p[1]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1]+'</span></a>'}).join("")+
- '<div class="sbg" id="sbg" hidden></div><div id="sbhost"></div><div class="sbf">Brooklyn, NY</div>'+(here==="stock"?'<button type="button" class="sbfab" id="sbfab" aria-label="Report a low item" title="Report a low item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>':"");
+ '<div class="sbg" id="sbg" hidden></div><div id="sbhost"></div><div class="sbf">Brooklyn, NY</div>'+(here==="stock"?'<button type="button" class="sbfab" id="sbfab" aria-label="Report a low item" title="Report a low item"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 3.2c.7 0 1.3.4 1.7 1l8 14c.8 1.4-.2 3.1-1.7 3.1H4c-1.5 0-2.5-1.7-1.7-3.1l8-14c.4-.6 1-1 1.7-1zM11 9v5.2h2V9h-2zm0 7.3v2h2v-2h-2z"/></svg></button>':"");
 b.insertBefore(sb,b.firstChild);
 var bn=d.createElement("nav");bn.className="bnav";bn.setAttribute("aria-label","Pages");
 bn.innerHTML=P.map(function(p){return'<a data-pg="'+p[0]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1].replace("Stock count","Stock")+'</span></a>'}).join("");
@@ -1767,7 +1908,7 @@ scrim.addEventListener("click",function(){drawer(false)});
 d.addEventListener("keydown",function(e){if(e.key==="Escape")drawer(false)});
 if(here==="stock"&&hd){
  var hp=d.createElement("button");hp.type="button";hp.className="hplus";hp.setAttribute("aria-label","Report a low item");
- hp.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+ hp.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 3.2c.7 0 1.3.4 1.7 1l8 14c.8 1.4-.2 3.1-1.7 3.1H4c-1.5 0-2.5-1.7-1.7-3.1l8-14c.4-.6 1-1 1.7-1zM11 9v5.2h2V9h-2zm0 7.3v2h2v-2h-2z"/></svg>';
  hd.appendChild(hp);hp.addEventListener("click",reportLow);
  var top=d.getElementById("top"),tw=d.querySelector(".tabwrap"),ph=window.matchMedia("(max-width:760px)");
  var sc=d.createElement("div");sc.className="statcard";
@@ -1794,8 +1935,11 @@ if(hd){
  var tb=d.createElement("div");tb.className="titlebar";hd.appendChild(tb);
  var mqd=window.matchMedia("(min-width:761px)");
  var layout=function(){
-  if(mqd.matches){if(wm)tb.appendChild(wm);if(nav)tb.appendChild(nav);if(hb2)tb.appendChild(hb2)}
-  else{if(wm)hd.insertBefore(wm,syn||tb);if(nav&&navHome)navHome.appendChild(nav);if(hb2)hd.insertBefore(hb2,tb)}
+  var hl=d.querySelector("main .hello"),h1=hl&&hl.querySelector("h1");
+  if(mqd.matches){if(wm)tb.appendChild(wm);if(nav)tb.appendChild(nav);if(hb2)tb.appendChild(hb2);
+   if(hl&&h1&&wm){if(!wm.hasAttribute("data-t"))wm.setAttribute("data-t",wm.textContent);wm.textContent=h1.textContent;hl.classList.add("intb");Array.prototype.slice.call(hl.children).forEach(function(c){if(c!==h1){c.classList.add("tbx");tb.appendChild(c)}})}}
+  else{if(wm)hd.insertBefore(wm,syn||tb);if(nav&&navHome)navHome.appendChild(nav);if(hb2)hd.insertBefore(hb2,tb);
+   if(hl&&h1&&wm){if(wm.hasAttribute("data-t"))wm.textContent=wm.getAttribute("data-t");hl.classList.remove("intb");Array.prototype.slice.call(tb.querySelectorAll(".tbx")).forEach(function(c){c.classList.remove("tbx");hl.appendChild(c)})}}
  };
  layout();if(mqd.addEventListener)mqd.addEventListener("change",layout);else mqd.addListener(layout);
  var inp=q.querySelector("input"),last="";
@@ -1846,6 +1990,14 @@ put();new MutationObserver(put).observe(nav,{childList:true})})();
  if(lb&&window.MutationObserver)new MutationObserver(function(){stock(d.querySelectorAll("#lowbox .orow.low").length)}).observe(lb,{childList:true,subtree:true});
  window.addEventListener("storage",events);
 })();
+})();
+
+/* iPhone: keep the confirm bar above the bottom navigation, whatever its real height */
+(function(){var d=document,nv=d.getElementById("nav");if(!nv)return;
+ var set=function(){var r=nv.getBoundingClientRect();var f=getComputedStyle(nv).position==="fixed";d.documentElement.style.setProperty("--navh",f?Math.ceil(window.innerHeight-r.top)+"px":"0px")};
+ set();window.addEventListener("resize",set);window.addEventListener("orientationchange",set);
+ if(window.ResizeObserver)new ResizeObserver(set).observe(nv);setTimeout(set,400);setTimeout(set,1500)
+try{if("serviceWorker" in navigator&&location.protocol==="https:"&&site==="staff"){navigator.serviceWorker.register((d.documentElement.getAttribute("data-root")||"../")+"sw.js")}}catch(e){}
 })();
 </script>
 </body>

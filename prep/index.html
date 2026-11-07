@@ -1300,8 +1300,8 @@ html[data-page="stock"] body.skin .secs .sec{width:100%;min-height:56px!importan
  html[data-page="stock"] body.skin .secs .sec{flex:1 1 calc(50% - 4px)!important;width:auto;min-height:44px!important;font-size:13px!important}
 }
 @media (min-width:761px){
- html[data-page="stock"] body.skin .titlebar{flex-wrap:nowrap}
- html[data-page="stock"] body.skin .titlebar #nav{flex:1;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-left:12px}
+ html[data-page="stock"] body.skin .titlebar{flex-wrap:wrap;row-gap:12px}
+ html[data-page="stock"] body.skin .titlebar #nav{flex:1 1 100%;order:5;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-left:0}
  html[data-page="stock"] body.skin .titlebar #nav .tab{min-height:48px;border-radius:6px;padding:4px 12px 0;font-size:14px;justify-content:center;text-align:center}
 }
 body.skin .log button{border-radius:8px}
@@ -1322,6 +1322,95 @@ body.skin .row.add{min-height:0;padding-top:8px;padding-bottom:8px}
 body.skin .row.add .stp{min-height:56px;font-size:30px}
 body.skin .row.add .cin input{min-height:56px;font-size:26px}
 .row.add .nm .u.ad{color:var(--brand)}
+
+/* +box button next to the steppers */
+.step:has(.stp.box){grid-template-columns:78px minmax(0,1fr) 78px auto!important}
+@media (max-width:760px){.step:has(.stp.box){grid-template-columns:62px minmax(0,1fr) 62px auto!important}}
+body.skin .step .stp.box{width:auto;min-width:0;padding:0 12px;font-size:12px!important;font-weight:800;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;margin:0;background:var(--brand);color:#fff;line-height:1.1}
+@media (min-width:761px){.row.add:has(.stp.box){grid-template-columns:minmax(0,1fr) 420px!important}.row.end:has(.stp.box){grid-template-columns:minmax(0,1fr) 300px!important}}
+body.skin .lowdlg .lowform{box-shadow:none !important;border:0 !important;padding:0 !important;background:transparent !important;border-radius:0 !important}
+body.skin .lowdlg{padding:20px 20px 18px}
+
+/* ONE desktop / iPad layout: title at the same height, tabs right under it, content on the same grid */
+@media (min-width:761px){
+ body.skin header:not(:has(#sync,.warn)) .titlebar{margin-top:40px}
+ body.skin .hello.intb{display:none}
+ body.skin .titlebar .tbx{margin-left:auto;align-self:center}
+ body.skin .titlebar .dt{font-size:13px;letter-spacing:.8px;color:#8a8788;text-transform:uppercase}
+ body.skin .evtabs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;overflow:visible;margin:0 0 16px;padding:0}
+ body.skin .evtabs button{min-height:48px;min-width:0;border-radius:6px;font-size:14px;flex:none}
+}
+@media (min-width:1100px){body.skin .tabwrap .inner{padding:0 28px}}
+@media (min-width:761px){html[data-page="home"] body.skin header .wm{visibility:visible !important}}
+@media (min-width:761px){body.skin .wkline{padding-left:0 !important;padding-right:0 !important}}
+@media (min-width:761px){.sb .sbl img,body.skin .sb .sbl img{height:78px !important}.sb .sbl{padding-bottom:22px}}
+@media (max-width:760px){body.skin header .wm::before{width:36px;height:58px;margin-right:12px}}
+/* steppers match the Remove button size */
+body.skin .row.add .stp,body.skin .row.end .stp{min-height:44px;height:44px;font-size:24px;border-radius:10px}
+body.skin .row.add .cin input,body.skin .row.end .cin input{min-height:44px;height:44px;font-size:20px;border-radius:10px}
+body.skin .row.add .step:not(:has(.stp.box)),body.skin .row.end .step:not(:has(.stp.box)){grid-template-columns:44px minmax(0,1fr) 44px;gap:8px;align-items:center}
+body.skin .log button{min-height:44px;height:44px}
+@media (min-width:1100px){body.skin .row.add .stp,body.skin .row.end .stp,body.skin .row.add .cin input,body.skin .row.end .cin input,body.skin .log button{min-height:40px;height:40px}body.skin .row.add .step:not(:has(.stp.box)),body.skin .row.end .step:not(:has(.stp.box)){grid-template-columns:40px minmax(0,1fr) 40px}}
+
+/* low-stock alert icon (bell) instead of a plus */
+body.skin .sbfab svg,body.skin .hplus svg,.sbfab svg,.hplus svg{fill:currentColor !important;stroke:none !important;width:24px !important;height:24px !important}
+/* no box around the - / + count controls */
+body.skin .row.end .step,body.skin .row .step{background:none !important;border:0 !important;box-shadow:none !important;padding:0 !important}
+/* Weekly / monthly toggles: no beige box behind the pills; hidden section chips stay hidden */
+body.skin .seg,body.skin .tog{background:none !important;border:0 !important;box-shadow:none !important;padding:0 !important;gap:8px}
+html[data-page="stock"] body.skin .secs[hidden]{display:none !important}
+body.skin .seg,body.skin .tog{margin-left:0 !important}
+
+@media (max-width:760px){
+ html[data-page="stock"] body.skin #bar{bottom:var(--navh,84px) !important;padding:8px 12px !important;gap:10px;min-height:56px;box-sizing:border-box}
+ html[data-page="stock"] body.skin #bar .bi{font-size:13px;line-height:1.2;letter-spacing:.2px}
+ html[data-page="stock"] body.skin #bar .big{min-height:44px;padding:0 14px;font-size:14px;white-space:nowrap;flex:0 0 auto}
+ html[data-page="stock"] body.skin.hasbar main{padding-bottom:calc(var(--navh,84px) + 90px)}
+}
+
+/* No rounded pills: one square-ish button shape everywhere */
+body.skin .tab:not(.sb .tab),body.skin .tab,body.skin .sec,body.skin .seg button,body.skin .tog button,body.skin .pc>button,body.skin .wkname,body.skin .big,body.skin .reset,body.skin .go,body.skin .backbtn,body.skin .homebtn,body.skin .links a,body.skin .rl,body.skin .cfmb,body.skin .evtabs button,body.skin .titlebar #nav .tab,body.skin .chip,body.skin .lowin{border-radius:6px !important}
+body.skin .seg,body.skin .tog,body.skin .mnav,body.skin #sync,body.skin .warn,body.skin .pill{border-radius:8px !important}
+/* recipe page: single back button on top, back-to-top button bottom right (phone: only at the very bottom) */
+body.skin #totop{border-radius:6px !important;background:#fff !important;color:var(--ink) !important;border:1px solid var(--line) !important;width:48px !important;height:48px !important;box-shadow:0 4px 14px rgba(40,45,35,.18)}
+body.skin #totop svg{width:22px !important;height:22px !important}
+body.skin #totop[hidden]{display:none !important}
+body.skin .recipe .reset{margin-top:14px;width:100%}
+@media (max-width:760px){body.skin #totop{bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important;right:16px !important}}
+@media (max-width:760px){body.skin .recipe{padding-bottom:84px}}
+
+body.skin .tipl{margin:0;padding:0 0 0 22px;display:grid;gap:10px;font-size:16px;line-height:1.35;font-weight:600;color:var(--ink)}
+body.skin .tipl li::marker{color:var(--brand);font-weight:800}
+/* one type scale: list item names 17px, section headings 16px (14px on phone), same spacing everywhere */
+body.skin main .row .nm,body.skin main .orow .on,body.skin main .nmbox .nm,body.skin main .tile .tn,body.skin main .log .n{font-size:17px !important;line-height:1.2}
+body.skin main .row .tg .u,body.skin main .row .u{font-size:13px !important}
+body.skin main h2.h,body.skin main section>h2,body.skin main .card h2,body.skin main .box h2,body.skin main .evpanel h2,body.skin main h2{font-size:16px !important;letter-spacing:.3px !important;color:var(--ink) !important}
+body.skin main section>h2,body.skin main h2.h{margin:22px 2px 10px !important}
+body.skin main section:first-child>h2,body.skin main section:first-child>h2.h{margin-top:0 !important}
+body.skin main .lowsec h2.h{margin:0 !important}
+@media (max-width:760px){body.skin main h2.h,body.skin main section>h2,body.skin main .card h2,body.skin main .box h2,body.skin main .evpanel h2,body.skin main h2{font-size:14px !important}body.skin main section>h2,body.skin main h2.h{margin:18px 2px 8px !important}}
+/* SOP page: same layout + type scale as Recipes */
+html[data-page="sop"] body.skin section{margin-bottom:34px}
+html[data-page="sop"] body.skin section>h2{margin-bottom:12px}
+html[data-page="sop"] body.skin h1{font-size:24px}
+html[data-page="sop"] body.skin .box:has(.sopl){background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:16px 20px 18px}
+html[data-page="sop"] body.skin .sopl li{font-size:16px !important;padding:0;background:none;border:0;box-shadow:none;line-height:1.45}
+html[data-page="sop"] body.skin .sopl li.warn{color:var(--brand);font-weight:700;background:none;border:0}
+html[data-page="sop"] body.skin .sbox input{font-size:16px !important;min-height:48px;border:1px solid var(--line);border-radius:6px;box-shadow:var(--sh)}
+html[data-page="sop"] body.skin .rn{font-size:17px}
+html[data-page="sop"] body.skin .rs{font-size:15px}
+html[data-page="sop"] body.skin .rc{border-color:var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+html[data-page="sop"] body.skin .cat{font-size:13px}
+html[data-page="sop"] body.skin .box h4{font-size:14px}
+/* Recipes: search box + two-column recipe detail on desktop */
+html[data-page="recipes"] body.skin .sbox{margin:0 0 22px}
+html[data-page="recipes"] body.skin .sbox input{width:100%;min-height:48px;font:inherit;font-size:16px;padding:0 16px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);box-shadow:var(--sh)}
+html[data-page="recipes"] body.skin .sr{position:absolute;left:-9999px}
+html[data-page="recipes"] body.skin .none{font-size:16px}
+@media (min-width:1100px){
+ html[data-page="recipes"] body.skin .recipe{max-width:none}
+ html[data-page="recipes"] body.skin .recipe .cols{display:block}
+}
 </style>
 </head>
 <body>
@@ -1843,6 +1932,7 @@ var I={
  prep:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h6"/>',
  events:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h3"/>',
  more:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',
+ sop:'<path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
  recipes:'<path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M9 7h6"/>'
 };
 var site=d.documentElement.getAttribute("data-site")||"staff",root=d.documentElement.getAttribute("data-root")||"../";
@@ -1853,7 +1943,7 @@ var src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwM
 var sb=d.createElement("aside");sb.className="sb";sb.setAttribute("aria-label","Kinhfolk pages");
 sb.innerHTML='<div class="sbl">'+(src?'<img alt="" src="'+src+'">':"")+'<span>Kinhfolk</span></div>'+
  P.map(function(p){return'<a class="sbi" data-pg="'+p[0]+'" title="'+p[1]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1]+'</span></a>'}).join("")+
- '<div class="sbg" id="sbg" hidden></div><div id="sbhost"></div><div class="sbf">Brooklyn, NY</div>'+(here==="stock"?'<button type="button" class="sbfab" id="sbfab" aria-label="Report a low item" title="Report a low item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>':"");
+ '<div class="sbg" id="sbg" hidden></div><div id="sbhost"></div><div class="sbf">Brooklyn, NY</div>'+(here==="stock"?'<button type="button" class="sbfab" id="sbfab" aria-label="Report a low item" title="Report a low item"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 3.2c.7 0 1.3.4 1.7 1l8 14c.8 1.4-.2 3.1-1.7 3.1H4c-1.5 0-2.5-1.7-1.7-3.1l8-14c.4-.6 1-1 1.7-1zM11 9v5.2h2V9h-2zm0 7.3v2h2v-2h-2z"/></svg></button>':"");
 b.insertBefore(sb,b.firstChild);
 var bn=d.createElement("nav");bn.className="bnav";bn.setAttribute("aria-label","Pages");
 bn.innerHTML=P.map(function(p){return'<a data-pg="'+p[0]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1].replace("Stock count","Stock")+'</span></a>'}).join("");
@@ -1874,7 +1964,7 @@ scrim.addEventListener("click",function(){drawer(false)});
 d.addEventListener("keydown",function(e){if(e.key==="Escape")drawer(false)});
 if(here==="stock"&&hd){
  var hp=d.createElement("button");hp.type="button";hp.className="hplus";hp.setAttribute("aria-label","Report a low item");
- hp.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+ hp.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 3.2c.7 0 1.3.4 1.7 1l8 14c.8 1.4-.2 3.1-1.7 3.1H4c-1.5 0-2.5-1.7-1.7-3.1l8-14c.4-.6 1-1 1.7-1zM11 9v5.2h2V9h-2zm0 7.3v2h2v-2h-2z"/></svg>';
  hd.appendChild(hp);hp.addEventListener("click",reportLow);
  var top=d.getElementById("top"),tw=d.querySelector(".tabwrap"),ph=window.matchMedia("(max-width:760px)");
  var sc=d.createElement("div");sc.className="statcard";
@@ -1901,8 +1991,11 @@ if(hd){
  var tb=d.createElement("div");tb.className="titlebar";hd.appendChild(tb);
  var mqd=window.matchMedia("(min-width:761px)");
  var layout=function(){
-  if(mqd.matches){if(wm)tb.appendChild(wm);if(nav)tb.appendChild(nav);if(hb2)tb.appendChild(hb2)}
-  else{if(wm)hd.insertBefore(wm,syn||tb);if(nav&&navHome)navHome.appendChild(nav);if(hb2)hd.insertBefore(hb2,tb)}
+  var hl=d.querySelector("main .hello"),h1=hl&&hl.querySelector("h1");
+  if(mqd.matches){if(wm)tb.appendChild(wm);if(nav)tb.appendChild(nav);if(hb2)tb.appendChild(hb2);
+   if(hl&&h1&&wm){if(!wm.hasAttribute("data-t"))wm.setAttribute("data-t",wm.textContent);wm.textContent=h1.textContent;hl.classList.add("intb");Array.prototype.slice.call(hl.children).forEach(function(c){if(c!==h1){c.classList.add("tbx");tb.appendChild(c)}})}}
+  else{if(wm)hd.insertBefore(wm,syn||tb);if(nav&&navHome)navHome.appendChild(nav);if(hb2)hd.insertBefore(hb2,tb);
+   if(hl&&h1&&wm){if(wm.hasAttribute("data-t"))wm.textContent=wm.getAttribute("data-t");hl.classList.remove("intb");Array.prototype.slice.call(tb.querySelectorAll(".tbx")).forEach(function(c){c.classList.remove("tbx");hl.appendChild(c)})}}
  };
  layout();if(mqd.addEventListener)mqd.addEventListener("change",layout);else mqd.addListener(layout);
  var inp=q.querySelector("input"),last="";
@@ -1953,6 +2046,14 @@ put();new MutationObserver(put).observe(nav,{childList:true})})();
  if(lb&&window.MutationObserver)new MutationObserver(function(){stock(d.querySelectorAll("#lowbox .orow.low").length)}).observe(lb,{childList:true,subtree:true});
  window.addEventListener("storage",events);
 })();
+})();
+
+/* iPhone: keep the confirm bar above the bottom navigation, whatever its real height */
+(function(){var d=document,nv=d.getElementById("nav");if(!nv)return;
+ var set=function(){var r=nv.getBoundingClientRect();var f=getComputedStyle(nv).position==="fixed";d.documentElement.style.setProperty("--navh",f?Math.ceil(window.innerHeight-r.top)+"px":"0px")};
+ set();window.addEventListener("resize",set);window.addEventListener("orientationchange",set);
+ if(window.ResizeObserver)new ResizeObserver(set).observe(nv);setTimeout(set,400);setTimeout(set,1500)
+try{if("serviceWorker" in navigator&&location.protocol==="https:"&&site==="staff"){navigator.serviceWorker.register((d.documentElement.getAttribute("data-root")||"../")+"sw.js")}}catch(e){}
 })();
 </script>
 </body>

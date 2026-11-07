@@ -150,6 +150,7 @@ html{-webkit-text-size-adjust:100%}
 /* green headings with black text */
 :root{--mint:#005949}
 section:not(.sum) h2,main h2{background:var(--mint) !important;color:#f1eedb !important}
+.backbtn.iconb{width:56px;min-width:56px;padding:0;justify-content:center}
 </style>
 <style id="skin">
 /* ===== Kinhfolk skin: sidebar + soft white cards (web / iPad), floating bottom nav (iPhone) ===== */
@@ -1270,8 +1271,8 @@ html[data-page="stock"] body.skin .secs .sec{width:100%;min-height:56px!importan
  html[data-page="stock"] body.skin .secs .sec{flex:1 1 calc(50% - 4px)!important;width:auto;min-height:44px!important;font-size:13px!important}
 }
 @media (min-width:761px){
- html[data-page="stock"] body.skin .titlebar{flex-wrap:nowrap}
- html[data-page="stock"] body.skin .titlebar #nav{flex:1;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-left:12px}
+ html[data-page="stock"] body.skin .titlebar{flex-wrap:wrap;row-gap:12px}
+ html[data-page="stock"] body.skin .titlebar #nav{flex:1 1 100%;order:5;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-left:0}
  html[data-page="stock"] body.skin .titlebar #nav .tab{min-height:48px;border-radius:6px;padding:4px 12px 0;font-size:14px;justify-content:center;text-align:center}
 }
 body.skin .log button{border-radius:8px}
@@ -1292,12 +1293,101 @@ body.skin .row.add{min-height:0;padding-top:8px;padding-bottom:8px}
 body.skin .row.add .stp{min-height:56px;font-size:30px}
 body.skin .row.add .cin input{min-height:56px;font-size:26px}
 .row.add .nm .u.ad{color:var(--brand)}
+
+/* +box button next to the steppers */
+.step:has(.stp.box){grid-template-columns:78px minmax(0,1fr) 78px auto!important}
+@media (max-width:760px){.step:has(.stp.box){grid-template-columns:62px minmax(0,1fr) 62px auto!important}}
+body.skin .step .stp.box{width:auto;min-width:0;padding:0 12px;font-size:12px!important;font-weight:800;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;margin:0;background:var(--brand);color:#fff;line-height:1.1}
+@media (min-width:761px){.row.add:has(.stp.box){grid-template-columns:minmax(0,1fr) 420px!important}.row.end:has(.stp.box){grid-template-columns:minmax(0,1fr) 300px!important}}
+body.skin .lowdlg .lowform{box-shadow:none !important;border:0 !important;padding:0 !important;background:transparent !important;border-radius:0 !important}
+body.skin .lowdlg{padding:20px 20px 18px}
+
+/* ONE desktop / iPad layout: title at the same height, tabs right under it, content on the same grid */
+@media (min-width:761px){
+ body.skin header:not(:has(#sync,.warn)) .titlebar{margin-top:40px}
+ body.skin .hello.intb{display:none}
+ body.skin .titlebar .tbx{margin-left:auto;align-self:center}
+ body.skin .titlebar .dt{font-size:13px;letter-spacing:.8px;color:#8a8788;text-transform:uppercase}
+ body.skin .evtabs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;overflow:visible;margin:0 0 16px;padding:0}
+ body.skin .evtabs button{min-height:48px;min-width:0;border-radius:6px;font-size:14px;flex:none}
+}
+@media (min-width:1100px){body.skin .tabwrap .inner{padding:0 28px}}
+@media (min-width:761px){html[data-page="home"] body.skin header .wm{visibility:visible !important}}
+@media (min-width:761px){body.skin .wkline{padding-left:0 !important;padding-right:0 !important}}
+@media (min-width:761px){.sb .sbl img,body.skin .sb .sbl img{height:78px !important}.sb .sbl{padding-bottom:22px}}
+@media (max-width:760px){body.skin header .wm::before{width:36px;height:58px;margin-right:12px}}
+/* steppers match the Remove button size */
+body.skin .row.add .stp,body.skin .row.end .stp{min-height:44px;height:44px;font-size:24px;border-radius:10px}
+body.skin .row.add .cin input,body.skin .row.end .cin input{min-height:44px;height:44px;font-size:20px;border-radius:10px}
+body.skin .row.add .step:not(:has(.stp.box)),body.skin .row.end .step:not(:has(.stp.box)){grid-template-columns:44px minmax(0,1fr) 44px;gap:8px;align-items:center}
+body.skin .log button{min-height:44px;height:44px}
+@media (min-width:1100px){body.skin .row.add .stp,body.skin .row.end .stp,body.skin .row.add .cin input,body.skin .row.end .cin input,body.skin .log button{min-height:40px;height:40px}body.skin .row.add .step:not(:has(.stp.box)),body.skin .row.end .step:not(:has(.stp.box)){grid-template-columns:40px minmax(0,1fr) 40px}}
+
+/* low-stock alert icon (bell) instead of a plus */
+body.skin .sbfab svg,body.skin .hplus svg,.sbfab svg,.hplus svg{fill:currentColor !important;stroke:none !important;width:24px !important;height:24px !important}
+/* no box around the - / + count controls */
+body.skin .row.end .step,body.skin .row .step{background:none !important;border:0 !important;box-shadow:none !important;padding:0 !important}
+/* Weekly / monthly toggles: no beige box behind the pills; hidden section chips stay hidden */
+body.skin .seg,body.skin .tog{background:none !important;border:0 !important;box-shadow:none !important;padding:0 !important;gap:8px}
+html[data-page="stock"] body.skin .secs[hidden]{display:none !important}
+body.skin .seg,body.skin .tog{margin-left:0 !important}
+
+@media (max-width:760px){
+ html[data-page="stock"] body.skin #bar{bottom:var(--navh,84px) !important;padding:8px 12px !important;gap:10px;min-height:56px;box-sizing:border-box}
+ html[data-page="stock"] body.skin #bar .bi{font-size:13px;line-height:1.2;letter-spacing:.2px}
+ html[data-page="stock"] body.skin #bar .big{min-height:44px;padding:0 14px;font-size:14px;white-space:nowrap;flex:0 0 auto}
+ html[data-page="stock"] body.skin.hasbar main{padding-bottom:calc(var(--navh,84px) + 90px)}
+}
+
+/* No rounded pills: one square-ish button shape everywhere */
+body.skin .tab:not(.sb .tab),body.skin .tab,body.skin .sec,body.skin .seg button,body.skin .tog button,body.skin .pc>button,body.skin .wkname,body.skin .big,body.skin .reset,body.skin .go,body.skin .backbtn,body.skin .homebtn,body.skin .links a,body.skin .rl,body.skin .cfmb,body.skin .evtabs button,body.skin .titlebar #nav .tab,body.skin .chip,body.skin .lowin{border-radius:6px !important}
+body.skin .seg,body.skin .tog,body.skin .mnav,body.skin #sync,body.skin .warn,body.skin .pill{border-radius:8px !important}
+/* recipe page: single back button on top, back-to-top button bottom right (phone: only at the very bottom) */
+body.skin #totop{border-radius:6px !important;background:#fff !important;color:var(--ink) !important;border:1px solid var(--line) !important;width:48px !important;height:48px !important;box-shadow:0 4px 14px rgba(40,45,35,.18)}
+body.skin #totop svg{width:22px !important;height:22px !important}
+body.skin #totop[hidden]{display:none !important}
+body.skin .recipe .reset{margin-top:14px;width:100%}
+@media (max-width:760px){body.skin #totop{bottom:calc(108px + env(safe-area-inset-bottom,0px)) !important;right:16px !important}}
+@media (max-width:760px){body.skin .recipe{padding-bottom:84px}}
+
+body.skin .tipl{margin:0;padding:0 0 0 22px;display:grid;gap:10px;font-size:16px;line-height:1.35;font-weight:600;color:var(--ink)}
+body.skin .tipl li::marker{color:var(--brand);font-weight:800}
+/* one type scale: list item names 17px, section headings 16px (14px on phone), same spacing everywhere */
+body.skin main .row .nm,body.skin main .orow .on,body.skin main .nmbox .nm,body.skin main .tile .tn,body.skin main .log .n{font-size:17px !important;line-height:1.2}
+body.skin main .row .tg .u,body.skin main .row .u{font-size:13px !important}
+body.skin main h2.h,body.skin main section>h2,body.skin main .card h2,body.skin main .box h2,body.skin main .evpanel h2,body.skin main h2{font-size:16px !important;letter-spacing:.3px !important;color:var(--ink) !important}
+body.skin main section>h2,body.skin main h2.h{margin:22px 2px 10px !important}
+body.skin main section:first-child>h2,body.skin main section:first-child>h2.h{margin-top:0 !important}
+body.skin main .lowsec h2.h{margin:0 !important}
+@media (max-width:760px){body.skin main h2.h,body.skin main section>h2,body.skin main .card h2,body.skin main .box h2,body.skin main .evpanel h2,body.skin main h2{font-size:14px !important}body.skin main section>h2,body.skin main h2.h{margin:18px 2px 8px !important}}
+/* SOP page: same layout + type scale as Recipes */
+html[data-page="sop"] body.skin section{margin-bottom:34px}
+html[data-page="sop"] body.skin section>h2{margin-bottom:12px}
+html[data-page="sop"] body.skin h1{font-size:24px}
+html[data-page="sop"] body.skin .box:has(.sopl){background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:16px 20px 18px}
+html[data-page="sop"] body.skin .sopl li{font-size:16px !important;padding:0;background:none;border:0;box-shadow:none;line-height:1.45}
+html[data-page="sop"] body.skin .sopl li.warn{color:var(--brand);font-weight:700;background:none;border:0}
+html[data-page="sop"] body.skin .sbox input{font-size:16px !important;min-height:48px;border:1px solid var(--line);border-radius:6px;box-shadow:var(--sh)}
+html[data-page="sop"] body.skin .rn{font-size:17px}
+html[data-page="sop"] body.skin .rs{font-size:15px}
+html[data-page="sop"] body.skin .rc{border-color:var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+html[data-page="sop"] body.skin .cat{font-size:13px}
+html[data-page="sop"] body.skin .box h4{font-size:14px}
+/* Recipes: search box + two-column recipe detail on desktop */
+html[data-page="recipes"] body.skin .sbox{margin:0 0 22px}
+html[data-page="recipes"] body.skin .sbox input{width:100%;min-height:48px;font:inherit;font-size:16px;padding:0 16px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);box-shadow:var(--sh)}
+html[data-page="recipes"] body.skin .sr{position:absolute;left:-9999px}
+html[data-page="recipes"] body.skin .none{font-size:16px}
+@media (min-width:1100px){
+ html[data-page="recipes"] body.skin .recipe{max-width:none}
+ html[data-page="recipes"] body.skin .recipe .cols{display:block}
+}
 </style>
 </head>
 <body>
 <header><img class="logo" alt="Kinhfolk logo" src="data:image/png;base64,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"><span class="wm">Recipes</span><a class="homebtn" id="homebtn" href="#home" hidden>← All recipes</a></header>
 <main id="view"></main>
-<button type="button" id="totop" aria-label="Back to top" title="Back to top" hidden><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 3 3 12h5.5v9h7v-9H21z"/></svg></button>
+<button type="button" id="totop" aria-label="Back to top" title="Back to top" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <script>
 var EQ=function(b){return[["Blender","1"],["Insulated bottle",b]]};
 var SPD="Place container on blender and add lid";
@@ -1373,7 +1463,12 @@ var D=[
  ing:[["Calamansi juice","{@1 bag} (480 g per bag)"],["Sugar","575 g"],["Water","575 g"],["Salt","2 g"]],
  eq:[["3 qt pot","1"]],
  steps:["In a pot, combine {@575 g} of sugar and {@575 g} of water.","Heat on medium low until it combines into a simple syrup.","Take off heat and let the simple syrup cool.","Add {@1 bag} of calamansi juice (480 g per bag) and {@2 g} of salt.","Mix until well combined."],
- t:["For service, simple syrup is added to this base syrup."]}
+ t:["For service, simple syrup is added to this base syrup."]},
+{n:"Phin Brew Guide",g:"Brews",ks:[1],nob:true,
+ ing:[["C\u00e0ph\u00ea Roasters True Robusta","200 g"]],
+ eq:[["Phin + tamp + saucer","1"],["Cambro 4 qt","1"],["Funnel","1"],["Glass bottle","1"],["Saran wrap","1"],["Fellow scale","1"]],
+ steps:["Dose 200 g of True Robusta.","Grind into the phin and distribute with a spoon for even coverage.","Bloom: pour #1, 250 g of water. Wait 1 minute.","Remove from the scale and tamp.","Pour #2: 350 g of water (total water 600 g).","Let the coffee fully drip, 1.5 to 2 minutes.","Pour #3: 400 g of water (total water 1000 g).","Let the coffee fully drip, 1.5 to 2 minutes.","Pour #4: 320 g of water (total water 1320 g).","Let the coffee fully drip before filtering into the bottle."],
+ tips:["Before the bloom, keep the tamp on the side of the saucer and zero the scale. That way when you tamp the coffee and leave it in the phin, the weight is not thrown off.","Keep the metal tamp pressed down before each pour. This helps keep the flow slow for better extraction.","Keep the kettles refilled between pours to keep the temperature consistent.","Aim for even saturation, not aggressive pouring.","Make sure the scales are fully charged before starting to avoid errors.","Plug the kettles into two separate outlets."]}
 ];
 var MR=/(\d+(?:[.\/]\d+)?(?:\u00B0F| ?(?:g|oz|cups?|dash(?:es)?|portions?|box(?:es)?|bottles?|seconds?|minutes?|gallons?|qt|hours?|inch(?:es)?|degrees?|bags?)\b))/g;
 function cap(t){return t.split(MR).map(function(s,i){return i%2?s:s.toLocaleUpperCase()}).join("")}
@@ -1381,11 +1476,88 @@ function esc(t){return cap(t).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
 function slug(n){return n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
 D.forEach(function(d){d.id=slug(d.n);d.k=(d.ks||[1])[0];d.m=0;d.done=d.steps.map(function(){return false});d.idone={}});
 var fromPrep=/\/prep\/?/.test(document.referrer)||/[?&]b=\d/.test(location.search);
-var ORD=["Sea Salt Cream Top","Calamansi Cream Top","Pandan Coconut Cloud","Coconut Cloud","Mango Sticky Rice Cloud","Pandan Coconut Milk","Coconut Milk","Mango Sticky Rice Milk","Simple Syrup","Pandan Syrup","Pho Spice Syrup","Earl Grey Syrup","Bergamot Earl Grey Syrup","Lychee Syrup","Mango Puree","Calamansi Syrup"];
+var ORD=["Sea Salt Cream Top","Calamansi Cream Top","Pandan Coconut Cloud","Coconut Cloud","Mango Sticky Rice Cloud","Pandan Coconut Milk","Coconut Milk","Mango Sticky Rice Milk","Simple Syrup","Pandan Syrup","Pho Spice Syrup","Earl Grey Syrup","Bergamot Earl Grey Syrup","Lychee Syrup","Mango Puree","Calamansi Syrup","Phin Brew Guide"];
+var BACKB="<a class=\"backbtn iconb\" href=\"#home\" aria-label=\"Back to recipes\"><svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 5l-7 7 7 7\"/></svg></a>";
+var SEC={caphe:"C\u00E0 Ph\u00EA",signature:"Signature",matcha:"Matcha",classic:"Classic"};
+var DK=[
+{s:"caphe",n:"Classic Vietnamese Coffee",v:"C\u00E0 ph\u00EA s\u1EEFa \u0111\u00E1",
+ i:{ing:[["Phin brewed coffee","120 g"],["Condensed milk","30 g"],["Ice","Full cup"]],
+ steps:["Squeeze 30 g condensed milk into boston tin","Add 120 g phin brewed coffee into boston tin","Mix to incorporate condensed milk and coffee","Fill cup with ice","Lightly froth coffee","Pour coffee into cup"]}},
+{s:"caphe",n:"Saigon Latte",v:"B\u1EA1c x\u1EC9u",
+ i:{ing:[["Espresso (iced)","Double shot"],["Condensed milk","15 g"],["Milk","50 g"],["Ice","Full cup"]],
+ steps:["Squeeze 15 g condensed milk and 50 g milk into boston tin","Mix using a mixing spoon","Fill cup to the top with ice","Pour condensed milk and milk mixture into cup","Pour espresso and one ice cube into boston tin","Froth coffee using milk frother","Pour frothed coffee into cup"]},
+ h:{ing:[["Espresso (hot)","Double shot"],["Condensed milk","15 g"],["Milk","210 g"]],
+ steps:["15 g condensed milk into cup","Pour espresso","Mix to incorporate using a spoon","Steam milk and pour"]}},
+{s:"classic",n:"Latte",v:"",
+ i:{ing:[["Espresso (hot)","Double shot"],["Milk (chosen milk)","120 g"],["Ice","Full cup"]],
+ steps:["Fill cup with ice","Pour 120 g of chosen milk","Pour espresso on top of the ice"]},
+ h:{ing:[["Espresso (hot)","Double shot"],["Milk of choice","220 g"],["Cup","10 oz to go cup or 10 oz hot cup"]],
+ steps:["Pull espresso into 10 oz to go cup or 10 oz hot cup","Using 15 oz pitcher, steam 220 g milk of choice and pour"],
+ f:["Hot build steps were not provided; these are drafted from the cup and pitcher details you gave."]}},
+{s:"classic",n:"Americano",v:"",
+ i:{ing:[["Espresso (hot)","Double shot"],["Room temperature water","120 g"],["Ice","Full cup"]],
+ steps:["Fill cup with ice","Pour 120 g of room temperature water","Pour espresso on top of the ice"]},
+ h:{ing:[["Espresso (hot)","Double shot"],["Hot water (175°F)","120 g"]],
+ steps:["Pour 120 g of 175°F water into 8 oz cup","Pour espresso on top of the water"]}},
+{s:"classic",n:"Cortado",v:"",
+ i:{ing:[["Espresso (hot)","Double shot"],["Milk of choice","60 g"],["Ice","3/4 cup"]],
+ steps:["Add 3/4 cup of ice","Pour 60 g of milk","Pour espresso over ice"]},
+ h:{ing:[["Espresso (hot)","Double shot"],["Milk of choice","10 oz pitcher"],["Cup","8 oz to go cup or 4.5 oz glass cup"]],
+ steps:["Pull espresso into 8 oz to go cup or 4.5 oz glass cup","Using 10 oz pitcher, steam milk and pour"],
+ w:["Do NOT fill the 8 oz cup for Cortado."],
+ f:["Hot milk amount is not specified beyond the 10 oz pitcher."]}},
+{s:"classic",n:"Cappuccino",v:"",
+ i:{ing:[["Espresso (hot)","Double shot"],["Milk of choice","100 g"],["Ice","3/4 cup"]],
+ steps:["Add 3/4 cup of ice","Pour 100 g of milk","Pour espresso over ice"]},
+ h:{ing:[["Espresso (hot)","Double shot"],["Milk of choice","10 oz pitcher"],["Cup","8 oz to go cup or 8 oz to stay cup"]],
+ steps:["Pull espresso into 8 oz to go cup or 8 oz to stay cup","Using 10 oz pitcher, steam milk and pour"],
+ t:["Steam slightly more than a latte."],
+ f:["Hot milk amount is not specified beyond the 10 oz pitcher."]}},
+{s:"classic",n:"Flat White",v:"",
+ i:{ing:[["Espresso (hot)","Double shot"],["Milk of choice","100 g"],["Ice","3/4 cup"]],
+ steps:["Add 3/4 cup of ice","Pour 100 g of milk","Pour espresso over ice"]},
+ h:{ing:[["Espresso (hot)","Double shot"],["Milk of choice","10 oz pitcher"],["Cup","8 oz to go cup or 8 oz to stay cup"]],
+ steps:["Pull espresso into 8 oz to go cup or 8 oz to stay cup","Using 10 oz pitcher, steam milk and pour"],
+ t:["Steam slightly thinner than a latte."],
+ f:["Hot milk amount is not specified beyond the 10 oz pitcher."]}},
+{s:"caphe",n:"Sea Salt Iced Coffee",v:"C\u00E0 ph\u00EA mu\u1ED1i",
+ i:{ing:[["Phin brewed coffee","100 g"],["Condensed milk","20 g"],["Sea salt cream top","40 g"],["Cocoa powder","2 dashes"],["Ice","3/4 full"]],
+ steps:["Squeeze 20 g condensed milk into boston tin","Add 100 g phin brewed coffee into boston tin","Mix to incorporate condensed milk and coffee","Fill cup 3/4 with ice","Pour coffee into the cup","Top with 40 g sea salt cream","Dust with cocoa powder"]},
+},
+{s:"signature",n:"Pandan Coconut Coffee",v:"C\u00E0 ph\u00EA l\u00E1 d\u1EE9a",
+ i:{ing:[["Espresso (iced)","Double shot"],["Pandan syrup","15 g"],["Pandan coconut milk mixture","65 g"],["Pandan coconut cloud","40 g"],["Ice","Full cup"]],
+ steps:["Pour 15 g pandan syrup into cup","Add 65 g coconut milk mixture into cup","Fill cup to the top with ice","Pour double shot of espresso on top of the ice","Pour 40 g pandan coconut cloud on top"]},
+ h:{ing:[["Espresso (hot)","Double shot"],["Pandan syrup","15 g"],["Coconut milk mixture","210 g"]],
+ steps:["15 g pandan syrup into cup","Pour espresso","Mix to incorporate","Steam coconut milk mixture and pour"]}},
+{s:"signature",n:"Pho Spiced Latte",v:"",
+ i:{ing:[["Espresso (iced)","Double shot"],["Pho syrup","20 g"],["Milk","110 g"],["Sea salt cream top","35 g"],["Ice","3/4 cup"],["Cinnamon powder","2 dashes"]],
+ steps:["Pour 20 g pho syrup into cup","Add 110 g milk into cup","Fill cup 3/4 with ice","Pour double shot of espresso on top of the ice","Top with 35 g sea salt cream","Dust with cinnamon powder"]},
+ h:{ing:[["Espresso (hot)","Double shot"],["Pho syrup","20 g"],["Cinnamon powder","1 dash"],["Milk of choice","210 g"]],
+ steps:["Pour 20 g pho syrup","Pour hot espresso","Mix to incorporate","1 dash of cinnamon powder over espresso","Steam milk of choice and pour"]}},
+{s:"matcha",n:"Matcha Latte",v:"",
+ i:{ing:[["Matcha","3.3 g"],["Water (175\u00B0F)","40 g"],["Milk of choice","120 g"],["Ice","Full cup"]],
+ steps:["Put 3.3 g matcha and 40 g 175\u00B0F water into matcha bowl","Whisk","Pour 120 g milk into empty cup and add ice","Pour matcha on top"]}},
+{s:"matcha",n:"Kyoto Fog",v:"Earl Grey matcha latte",
+ i:{ing:[["Matcha","3.3 g"],["Water (175\u00B0F)","40 g"],["Earl grey syrup","22 g"],["Milk","110 g"],["Ice","Full cup"]],
+ steps:["Put 3.3 g matcha and 40 g 175\u00B0F water into matcha bowl","Whisk","22 g earl grey syrup into empty cup","Pour 110 g milk on top of the earl grey syrup","Add ice","Pour matcha on top of the ice"]},
+ h:{ing:[["Matcha","3.3 g"],["Water (175\u00B0F)","40 g"],["Earl grey syrup","22 g"],["Milk","210 g"]],
+ steps:["Put 3.3 g matcha and 40 g 175\u00B0F water into matcha bowl","Whisk","22 g earl grey syrup into empty cup","Pour matcha into cup","Pour 210 g of milk into milk pitcher and steam","Pour latte art"]}},
+{s:"matcha",n:"Matcha Americano",v:"",
+ i:{ing:[["Matcha","3.3 g"],["Hot water (bowl)","40 g"],["Room temperature water","120 g"],["Ice","Full cup"]],
+ steps:["Put 3.3 g matcha and 40 g 175\u00B0F water into matcha bowl","Whisk","Pour 120 g room temperature water into a cup of ice","Pour matcha on top of the ice"]},
+ h:{ing:[["Matcha","3.3 g"],["Water (bowl)","40 g"],["Water (cup)","120 g"]],
+ steps:["Put 3.3 g matcha and 40 g 175\u00B0F water into matcha bowl","Whisk","Pour 120 g 175\u00B0F water into 8 oz cup","Pour matcha into cup"]}}
+];
+DK.forEach(function(d){d.id="drink-"+slug(d.n);d.drink=1;d.mode=d.i?"i":"h";d.done={};d.idone={}});
 var view=document.getElementById("view"),hb=document.getElementById("homebtn");
 function home(){
- view.innerHTML=["Cream Tops","Milk Bases","Syrups"].map(function(g){return'<section><h2>'+esc(g)+'</h2><div class="tiles">'+D.filter(function(d){return d.g===g}).sort(function(a,b){return ORD.indexOf(a.n)-ORD.indexOf(b.n)}).map(function(d){return'<a class="tile" href="#'+d.id+'"><span class="tn">'+esc(d.n)+'</span>'+(d.y||d.alt||d.todo?'<span class="tt">'+esc(d.y?tk(d.y,1):d.alt?"Single + Full Batch":"Recipe Needed")+'</span>':'')+'</a>'}).join("")+'</div></section>'}).join("");
- document.title="Kinhfolk Prep Recipes";
+ view.innerHTML='<div class="sbox"><label for="rq" class="sr">Search recipes</label><input id="rq" type="search" placeholder="Search recipes" autocomplete="off"></div><div id="rhome"></div>';
+ var rh=document.getElementById("rhome");rh.innerHTML=homeHtml();
+ document.getElementById("rq").addEventListener("input",function(){var q=this.value.trim().toLowerCase();if(!q){rh.innerHTML=homeHtml();return}var r=DK.concat(D).filter(function(d){return d.n.toLowerCase().indexOf(q)>=0});rh.innerHTML=r.length?'<section><div class="tiles">'+r.map(function(d){return'<a class="tile" href="#'+d.id+'"><span class="tn">'+esc(d.n)+'</span></a>'}).join("")+'</div></section>':'<p class="none">No recipes match "'+esc(q)+'".</p>'});
+ document.title="Kinhfolk Recipes";
+}
+function homeHtml(){return ["C\u00E0 Ph\u00EA","Signature","Matcha","Classic"].map(function(g){var k=Object.keys(SEC).filter(function(x){return SEC[x]===g})[0];return'<section><h2>'+esc(g)+'</h2><div class="tiles">'+DK.filter(function(d){return d.s===k}).map(function(d){return'<a class="tile" href="#'+d.id+'"><span class="tn">'+esc(d.n)+'</span>'+(d.v?'<span class="tt">'+esc(d.v)+'</span>':'')+'</a>'}).join("")+'</div></section>'}).join("")+["Cream Tops","Milk Bases","Syrups","Brews"].map(function(g){return'<section><h2>'+esc(g)+'</h2><div class="tiles">'+D.filter(function(d){return d.g===g}).sort(function(a,b){return ORD.indexOf(a.n)-ORD.indexOf(b.n)}).map(function(d){return'<a class="tile" href="#'+d.id+'"><span class="tn">'+esc(d.n)+'</span>'+(d.y||d.alt||d.todo?'<span class="tt">'+esc(d.y?tk(d.y,1):d.alt?"Single + Full Batch":"Recipe Needed")+'</span>':'')+'</a>'}).join("")+'</div></section>'}).join("");
+ document.title="Kinhfolk Recipes";
 }
 function fmt(n,f){var w=Math.floor(n+1e-9),r=n-w;if(r<.01)return""+w;if(f&&Math.abs(r-.5)<.01)return(w?w+" ":"")+"1/2";return""+Math.round(n*100)/100}
 function sc(s,k){var m=/^(?:(\d+)\/(\d+)|(\d+(?:\.\d+)?)) ?(.*)$/.exec(s);if(!m)return s;var n=(m[3]!==undefined?+m[3]:m[1]/m[2])*k,u=m[4];if(n>1)u=u.replace(/^box$/,"boxes").replace(/^bottle$/,"bottles").replace(/^can$/,"cans").replace(/^gallon$/,"gallons").replace(/^bag$/,"bags");return fmt(n,m[3]===undefined)+(u?" "+u:"")}
@@ -1399,15 +1571,15 @@ function recipe(d){
  if(d.todo){view.innerHTML='<div class="recipe"><h1>'+esc(d.n)+'</h1><div class="flag">'+esc(d.todo)+'</div></div>';document.title=d.n+" \u2013 Kinhfolk Prep";return}
  var o=opts(d);if(o.indexOf(d.k)<0)d.k=o[0];
  var ix=o.indexOf(d.k);
- var backs='<div class="backs"><a class="backbtn" href="#home">\u2190 '+esc("Back to recipes")+'</a>'+(fromPrep?'<a class="backbtn alt" href="../prep/">\u2190 '+esc("Back to prep list")+'</a>':"")+'</div>';
+ var backs='<div class="backs">'+BACKB+''+(fromPrep?'<a class="backbtn alt" href="../prep/">\u2190 '+esc("Back to prep list")+'</a>':"")+'</div>';
  view.innerHTML='<div class="recipe">'+backs+'<h1>'+esc(d.n)+'</h1>'+(d.y?'<div class="yield">'+esc((d.k===1?"One batch makes ":d.k+" batches make ")+(d.y.indexOf("{@")>=0?tk(d.y,d.k):sc(d.y,d.k)))+'</div>':'')+
  (d.auto?'<div class="flag note">'+esc(d.auto)+'</div>':'')+(d.t||[]).map(function(t){return'<div class="flag note">'+esc(t)+'</div>'}).join("")+(d.f||[]).map(function(t){return'<div class="flag">'+esc(t)+'</div>'}).join("")+
  (d.alt?'<div class="tog" role="group" aria-label="Batch size">'+[d.lab,d.alt.lab].map(function(l,i){return'<button type="button" data-m="'+i+'" aria-pressed="'+(d.m===i)+'">'+esc(l)+'</button>'}).join("")+'</div>':'')+
- (d.nob?'':'<div class="box"><h4>How many batches?</h4><div class="bs" role="group" aria-label="Number of batches"><button type="button" data-kstep="-1" aria-label="One fewer batch"'+(ix<=0?' disabled':'')+'>\u2212</button><div class="bv" aria-live="polite">'+d.k+'</div><button type="button" data-kstep="1" aria-label="One more batch"'+(ix>=o.length-1?' disabled':'')+'>+</button></div></div>')+
+ '<div class="cols"><div class="lc">'+(d.nob?'':'<div class="box"><h4>How many batches?</h4><div class="bs" role="group" aria-label="Number of batches"><button type="button" data-kstep="-1" aria-label="One fewer batch"'+(ix<=0?' disabled':'')+'>\u2212</button><div class="bv" aria-live="polite">'+d.k+'</div><button type="button" data-kstep="1" aria-label="One more batch"'+(ix>=o.length-1?' disabled':'')+'>+</button></div></div>')+
  '<div class="box"><h4>'+esc("Ingredients \u2013 tap when added")+'</h4><p class="prog" id="iprog" aria-live="polite"></p><ul class="ing">'+rows(v.ing,d.k,"",true,d.idone)+'</ul></div><div class="box"><h4>Equipment</h4><ul class="ing">'+rows(v.eq,d.k,d.bo||"Insulated bottle")+'</ul></div>'+
- '<div class="box"><h4>'+esc("Steps \u2013 tap to check off")+'</h4><p class="prog" id="prog" aria-live="polite"></p><ol class="steps">'+
+ '</div><div class="rc2">'+'<div class="box"><h4>'+esc("Steps \u2013 tap to check off")+'</h4><p class="prog" id="prog" aria-live="polite"></p><ol class="steps">'+
  d.steps.map(function(t,i){return'<li><button type="button" class="step" data-i="'+i+'" aria-pressed="false"><span class="n" aria-hidden="true">'+(i+1)+'</span><span class="tx">'+esc(tk(t.replace("{B}",(d.bn||1)*d.k),d.k))+'</span></button></li>'}).join("")+
- '</ol></div><button type="button" class="reset" id="reset">Start over</button>'+backs+'</div>';
+ '</ol></div>'+(d.tips&&d.tips.length?'<div class="box"><h4>Tips</h4><ol class="tipl">'+d.tips.map(function(t){return'<li>'+esc(t)+'</li>'}).join("")+'</ol></div>':'')+'</div></div><button type="button" class="reset" id="reset">Start over</button></div>';
  var ib=view.querySelectorAll(".ingb"),ip=document.getElementById("iprog");
  function paintI(){
   var c=0;
@@ -1434,9 +1606,27 @@ function recipe(d){
  paint();paintI();
  document.title=d.n+" \u2013 Kinhfolk Prep";
 }
+function drink(d){
+ var v=d[d.mode]||d.i||d.h,both=d.i&&d.h;
+ var key=d.mode,dn=d.done[key]=d.done[key]||v.steps.map(function(){return false}),idn=d.idone[key]=d.idone[key]||{};
+ var backs='<div class="backs">'+BACKB+(fromPrep?'<a class="backbtn alt" href="../prep/">← '+esc("Back to prep list")+'</a>':"")+'</div>';
+ var all=(d.w||[]).concat(v.w||[]);
+ view.innerHTML='<div class="recipe">'+backs+'<h1>'+esc(d.n)+'</h1>'+(d.v?'<div class="yield">'+esc(d.v)+'</div>':'')+
+ (both?'<div class="tog" role="group" aria-label="Hot or iced">'+[["i","Iced"],["h","Hot"]].map(function(x){return'<button type="button" data-mode="'+x[0]+'" aria-pressed="'+(d.mode===x[0])+'">'+x[1]+'</button>'}).join("")+'</div>':'')+
+ all.map(function(t){return'<div class="flag">'+esc(t)+'</div>'}).join("")+(v.t||[]).map(function(t){return'<div class="flag note">'+esc(t)+'</div>'}).join("")+(v.f||[]).map(function(t){return'<div class="flag">'+esc(t)+'</div>'}).join("")+
+ '<div class="cols"><div class="lc">'+'<div class="box"><h4>'+esc("Ingredients – tap when added")+'</h4><p class="prog" id="iprog" aria-live="polite"></p><ul class="ing">'+rows(v.ing,1,"",true,idn)+'</ul></div>'+
+ '</div><div class="rc2">'+'<div class="box"><h4>'+esc("Steps – tap to check off")+'</h4><p class="prog" id="prog" aria-live="polite"></p><ol class="steps">'+v.steps.map(function(t,i){return'<li><button type="button" class="step" data-i="'+i+'" aria-pressed="false"><span class="n" aria-hidden="true">'+(i+1)+'</span><span class="tx">'+esc(t)+'</span></button></li>'}).join("")+'</ol></div></div></div><button type="button" class="reset" id="reset">Start over</button></div>';
+ var ib=view.querySelectorAll(".ingb"),ip=document.getElementById("iprog"),bs=view.querySelectorAll(".step"),pg=document.getElementById("prog");
+ function paint(){var c=0,ci=0;ib.forEach(function(b){var on=!!idn[b.dataset.ing];if(on)ci++;b.setAttribute("aria-pressed",on);b.querySelector(".ck").textContent=on?"✓":""});bs.forEach(function(b,i){var on=dn[i];if(on)c++;b.setAttribute("aria-pressed",on);b.querySelector(".n").textContent=on?"✓":(i+1)});ip.textContent=esc(ci+" of "+ib.length+" ingredients added");pg.textContent=esc(c+" of "+bs.length+" steps done")+(c===bs.length?" – "+esc("drink complete"):"")}
+ ib.forEach(function(b){b.onclick=function(){var n=b.dataset.ing;idn[n]=!idn[n];paint()}});
+ bs.forEach(function(b){b.onclick=function(){var i=+b.dataset.i;dn[i]=!dn[i];paint()}});
+ view.querySelectorAll(".tog button").forEach(function(b){b.onclick=function(){var y=window.scrollY;d.mode=b.dataset.mode;drink(d);window.scrollTo(0,y);view.querySelector('.tog [data-mode="'+d.mode+'"]').focus()}});
+ document.getElementById("reset").onclick=function(){d.done={};d.idone={};drink(d);window.scrollTo(0,0)};
+ paint();document.title=d.n+" – Kinhfolk Recipes";
+}
 function route(){
  var id=(location.hash||"#home").slice(1);
- var d=D.filter(function(x){return x.id===id})[0];
+ var d=D.concat(DK).filter(function(x){return x.id===id})[0];
  hb.hidden=!d;
  if(d&&qb>0&&d.id===qid){
   var o=opts(d);
@@ -1445,12 +1635,14 @@ function route(){
   d.auto="Batches set from the Prep List"+(qneed>0?": need "+fq(qneed)+" more":"")+".";
   qb=0;
  }
- if(d)recipe(d);else home();
+ if(d&&d.drink)drink(d);else if(d)recipe(d);else home();
  window.scrollTo(0,0);
 }
 window.addEventListener("hashchange",route);
 var toTop=document.getElementById("totop");
-window.addEventListener("scroll",function(){toTop.hidden=window.scrollY<300},{passive:true});
+var phoneMQ=window.matchMedia("(max-width:760px)");
+function paintTop(){var y=window.scrollY,de=document.documentElement,atEnd=y+window.innerHeight>=de.scrollHeight-140;toTop.hidden=phoneMQ.matches?!(y>60&&atEnd):y<300}
+window.addEventListener("scroll",paintTop,{passive:true});window.addEventListener("resize",paintTop);
 toTop.addEventListener("click",function(){
  var rm=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
  window.scrollTo({top:0,behavior:rm?"auto":"smooth"});
@@ -1498,6 +1690,7 @@ var I={
  prep:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h6"/>',
  events:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h3"/>',
  more:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',
+ sop:'<path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
  recipes:'<path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M9 7h6"/>'
 };
 var site=d.documentElement.getAttribute("data-site")||"staff",root=d.documentElement.getAttribute("data-root")||"../";
@@ -1508,7 +1701,7 @@ var src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwM
 var sb=d.createElement("aside");sb.className="sb";sb.setAttribute("aria-label","Kinhfolk pages");
 sb.innerHTML='<div class="sbl">'+(src?'<img alt="" src="'+src+'">':"")+'<span>Kinhfolk</span></div>'+
  P.map(function(p){return'<a class="sbi" data-pg="'+p[0]+'" title="'+p[1]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1]+'</span></a>'}).join("")+
- '<div class="sbg" id="sbg" hidden></div><div id="sbhost"></div><div class="sbf">Brooklyn, NY</div>'+(here==="stock"?'<button type="button" class="sbfab" id="sbfab" aria-label="Report a low item" title="Report a low item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>':"");
+ '<div class="sbg" id="sbg" hidden></div><div id="sbhost"></div><div class="sbf">Brooklyn, NY</div>'+(here==="stock"?'<button type="button" class="sbfab" id="sbfab" aria-label="Report a low item" title="Report a low item"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 3.2c.7 0 1.3.4 1.7 1l8 14c.8 1.4-.2 3.1-1.7 3.1H4c-1.5 0-2.5-1.7-1.7-3.1l8-14c.4-.6 1-1 1.7-1zM11 9v5.2h2V9h-2zm0 7.3v2h2v-2h-2z"/></svg></button>':"");
 b.insertBefore(sb,b.firstChild);
 var bn=d.createElement("nav");bn.className="bnav";bn.setAttribute("aria-label","Pages");
 bn.innerHTML=P.map(function(p){return'<a data-pg="'+p[0]+'" href="'+p[2]+'"'+(p[0]===here?' aria-current="page"':"")+'>'+svg(p[0])+'<span>'+p[1].replace("Stock count","Stock")+'</span></a>'}).join("");
@@ -1529,7 +1722,7 @@ scrim.addEventListener("click",function(){drawer(false)});
 d.addEventListener("keydown",function(e){if(e.key==="Escape")drawer(false)});
 if(here==="stock"&&hd){
  var hp=d.createElement("button");hp.type="button";hp.className="hplus";hp.setAttribute("aria-label","Report a low item");
- hp.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+ hp.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 3.2c.7 0 1.3.4 1.7 1l8 14c.8 1.4-.2 3.1-1.7 3.1H4c-1.5 0-2.5-1.7-1.7-3.1l8-14c.4-.6 1-1 1.7-1zM11 9v5.2h2V9h-2zm0 7.3v2h2v-2h-2z"/></svg>';
  hd.appendChild(hp);hp.addEventListener("click",reportLow);
  var top=d.getElementById("top"),tw=d.querySelector(".tabwrap"),ph=window.matchMedia("(max-width:760px)");
  var sc=d.createElement("div");sc.className="statcard";
@@ -1556,8 +1749,11 @@ if(hd){
  var tb=d.createElement("div");tb.className="titlebar";hd.appendChild(tb);
  var mqd=window.matchMedia("(min-width:761px)");
  var layout=function(){
-  if(mqd.matches){if(wm)tb.appendChild(wm);if(nav)tb.appendChild(nav);if(hb2)tb.appendChild(hb2)}
-  else{if(wm)hd.insertBefore(wm,syn||tb);if(nav&&navHome)navHome.appendChild(nav);if(hb2)hd.insertBefore(hb2,tb)}
+  var hl=d.querySelector("main .hello"),h1=hl&&hl.querySelector("h1");
+  if(mqd.matches){if(wm)tb.appendChild(wm);if(nav)tb.appendChild(nav);if(hb2)tb.appendChild(hb2);
+   if(hl&&h1&&wm){if(!wm.hasAttribute("data-t"))wm.setAttribute("data-t",wm.textContent);wm.textContent=h1.textContent;hl.classList.add("intb");Array.prototype.slice.call(hl.children).forEach(function(c){if(c!==h1){c.classList.add("tbx");tb.appendChild(c)}})}}
+  else{if(wm)hd.insertBefore(wm,syn||tb);if(nav&&navHome)navHome.appendChild(nav);if(hb2)hd.insertBefore(hb2,tb);
+   if(hl&&h1&&wm){if(wm.hasAttribute("data-t"))wm.textContent=wm.getAttribute("data-t");hl.classList.remove("intb");Array.prototype.slice.call(tb.querySelectorAll(".tbx")).forEach(function(c){c.classList.remove("tbx");hl.appendChild(c)})}}
  };
  layout();if(mqd.addEventListener)mqd.addEventListener("change",layout);else mqd.addListener(layout);
  var inp=q.querySelector("input"),last="";
@@ -1608,6 +1804,14 @@ put();new MutationObserver(put).observe(nav,{childList:true})})();
  if(lb&&window.MutationObserver)new MutationObserver(function(){stock(d.querySelectorAll("#lowbox .orow.low").length)}).observe(lb,{childList:true,subtree:true});
  window.addEventListener("storage",events);
 })();
+})();
+
+/* iPhone: keep the confirm bar above the bottom navigation, whatever its real height */
+(function(){var d=document,nv=d.getElementById("nav");if(!nv)return;
+ var set=function(){var r=nv.getBoundingClientRect();var f=getComputedStyle(nv).position==="fixed";d.documentElement.style.setProperty("--navh",f?Math.ceil(window.innerHeight-r.top)+"px":"0px")};
+ set();window.addEventListener("resize",set);window.addEventListener("orientationchange",set);
+ if(window.ResizeObserver)new ResizeObserver(set).observe(nv);setTimeout(set,400);setTimeout(set,1500)
+try{if("serviceWorker" in navigator&&location.protocol==="https:"&&site==="staff"){navigator.serviceWorker.register((d.documentElement.getAttribute("data-root")||"../")+"sw.js")}}catch(e){}
 })();
 </script>
 </body>
