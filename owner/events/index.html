@@ -1392,6 +1392,12 @@ html[data-page="recipes"] body.skin .none{font-size:16px}
  html[data-page="recipes"] body.skin .recipe{max-width:none}
  html[data-page="recipes"] body.skin .recipe .cols{display:block}
 }
+/* Overview: week toggle lines up with the card heading; misc amounts line up on the right */
+body.skin .card>.seg{margin:0 14px 10px 20px !important;flex-wrap:wrap}
+@media (max-width:760px){body.skin .card>.seg{margin-left:16px !important}}
+body.skin #misc .kv{display:grid;grid-template-columns:minmax(0,1fr) auto 32px;align-items:center;column-gap:10px}
+body.skin #misc .kv b{text-align:right;white-space:nowrap}
+body.skin #misc .kv .x{margin-left:0}
 </style>
 </head>
 <body>
