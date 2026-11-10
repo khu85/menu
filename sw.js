@@ -1,6 +1,6 @@
 /* Kinhfolk staff pages: keep pages available when the shop wifi drops.
    Only same-site files are cached; saving counts still needs a connection. */
-var V="kf-v1";
+var V="kf-v2";
 self.addEventListener("install",function(e){self.skipWaiting()});
 self.addEventListener("activate",function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==V}).map(function(x){return caches.delete(x)}))}).then(function(){return self.clients.claim()}))});
 self.addEventListener("fetch",function(e){
