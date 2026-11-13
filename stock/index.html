@@ -3108,6 +3108,25 @@ html:not(#k):not(#j):not(#x):not(#w):not(#v) body.skin .clown details.clleft{mar
 html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin .clown .cllate li{grid-template-columns:48px minmax(0,1fr)!important}
 @media (max-width:760px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin .clown .cllate li{grid-template-columns:36px minmax(0,1fr)!important;column-gap:8px!important;font-size:12.5px}}
 
+/* round: smaller desktop nav, bigger prep need-more list, no recipe grey lines, inventory icon, inventory alignment */
+@media (min-width:1100px){
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin{--sbw:72px}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .sb{width:72px!important}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .sb :is(.sbbox,.sbsw){width:64px!important;padding:3px!important}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .sb :is(.sbbox,.sbsw) a.sbi{width:58px!important;min-height:50px!important;padding:6px 0 5px!important;gap:3px!important}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .sb :is(.sbbox,.sbsw) a.sbi svg{width:22px!important;height:22px!important}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .sb :is(.sbbox,.sbsw) a.sbi span{font-size:11.5px!important}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .thp{left:4px!important}
+}
+html[data-page="prep"]:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v) body.skin .sum li .sn,html[data-page="prep"]:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v) body.skin .sum li .sn a{font-size:18px!important}
+html[data-page="prep"]:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v) body.skin .sum li .sd{font-size:17px!important}
+html[data-page="prep"]:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v) body.skin .sum li{padding-top:16px!important;padding-bottom:16px!important}
+html[data-page="recipes"]:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v) body.skin :is(.box>:is(ol,ul)>li>*,.box>:is(ol,ul)>li:not(:first-child)>*,.box li,.box li>span,.box li>b,.recipe .step,.step){border-top:0!important;border-bottom:0!important}
+html[data-page="stock"] body.skin #nav .tab[data-nav="inv"]{--ic:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='1.8'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M21%208l-9-5-9%205v8l9%205%209-5z'/%3E%3Cpath%20d='M3%208l9%205%209-5M12%2013v8'/%3E%3C/svg%3E")}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .colh .cs i,html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .kfl>.orow.kfa .st .sv,html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .kfl>.orow.kfa .st .sv b{text-align:center!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t) body.skin section.kfinv :is(.kfl>.orow.kfa .st,.colh .cs){gap:0!important;column-gap:0!important}
+@media (min-width:761px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s) body.skin section.kfinv :is(.kfl>.orow.kfa .st .sv,.colh .cs i){width:112px!important;margin:0!important;padding:0!important;box-sizing:border-box}}
+
 @media (prefers-color-scheme:dark){
 html:not([data-theme="light"]):not(#k):not(#j) body.skin{--pg:#1F1E1F;--card:#2B292A;--fill:#363435;--sep:#3D3B3C;--ink:#F1EEDB;--mute:#A9A493;--black:#141314;--onb:#fff;color-scheme:dark;background:var(--pg)!important;color:var(--ink)!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin :is(.sbl img,header img,.logo img,img.logo,.brand img,#top img){filter:invert(1) sepia(.15) brightness(1.05)!important}
@@ -3603,7 +3622,7 @@ function paintEnd(idx){
 function invHtml(){
  var w=S.cur,secs=[],by={},tot=0;
  S.items.forEach(function(it){
-  var storOnly=!!it.ingredient;if(!counted(it)&&!(storOnly&&isStor(it)))return;
+  if(/^mop pads?$/i.test(it.item||""))return;var storOnly=!!it.ingredient;if(!counted(it)&&!(storOnly&&isStor(it)))return;
   var g=grp(it),c=calc(w,it),k=keyOf(it),bx=bxOf(it),cafe=storOnly?0:(c.e!==null?c.e:r2(c.b+c.a)),est=!storOnly&&c.e===null,st=isStor(it)?storOf(k):0,all=r2(cafe+st);
   if(!by[g]){by[g]=[];secs.push(g)}by[g].push({it:it,k:k,bx:bx,cafe:cafe,est:est,st:st,all:all,hasS:isStor(it),so:storOnly});tot++;
  });
@@ -3613,7 +3632,6 @@ function invHtml(){
    var it=r.it,u=r.bx>1?"sleeve":(it.unit||""),sub=[];
    if(r.bx>1&&r.hasS)sub.push(fmt(r2(r.st/r.bx))+" boxes in storage");
    else if(it.perBox&&r.hasS)sub.push(fmt(r2(r.st/it.perBox))+" boxes in storage");
-   if(r.est)sub.push("Cafe not counted yet");
    var low=r.hasS&&!!(S.storageLow||{})[r.k];
    acc+='<div class="orow kfa row inv'+(low?' kbad':'')+'"><div class="l"><div class="on">'+nmb(it.item)+(low?' <span class="chip bad">Low in storage</span>':'')+'</div><div class="sub"><span class="pu">'+esc(u)+(sub.length?" \u00B7 ":"")+'</span>'+esc(sub.join(" \u00B7 "))+'</div></div>'+
     '<div class="st">'+stat(u||"\u2013","Unit")+stat(r.so?"\u2013":fmt(r.cafe),"Cafe")+stat(r.hasS?fmt(r.st):"\u2013","Storage")+stat(fmt(r.all),"Total")+'</div></div>';
