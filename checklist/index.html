@@ -186,6 +186,20 @@ html[data-page="checklist"]:not(#k):not(#j):not(#x):not(#w) body.skin .clwho but
 html[data-page="checklist"]:not(#k):not(#j):not(#x):not(#w) body.skin .clcols,html[data-page="checklist"]:not(#k):not(#j):not(#x):not(#w) body.skin .clcols.n2{grid-template-columns:1fr}
 html[data-page="checklist"]:not(#k):not(#j):not(#x):not(#w) body.skin section.clc.hide{display:none!important}
 }
+
+/* Confirm bar: checks are logged when staff tap Confirm */
+.clconf{position:sticky;bottom:calc(var(--navh,0px) + 14px);z-index:30;display:flex;align-items:center;justify-content:space-between;gap:14px;margin:18px 0 6px;padding:12px 12px 12px 18px;background:#fff;border-radius:18px;box-shadow:0 6px 24px rgba(51,49,50,.16);font-weight:700;color:#333132}
+.clconf b{color:#005949;font-weight:800}
+.clconf.old{background:#FFF6E5;box-shadow:0 0 0 2px #C17D12,0 6px 24px rgba(51,49,50,.16)}
+.clconf.ok{position:static;justify-content:flex-start;color:#005949;background:#F1EEDB;box-shadow:none}
+.clconf .btn{appearance:none;border:0;border-radius:14px;background:#005949;color:#fff;font:inherit;font-weight:800;font-size:17px;min-height:48px;padding:0 26px;cursor:pointer}
+.clconf .btn:disabled{opacity:.6}
+/* ticked but not confirmed yet: gold check; turns green once logged */
+html[data-page="checklist"]:not(#k):not(#j):not(#x):not(#w):not(#v) body.skin button.ck.on.ns .cbx{background:#C17D12;border-color:#C17D12}
+html[data-theme="dark"] .clconf{background:#2B292A;color:#F1EEDB}
+html[data-theme="dark"] .clconf.old{background:#3a2f1c}
+html[data-theme="dark"] .clconf.ok{background:#363435;color:#9fd3c4}
+@media (prefers-color-scheme:dark){html:not([data-theme="light"]) .clconf{background:#2B292A;color:#F1EEDB}html:not([data-theme="light"]) .clconf.ok{background:#363435;color:#9fd3c4}html:not([data-theme="light"]) .clconf.old{background:#3a2f1c}}
 </style>
 <script id="kfth">try{var t=localStorage.getItem("kf-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style id="skin">
@@ -3180,7 +3194,7 @@ function mins(t,part){var p=t.split(":"),h=+p[0],m=+p[1];if(part==="close"&&h<12
 function nowM(){var d=new Date();return d.getHours()*60+d.getMinutes()}
 function ampm(t,part){return t+(part==="close"?" PM":(+t.split(":")[0]>=12?" PM":" AM"))}
 function row(id,t,x,part,live){var on=!!st[id],late=live&&!on&&nowM()>mins(t,part)+10;
- return'<button type="button" class="ck'+(on?" on":"")+(late?" late":"")+'" data-id="'+id+'" aria-pressed="'+on+'"><span class="ctm">'+esc(t)+'</span><span class="ctx">'+esc(x)+'</span><span class="cbx" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></button>'}
+ return'<button type="button" class="ck'+(on?" on":"")+(late?" late":"")+(pend[id]!==undefined?" ns":"")+'" data-id="'+id+'" aria-pressed="'+on+'"><span class="ctm">'+esc(t)+'</span><span class="ctx">'+esc(x)+'</span><span class="cbx" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></button>'}
 function card(title,ids,html,cls){var n=ids.filter(function(i){return st[i]}).length;
  return'<section class="clc'+(cls?" "+cls:"")+'"><h2 class="h"><span>'+esc(title)+'</span><span class="vsum'+(n===ids.length?" done":"")+'">'+n+' / '+ids.length+'</span></h2><div class="ckl">'+html+'</div></section>'}
 function render(){
@@ -3197,8 +3211,8 @@ function render(){
  h+='</div>';
  var aids=[],ar="";L.all.forEach(function(t,ti){var id=V.day+"."+V.part+".a."+ti;aids.push(id);ar+=row(id,t[0],t[1],V.part,live)});
  h+=card("Everyone, to finish",aids,ar,"clall");
- h+='<div class="clfoot"><button type="button" class="linkb" id="clclear"'+(done?"":" disabled")+'>Clear checks</button><span>'+(sync==="off"?"Offline. Checks will save when the connection is back.":(clApi()?"Saved for every device and the owner page. Resets each day.":"Checks reset each day."))+'</span></div>';
- var v=$("view"),y=window.scrollY,hh=v.offsetHeight;v.style.minHeight=hh+"px";v.innerHTML=h;window.scrollTo(0,y);v.style.minHeight="";
+ h+='<div class="clfoot"><button type="button" class="linkb" id="clclear"'+(done?"":" disabled")+'>Clear checks</button><span>'+(sync==="off"?"Offline. Checks will save when the connection is back.":(clApi()?"Tap Confirm to log your checks for every device and the owner page. Resets each day.":"Checks reset each day."))+'</span></div>';
+ var v=$("view"),y=window.scrollY,hh=v.offsetHeight;v.style.minHeight=hh+"px";v.innerHTML=h+barHtml();window.scrollTo(0,y);v.style.minHeight="";
 }
 function tick(b,on){b.classList.toggle("on",on);b.classList.remove("late");b.setAttribute("aria-pressed",on);
  var c=b.closest(".clc");if(c){var bs=c.querySelectorAll("button.ck"),n=c.querySelectorAll("button.ck.on").length,sm=c.querySelector(".vsum");sm.textContent=n+" / "+bs.length;sm.classList.toggle("done",n===bs.length)}
@@ -3206,20 +3220,38 @@ function tick(b,on){b.classList.toggle("on",on);b.classList.remove("late");b.set
  var cl=$("clclear");if(cl)cl.disabled=!d}
 document.addEventListener("click",function(e){
  var b=e.target.closest("button");if(!b||!$("view").contains(b))return;
- if(b.dataset.id){var id=b.dataset.id,on=!st[id];if(on)st[id]=clNowT();else delete st[id];clSave(now,st);pend[id]=on;savePend();seq++;tick(b,on);flush();return}
+ if(b.dataset.id){var id=b.dataset.id,on=!st[id];if(on)st[id]=clNowT();else delete st[id];clSave(now,st);
+  if(!!srv[id]===on)delete pend[id];else{pend[id]=on;if(!pendAt)pendAt=Date.now()}if(!Object.keys(pend).length)pendAt=0;
+  savePend();seq++;tick(b,on);b.classList.toggle("ns",pend[id]!==undefined);updBar();return}
+ if(b.id==="clsend"){flush();return}
  if(b.dataset.part){V.part=b.dataset.part;render();return}
  if(b.dataset.day){V.day=b.dataset.day;render();return}
  if(b.dataset.who!==undefined){V.who=+b.dataset.who;try{localStorage.setItem("kf-cl-who",V.who)}catch(z){}render();return}
- if(b.id==="clclear"){var p=V.day+"."+V.part+".";Object.keys(st).forEach(function(k){if(k.indexOf(p)===0){delete st[k];pend[k]=false}});clSave(now,st);savePend();flush();render()}
+ if(b.id==="clclear"){var p=V.day+"."+V.part+".";Object.keys(st).forEach(function(k){if(k.indexOf(p)===0){delete st[k];if(srv[k])pend[k]=false;else delete pend[k]}});if(Object.keys(pend).length&&!pendAt)pendAt=Date.now();clSave(now,st);savePend();render()}
 });
 var pend={},sync="";try{pend=JSON.parse(localStorage.getItem("kf-cl-pend-"+clDate(now))||"{}")||{}}catch(e){}
 function savePend(){try{localStorage.setItem("kf-cl-pend-"+clDate(now),JSON.stringify(pend))}catch(e){}}
-function apply(done){var n={};Object.keys(done).forEach(function(k){n[k]=done[k]});Object.keys(pend).forEach(function(k){if(pend[k])n[k]=st[k]||clNowT();else delete n[k]});st=n;clSave(now,st)}
-function flush(){if(!clApi()){sync="";return}var ks=Object.keys(pend);if(!ks.length)return;var k=ks[0],on=pend[k];
- clPost(now,k,on).then(function(done){if(pend[k]===on)delete pend[k];savePend();apply(done);sync="ok";if(Object.keys(pend).length)flush();else render()},function(){sync="off";render()})}
-var seq=0;function pull(){if(!clApi())return;var q0=seq;clGet(now).then(function(done){if(q0!==seq||Object.keys(pend).length){flush();return}apply(done);sync=Object.keys(pend).length?sync:"ok";render();flush()},function(){sync="off";render()})}
+var srv={},sending=false,lastOk="",pendAt=0,okT=0;if(Object.keys(pend).length)pendAt=Date.now();
+function apply(done){srv={};Object.keys(done).forEach(function(k){srv[k]=done[k]});var n={};Object.keys(done).forEach(function(k){n[k]=done[k]});Object.keys(pend).forEach(function(k){if(pend[k])n[k]=st[k]||clNowT();else delete n[k]});st=n;clSave(now,st)}
+function items(){return Object.keys(pend).map(function(k){return{id:k,on:!!pend[k],t:pend[k]?(typeof st[k]==="string"?st[k]:clNowT()):""}})}
+/* Confirm: every tick goes to the owner backend in ONE request */
+function flush(){if(!clApi()||sending)return;var it=items();if(!it.length)return;sending=true;updBar();var snap=JSON.stringify(pend);
+ var u=clApi();fetch(u,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"checks",date:clDate(now),items:it})}).then(function(r){return r.json()}).then(function(j){
+  if(!j||!j.ok)throw new Error(j&&j.error||"error");sending=false;
+  if(JSON.stringify(pend)===snap)pend={};else it.forEach(function(x){if(pend[x.id]===x.on)delete pend[x.id]});
+  pendAt=Object.keys(pend).length?pendAt:0;savePend();apply(j.done||{});sync="ok";lastOk=clT12(clNowT());render();clearTimeout(okT);okT=setTimeout(function(){lastOk="";updBar()},6000)},
+ function(){sending=false;sync="off";render()})}
+function barHtml(){var n=Object.keys(pend).length;if(!n&&!lastOk)return"";
+ if(!n)return'<div class="clconf ok" role="status" aria-live="polite"><span>✓ Logged at '+esc(lastOk)+'</span></div>';
+ var old=pendAt&&Date.now()-pendAt>5*60000;
+ return'<div class="clconf'+(old?" old":"")+'" role="status" aria-live="polite"><span><b>'+n+'</b> '+(n===1?"check":"checks")+' not logged yet'+(sync==="off"?" · offline, try again":"")+'</span><button type="button" id="clsend" class="btn"'+(sending?" disabled":"")+'>'+(sending?"Sending…":"Confirm")+'</button></div>'}
+function updBar(){var v=$("view"),o=v.querySelector(".clconf"),h=barHtml();if(o)o.outerHTML=h||"";else if(h)v.insertAdjacentHTML("beforeend",h)}
+var seq=0;function pull(){if(!clApi())return;clGet(now).then(function(done){apply(done);if(sync!=="off"||!Object.keys(pend).length)sync="ok";render();
+ if(pendAt&&Date.now()-pendAt>10*60000)flush()},function(){sync="off";render()})}
+/* leaving the page with checks not logged: send them anyway */
+addEventListener("pagehide",function(){var it=items();if(!it.length||!clApi()||!navigator.sendBeacon)return;try{navigator.sendBeacon(clApi(),new Blob([JSON.stringify({action:"checks",date:clDate(now),items:it})],{type:"text/plain;charset=utf-8"}))}catch(e){}});
 render();pull();
-setInterval(function(){var d=new Date();if(clKey(d)!==clKey(now)){now=d;today=clDay(d);openToday=clOpenDay(d);st=clLoad(d);pend={}}pull();render()},30000);
+setInterval(function(){var d=new Date();if(clKey(d)!==clKey(now)){now=d;today=clDay(d);openToday=clOpenDay(d);st=clLoad(d);pend={}}pull();render()},15000);
 var tt=$("totop");if(tt){addEventListener("scroll",function(){tt.hidden=scrollY<500},{passive:true});tt.addEventListener("click",function(){scrollTo({top:0,behavior:"smooth"})})}
 })();
 </script>
