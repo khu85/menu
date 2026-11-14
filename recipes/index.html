@@ -2883,6 +2883,53 @@ html[data-page="stock"] body.skin #nav .tab[data-nav="inv"]{--ic:url("data:image
 html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .colh .cs i,html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .kfl>.orow.kfa .st .sv,html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .kfl>.orow.kfa .st .sv b{text-align:center!important}
 html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t) body.skin section.kfinv :is(.kfl>.orow.kfa .st,.colh .cs){gap:0!important;column-gap:0!important}
 @media (min-width:761px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s) body.skin section.kfinv :is(.kfl>.orow.kfa .st .sv,.colh .cs i){width:112px!important;margin:0!important;padding:0!important;box-sizing:border-box}}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s) body.skin :is(section.kfadd,section.kfend,section.kflog) :is(.colh .cs i,.kfl>.orow.kfa .st .sv,.kfl>.orow.kfa .st .sv b,.kfl>.orow.kfa .st .sv i){text-align:center!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r) body.skin section:has(>.colh) :is(.colh .cs i,.orow .st .sv,.orow .st .sv b){text-align:center!important}
+/* stock Added: phone number line, storage note + recount button */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfadd .kfl>.orow.kfa .sub .pn{display:none}
+@media (max-width:760px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfadd .kfl>.orow.kfa .sub .pn{display:inline}}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin .note.snote{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin .note.snote .srec{flex:none;border:0;border-radius:12px;background:var(--card,#fff);color:var(--ink);font:inherit;font-weight:600;font-size:14px;padding:10px 16px;min-height:44px;cursor:pointer;box-shadow:0 0 0 1px var(--line,rgba(0,0,0,.08)) inset}
+@media (min-width:761px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r) body.skin :is(section.kfadd,section.kflog) .kfl>.orow.kfa .st{width:auto!important;flex:none!important;grid-template-columns:none!important;display:flex!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r) body.skin :is(section.kfadd,section.kflog) :is(.kfl>.orow.kfa .st .sv,.colh .cs i){width:112px!important;flex:none!important;min-width:0!important;margin:0!important;padding:0 4px!important;box-sizing:border-box}}
+/* stepper focus ring: only for keyboard focus, drawn outside the box so the green + keeps its shape */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin :is(.step,.ctl):focus-within{box-shadow:none!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin :is(.step,.ctl):has(:focus-visible){box-shadow:none!important;outline:2px solid var(--brand)!important;outline-offset:3px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin :is(.step,.ctl):has(input:focus){outline:2px solid var(--brand)!important;outline-offset:3px!important}
+/* desktop/iPad nav: inset from the screen edge */
+@media (min-width:1100px){
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o):not(#n) body.skin{--sbw:92px}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o):not(#n) body.skin .sb{width:92px!important;padding-left:16px!important;box-sizing:border-box!important}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o):not(#n) body.skin .thp{left:22px!important}
+}
+/* recipe batch stepper: keep the − readable when it is at 1 (just dimmer) */
+html:not(#k):not(#j):not(#x):not(#w):not(#v) body.skin .bs button:disabled{opacity:1!important;color:var(--mute)!important;cursor:default}
+html:not(#k):not(#j):not(#x):not(#w):not(#v) body.skin .bs .bv{border-radius:14px!important}
+
+/* nav alert badge: a circle, not a square */
+html:not(#k):not(#j):not(#i):not(#h):not(#g):not(#f):not(#e):not(#d):not(#c):not(#b):not(#a):not(#z) body.skin :is(.sb,.bnav,#nav,.drawer) .nbd{border-radius:999px!important;min-width:20px!important;height:20px!important;padding:0 4px!important;box-sizing:border-box!important;line-height:16px!important;text-align:center!important}
+
+/* boxes under the storage number on Inventory */
+body.skin section.kfinv .sv .bxs{display:block;font-size:12px;font-weight:600;color:var(--mute,#6f6c68);margin-top:2px;text-align:center}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q) body.skin section.kfinv .kfl>.orow.kfa .st .sv{position:relative!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q) body.skin section.kfinv .sv .bxs{position:absolute!important;left:0!important;right:0!important;top:100%!important;width:100%!important;margin:1px 0 0!important;padding:0!important;text-align:center!important;white-space:nowrap}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q) body.skin section.kfinv .orow.inv:has(.bxs){padding-bottom:26px!important}
+
+/* Inventory: the unit line sits under the item name, not under the dot */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p) body.skin section.kfinv .orow.inv .l .sub{padding-left:18px!important}
+
+/* names that wrap hang under the first letter, not under the dot */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p) body.skin .kfl>.orow:not(.kend) .l>.on{padding-left:18px!important;text-indent:-18px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p) body.skin .kfl>.orow:not(.kend) .l>.sub{padding-left:18px!important}
+
+/* every list row: name hangs after the dot, sub line under the name; Bring from storage count is bold green */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orlist>.orow:not(.kend) .l>.on{padding-left:18px!important;text-indent:-18px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orlist>.orow:not(.kend) .l>.sub{padding-left:18px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orlist>.orow .l>.sub .sn{color:var(--brand,#005949)!important;font-weight:800!important}
+
+/* low stock list on the owner Home card */
+html:not(#k):not(#j):not(#x) body.skin .olist.lowlist{margin:0 0 14px}
+html:not(#k):not(#j):not(#x) body.skin .olist.lowlist li b{color:var(--red)!important;font-weight:700;font-size:.9em;text-align:right;white-space:normal}
 
 @media (prefers-color-scheme:dark){
 html:not([data-theme="light"]):not(#k):not(#j) body.skin{--pg:#1F1E1F;--card:#2B292A;--fill:#363435;--sep:#3D3B3C;--ink:#F1EEDB;--mute:#A9A493;--black:#141314;--onb:#fff;color-scheme:dark;background:var(--pg)!important;color:var(--ink)!important}
@@ -2950,6 +2997,9 @@ html:not([data-theme="light"]):not(#k):not(#j) body.skin p.note{padding-left:16p
 html:not([data-theme="light"]):not(#k):not(#j) body.skin .sum li.ok{background:var(--fill)!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin :is(#copyquote,#proposalpdf){background:var(--fill)!important;color:var(--ink)!important;border-color:var(--sep)!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin .sum li.ok{background:transparent!important}
+html:not([data-theme="light"]):not(#k):not(#j) body.skin .bs :is(button:first-child,.bv){background:var(--fill)!important;color:var(--ink)!important}
+html:not([data-theme="light"]):not(#k):not(#j) body.skin .bs .bv *{color:var(--ink)!important}
+html:not([data-theme="light"]):not(#k):not(#j) body.skin .bs .bv{border-color:transparent!important}
 }
 html[data-theme="dark"]:not(#k):not(#j) body.skin{--pg:#1F1E1F;--card:#2B292A;--fill:#363435;--sep:#3D3B3C;--ink:#F1EEDB;--mute:#A9A493;--black:#141314;--onb:#fff;color-scheme:dark;background:var(--pg)!important;color:var(--ink)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin :is(.sbl img,header img,.logo img,img.logo,.brand img,#top img){filter:invert(1) sepia(.15) brightness(1.05)!important}
@@ -3016,6 +3066,9 @@ html[data-theme="dark"]:not(#k):not(#j) body.skin p.note{padding-left:16px!impor
 html[data-theme="dark"]:not(#k):not(#j) body.skin .sum li.ok{background:var(--fill)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin :is(#copyquote,#proposalpdf){background:var(--fill)!important;color:var(--ink)!important;border-color:var(--sep)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin .sum li.ok{background:transparent!important}
+html[data-theme="dark"]:not(#k):not(#j) body.skin .bs :is(button:first-child,.bv){background:var(--fill)!important;color:var(--ink)!important}
+html[data-theme="dark"]:not(#k):not(#j) body.skin .bs .bv *{color:var(--ink)!important}
+html[data-theme="dark"]:not(#k):not(#j) body.skin .bs .bv{border-color:transparent!important}
 </style>
 </head>
 <body class="skin">

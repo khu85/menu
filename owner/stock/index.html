@@ -3126,6 +3126,53 @@ html[data-page="stock"] body.skin #nav .tab[data-nav="inv"]{--ic:url("data:image
 html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .colh .cs i,html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .kfl>.orow.kfa .st .sv,html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .kfl>.orow.kfa .st .sv b{text-align:center!important}
 html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t) body.skin section.kfinv :is(.kfl>.orow.kfa .st,.colh .cs){gap:0!important;column-gap:0!important}
 @media (min-width:761px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s) body.skin section.kfinv :is(.kfl>.orow.kfa .st .sv,.colh .cs i){width:112px!important;margin:0!important;padding:0!important;box-sizing:border-box}}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s) body.skin :is(section.kfadd,section.kfend,section.kflog) :is(.colh .cs i,.kfl>.orow.kfa .st .sv,.kfl>.orow.kfa .st .sv b,.kfl>.orow.kfa .st .sv i){text-align:center!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r) body.skin section:has(>.colh) :is(.colh .cs i,.orow .st .sv,.orow .st .sv b){text-align:center!important}
+/* stock Added: phone number line, storage note + recount button */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfadd .kfl>.orow.kfa .sub .pn{display:none}
+@media (max-width:760px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfadd .kfl>.orow.kfa .sub .pn{display:inline}}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin .note.snote{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin .note.snote .srec{flex:none;border:0;border-radius:12px;background:var(--card,#fff);color:var(--ink);font:inherit;font-weight:600;font-size:14px;padding:10px 16px;min-height:44px;cursor:pointer;box-shadow:0 0 0 1px var(--line,rgba(0,0,0,.08)) inset}
+@media (min-width:761px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r) body.skin :is(section.kfadd,section.kflog) .kfl>.orow.kfa .st{width:auto!important;flex:none!important;grid-template-columns:none!important;display:flex!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r) body.skin :is(section.kfadd,section.kflog) :is(.kfl>.orow.kfa .st .sv,.colh .cs i){width:112px!important;flex:none!important;min-width:0!important;margin:0!important;padding:0 4px!important;box-sizing:border-box}}
+/* stepper focus ring: only for keyboard focus, drawn outside the box so the green + keeps its shape */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin :is(.step,.ctl):focus-within{box-shadow:none!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin :is(.step,.ctl):has(:focus-visible){box-shadow:none!important;outline:2px solid var(--brand)!important;outline-offset:3px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin :is(.step,.ctl):has(input:focus){outline:2px solid var(--brand)!important;outline-offset:3px!important}
+/* desktop/iPad nav: inset from the screen edge */
+@media (min-width:1100px){
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o):not(#n) body.skin{--sbw:92px}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o):not(#n) body.skin .sb{width:92px!important;padding-left:16px!important;box-sizing:border-box!important}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o):not(#n) body.skin .thp{left:22px!important}
+}
+/* recipe batch stepper: keep the − readable when it is at 1 (just dimmer) */
+html:not(#k):not(#j):not(#x):not(#w):not(#v) body.skin .bs button:disabled{opacity:1!important;color:var(--mute)!important;cursor:default}
+html:not(#k):not(#j):not(#x):not(#w):not(#v) body.skin .bs .bv{border-radius:14px!important}
+
+/* nav alert badge: a circle, not a square */
+html:not(#k):not(#j):not(#i):not(#h):not(#g):not(#f):not(#e):not(#d):not(#c):not(#b):not(#a):not(#z) body.skin :is(.sb,.bnav,#nav,.drawer) .nbd{border-radius:999px!important;min-width:20px!important;height:20px!important;padding:0 4px!important;box-sizing:border-box!important;line-height:16px!important;text-align:center!important}
+
+/* boxes under the storage number on Inventory */
+body.skin section.kfinv .sv .bxs{display:block;font-size:12px;font-weight:600;color:var(--mute,#6f6c68);margin-top:2px;text-align:center}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q) body.skin section.kfinv .kfl>.orow.kfa .st .sv{position:relative!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q) body.skin section.kfinv .sv .bxs{position:absolute!important;left:0!important;right:0!important;top:100%!important;width:100%!important;margin:1px 0 0!important;padding:0!important;text-align:center!important;white-space:nowrap}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q) body.skin section.kfinv .orow.inv:has(.bxs){padding-bottom:26px!important}
+
+/* Inventory: the unit line sits under the item name, not under the dot */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p) body.skin section.kfinv .orow.inv .l .sub{padding-left:18px!important}
+
+/* names that wrap hang under the first letter, not under the dot */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p) body.skin .kfl>.orow:not(.kend) .l>.on{padding-left:18px!important;text-indent:-18px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p) body.skin .kfl>.orow:not(.kend) .l>.sub{padding-left:18px!important}
+
+/* every list row: name hangs after the dot, sub line under the name; Bring from storage count is bold green */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orlist>.orow:not(.kend) .l>.on{padding-left:18px!important;text-indent:-18px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orlist>.orow:not(.kend) .l>.sub{padding-left:18px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orlist>.orow .l>.sub .sn{color:var(--brand,#005949)!important;font-weight:800!important}
+
+/* low stock list on the owner Home card */
+html:not(#k):not(#j):not(#x) body.skin .olist.lowlist{margin:0 0 14px}
+html:not(#k):not(#j):not(#x) body.skin .olist.lowlist li b{color:var(--red)!important;font-weight:700;font-size:.9em;text-align:right;white-space:normal}
 
 @media (prefers-color-scheme:dark){
 html:not([data-theme="light"]):not(#k):not(#j) body.skin{--pg:#1F1E1F;--card:#2B292A;--fill:#363435;--sep:#3D3B3C;--ink:#F1EEDB;--mute:#A9A493;--black:#141314;--onb:#fff;color-scheme:dark;background:var(--pg)!important;color:var(--ink)!important}
@@ -3193,6 +3240,9 @@ html:not([data-theme="light"]):not(#k):not(#j) body.skin p.note{padding-left:16p
 html:not([data-theme="light"]):not(#k):not(#j) body.skin .sum li.ok{background:var(--fill)!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin :is(#copyquote,#proposalpdf){background:var(--fill)!important;color:var(--ink)!important;border-color:var(--sep)!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin .sum li.ok{background:transparent!important}
+html:not([data-theme="light"]):not(#k):not(#j) body.skin .bs :is(button:first-child,.bv){background:var(--fill)!important;color:var(--ink)!important}
+html:not([data-theme="light"]):not(#k):not(#j) body.skin .bs .bv *{color:var(--ink)!important}
+html:not([data-theme="light"]):not(#k):not(#j) body.skin .bs .bv{border-color:transparent!important}
 }
 html[data-theme="dark"]:not(#k):not(#j) body.skin{--pg:#1F1E1F;--card:#2B292A;--fill:#363435;--sep:#3D3B3C;--ink:#F1EEDB;--mute:#A9A493;--black:#141314;--onb:#fff;color-scheme:dark;background:var(--pg)!important;color:var(--ink)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin :is(.sbl img,header img,.logo img,img.logo,.brand img,#top img){filter:invert(1) sepia(.15) brightness(1.05)!important}
@@ -3259,6 +3309,9 @@ html[data-theme="dark"]:not(#k):not(#j) body.skin p.note{padding-left:16px!impor
 html[data-theme="dark"]:not(#k):not(#j) body.skin .sum li.ok{background:var(--fill)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin :is(#copyquote,#proposalpdf){background:var(--fill)!important;color:var(--ink)!important;border-color:var(--sep)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin .sum li.ok{background:transparent!important}
+html[data-theme="dark"]:not(#k):not(#j) body.skin .bs :is(button:first-child,.bv){background:var(--fill)!important;color:var(--ink)!important}
+html[data-theme="dark"]:not(#k):not(#j) body.skin .bs .bv *{color:var(--ink)!important}
+html[data-theme="dark"]:not(#k):not(#j) body.skin .bs .bv{border-color:transparent!important}
 </style>
 </head>
 <body class="skin">
@@ -3277,7 +3330,7 @@ var HAS_API=/^https:\/\/script\.google\.com\//.test(API);
 var KEY="kinhfolk-stock-v2";
 
 var AVG=4;
-var S={orders:[],storage:{},addMode:"cafe",sdrafts:{},items:[],weeks:[],cur:null,drafts:{},queue:[],seq:0,nav:"added",sec:"",viewId:"",cache:{},usage:{},basis:"week",hist:"weeks",rv:"week",viewMonth:"",edrafts:{},edw:"",lowSel:"",lowOpen:false,lowAdd:null};
+var S={orders:[],storage:{},addMode:"cafe",sdrafts:{},sadds:{},recount:false,items:[],weeks:[],cur:null,drafts:{},queue:[],seq:0,nav:"added",sec:"",viewId:"",cache:{},usage:{},basis:"week",hist:"weeks",rv:"week",viewMonth:"",edrafts:{},edw:"",lowSel:"",lowOpen:false,lowAdd:null};
 try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&typeof p==="object"){for(var k0 in S)if(p[k0]!==undefined)S[k0]=p[k0]}}}catch(e){}
 S.viewId="";S.viewMonth="";
 var WANTLOW=(location.hash||"")==="#low";(function(){var h=(location.hash||"").slice(1);if(["added","ending","report","order","edit","history"].indexOf(h)>=0)S.nav=h;if(h==="history"){S.nav="report";S.rv="past"}})();
@@ -3292,19 +3345,31 @@ function nmb(t){t=esc(t);return t.replace(/^(Marou -) /,'$1 <span class="mbr"></
 function keyOf(it){return it.section+" / "+(it.rawItem||it.item)}
 function stepOf(it){return it&&/syrup/i.test(it.item)?0.25:1}
 /* Cups and lids come by the box but are counted by the sleeve: Added and Storage use boxes, Ending stays in sleeves. */
-function bxOf(it){return it&&it.perBox>0&&/sleeve/i.test(it.unit||"")?it.perBox:1}
+function bxOf(it){return it&&it.perBox>0&&(/sleeve/i.test(it.unit||"")||(/^(bag|pack)$/i.test(it.unit||"")&&/^cups$/i.test(it.section||"")))?it.perBox:1}
+function bxWord(it,pl){var u=/sleeve/i.test(it.unit||"")?"sleeve":String(it.unit||"sleeve").toLowerCase();return u+(pl?"s":"")}
 function bxKey(k){return bxOf(itemByKey(k))}
 /* Syrups made in-house: what adding them takes out of storage (sugar, pandan leaves). Counts shortfalls in ingShort. */
 var ingShort=0;function ingText(){return""}
 function itemByKey(k){for(var i=0;i<S.items.length;i++)if(keyOf(S.items[i])===k)return S.items[i];return null}
 var GRP={"beans + matcha":"Coffee + Matcha","milk + juices":"Milks","syrups + garnish":"Syrups","cups":"Cups","dry goods":"Cups","cleaning":"Supplies","paper goods":"Supplies"};
-function grp(it){if(it.gr)return it.gr;var k=String(it.section||"").toLowerCase();return GRP[k]||it.section}
+function grp(it){if(it.gr)return it.gr;var k=String(it.section||"").toLowerCase();
+ if(k==="cups"||k==="supplies"||k==="cleaning"||k==="paper goods"||k==="dry goods"){var n=String(it.rawItem||it.item||"").toLowerCase();
+  if(/^(straws?|napkins?|stirs?|drink carriers?|paper towels?|c.?fold|toilet paper)/.test(n))return "Paper Goods";
+  if(/^(water|sugar packets?)/.test(n))return "Supplies";
+  if(k==="cups")return "Cups";
+  return "Cleaning"}
+ return GRP[k]||it.section}
+function noEnd(it){return grp(it)==="Cleaning"||/^(water|paper towels?|c.?fold|toilet paper)/i.test(String(it.rawItem||it.item||""))}
 function counted(it){return !it.alertOnly&&!it.ingredient}
 function isStor(it){return !!it.storage}
 function storOf(k){return S.storage&&typeof S.storage[k]==='number'?S.storage[k]:0}
-function DR(){return S.addMode==="storage"?S.sdrafts:S.drafts}
-function required(it){return !it.optional&&grp(it)!=="Supplies"}
-function sections(){var o=[],so=false;S.items.forEach(function(it){var g=grp(it);if(counted(it)&&(!so||isStor(it))&&!(g==="Supplies"&&curNav()==="ending")&&o.indexOf(g)<0)o.push(g)});var pr=["Coffee + Matcha","Milks","Syrups","Cups","Supplies","Retail"];return o.sort(function(a,b){var x=pr.indexOf(a),y=pr.indexOf(b);return(x<0?9:x)-(y<0?9:y)})}
+function lowChips(k,al){var cl=(S.cafeLow||{})[k],sl=(S.storageLow||{})[k],h='';if(cl)h+=' <span class="chip bad" title="'+esc(cl)+'">Low in cafe</span>';else if(al)h+=' <span class="chip bad" title="Reported by staff">Low stock</span>';if(sl)h+=' <span class="chip bad" title="'+esc(sl)+'">Low in storage</span>';return h}
+function RC(){return S.addMode==="storage"&&!!S.recount}
+function DR(){return S.addMode==="storage"?(S.recount?S.sdrafts:(S.sadds||(S.sadds={}))):S.drafts}
+function cafeOf(w,it){if(it&&it.ingredient&&!counted(it))return null;var c=calc(w,it);return c.e!==null?c.e:r2(c.b+c.a)}
+function saddOf(w,key){var s=0;(w.storageAdds||[]).forEach(function(a){if(a.key===key)s+=a.qty});return r2(s)}
+function required(it){return !it.optional&&!noEnd(it)}
+function sections(){var o=[],so=false;S.items.forEach(function(it){var g=grp(it);if(counted(it)&&(!so||isStor(it))&&!(noEnd(it)&&curNav()==="ending")&&o.indexOf(g)<0)o.push(g)});var pr=["Coffee + Matcha","Milks","Syrups","Cups","Paper Goods","Supplies","Cleaning","Retail"];return o.sort(function(a,b){var x=pr.indexOf(a),y=pr.indexOf(b);return(x<0?9:x)-(y<0?9:y)})}
 function clockText(iso){var d=new Date(iso);return isNaN(d)?"":d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}
 function dayText(iso){
  if(!iso)return"";
@@ -3359,6 +3424,11 @@ function applyOp(w,op){
   S.orders=S.orders.filter(function(o){return op.ids.indexOf(o.id)<0});
  }else if(op.type==="ordx"){
   S.orders=S.orders.filter(function(o){return o.id!==op.id});
+ }else if(op.type==="sadd"){
+  w.storageAdds=w.storageAdds||[];
+  op.entries.forEach(function(en,i){var id="s"+op.batch+"-"+i;if(!w.storageAdds.some(function(a){return a.id===id}))w.storageAdds.push({id:id,time:op.time,key:en.key,qty:en.qty,note:"Delivery"})});
+ }else if(op.type==="srm"){
+  w.storageAdds=(w.storageAdds||[]).filter(function(a){return a.id!==op.id});
  }else if(op.type==="stor"){
   op.entries.forEach(function(en){S.storage[en.key]=en.count});
  }else if(op.type==="alert"){
@@ -3528,7 +3598,7 @@ function renderBar(){
  document.body.classList.toggle("hasbar",show);
  if(!show)return;
  var slot=$("barslot");if(slot&&$("bar").parentNode!==slot)slot.appendChild($("bar"));
- var msg=isE?(n?(n===1?"1 count typed, not saved yet":n+" counts typed, not saved yet"):"Count each item, then confirm"):(n?(n===1?"1 item typed, not saved yet":n+" items typed, not saved yet"):(S.addMode==="storage"?"Update the storage count, then confirm":"Type what arrived, then confirm"));
+ var msg=isE?(n?(n===1?"1 count typed, not saved yet":n+" counts typed, not saved yet"):"Count each item, then confirm"):(n?(n===1?"1 item typed, not saved yet":n+" items typed, not saved yet"):(RC()?"Update the storage count, then confirm":S.addMode==="storage"?"Type the delivery going into storage, then confirm":"Type what arrived, then confirm"));
  $("bar").innerHTML='<span class="bi">'+esc(msg)+'</span><button type="button" class="big" aria-label="'+(isE?"Confirm ending count":"Confirm added items")+'" id="'+(isE?"confirmend":"confirmadd")+'"'+(n?"":" disabled")+'>'+"Confirm"+'</button>';
 }
 var _rv=renderView;renderView=function(){_rv.apply(this,arguments);var sl=$("barslot"),bb=$("bar");if(sl&&bb&&bb.parentNode!==sl)sl.appendChild(bb)};
@@ -3559,35 +3629,36 @@ function renderView(){
 
 /* Added */
 function addedHtml(){
- var w=S.cur,sec=curSec(),h="",anyS=S.items.some(isStor),sm=anyS&&S.addMode==="storage";
+ var w=S.cur,sec=curSec(),h="",anyS=S.items.some(isStor),sm=anyS&&S.addMode==="storage",rc=sm&&!!S.recount;
  if(anyS)h+='<div class="seg" role="group" aria-label="Where is it going"><button type="button" data-amode="cafe" aria-pressed="'+(!sm)+'">Cafe</button><button type="button" data-amode="storage" aria-pressed="'+sm+'">Storage</button></div>';
- if(sm)h+='<p class="note">Type the number now in storage. Tap + when a delivery arrives.</p>';
+ if(sm)h+='<div class="note snote"><span>'+esc(rc?"Type the number now in storage, then confirm.":"Type what arrived for storage, then confirm. It is added on top of what is already there.")+'</span><button type="button" class="srec" id="srec">'+esc(rc?"Back to adding":"Recount storage")+'</button></div>';
  if(!sm)h+=bringHtml();
  var nrows=0;if(editable()&&S.cur&&!sm&&rows(S.cur).some(function(r){return r.e!==null})){var ul=uncounted(S.cur);h='<div class="donebar"><span>'+(ul===0?'Ending count is complete for '+esc(S.cur.label)+'.':ul+(ul===1?' item has':' items have')+' no ending count yet.')+' Start the new week to reset what was added.</span><button type="button" class="big green" id="startnew">Start new week</button></div>'+h}
- var acc="",nn=0;
+ var acc="",nn=0,dr=DR();
  S.items.forEach(function(it){
   if(!(counted(it)||sm&&it.ingredient))return;
   if(sm&&!isStor(it)||grp(it)!==sec)return;nrows++;nn++;
-  var k=keyOf(it),bx=bxOf(it),a=addedOf(w,k),d=sm?(S.sdrafts[k]!==undefined?S.sdrafts[k]:storOf(k)):S.drafts[k],has=sm?S.sdrafts[k]!==undefined:!!d,st=isStor(it)?storOf(k):null,u=bx>1?"box":(it.unit||""),al=alertFor(w,k),slow=st!==null&&!!(S.storageLow||{})[k];var B=function(v){return v===null||v===undefined?v:r2(v/bx)};
-  var sub=[];if(bx>1)sub.push("box of "+fmt(bx)+" sleeves");else{if(u)sub.push(u);if(it.meas)sub.push(it.meas);if(it.perBox)sub.push(fmt(it.perBox)+" per box")}if(!sm&&st!==null)sub.push(fmt(B(st))+" in storage");if(!sm&&a)sub.push("Added "+fmt(B(a)));
-  acc+='<div class="orow kfa row add'+(al||slow?' kbad':(!sm&&a?' kok':''))+'"><div class="l"><div class="on">'+nmb(it.item)+(al?' <span class="chip bad">Low stock</span>':(slow?' <span class="chip bad" title="'+esc(S.storageLow[k])+'">Low in storage</span>':''))+'</div><div class="sub">'+esc(sub.join(" · "))+'</div></div>'+
-   '<div class="st">'+stat(u||"–","Unit")+stat(st!==null?fmt(B(st)):"","Storage")+stat(sm?"":(a?fmt(B(a)):"–"),"Added",a||sm?"":"nil")+'</div><div class="r">'+
+  var k=keyOf(it),bx=bxOf(it),a=sm?saddOf(w,k):addedOf(w,k),cf=cafeOf(w,it),d=rc?(S.sdrafts[k]!==undefined?S.sdrafts[k]:storOf(k)):dr[k],has=rc?S.sdrafts[k]!==undefined:!!d,st=isStor(it)?storOf(k):null,u=bx>1?"box":(it.unit||""),al=alertFor(w,k),slow=!!(S.storageLow||{})[k]||!!(S.cafeLow||{})[k];var B=function(v){return v===null||v===undefined?v:r2(v/bx)};
+  var sub=[];if(bx>1)sub.push("box of "+fmt(bx)+" "+bxWord(it,true));else{if(u)sub.push(u);if(it.meas)sub.push(it.meas);if(it.perBox)sub.push(fmt(it.perBox)+" per box")}
+  var nums=[];if(cf!==null)nums.push("Cafe "+fmt(B(cf)));if(st!==null)nums.push("Storage "+fmt(B(st)));if(!rc&&a)nums.push("Added "+fmt(B(a)));
+  acc+='<div class="orow kfa row add'+(al||slow?' kbad':(!rc&&a?' kok':''))+'"><div class="l"><div class="on">'+nmb(it.item)+lowChips(k,al)+'</div><div class="sub">'+esc(sub.join(" · "))+(nums.length?'<span class="pn"> · '+esc(nums.join(" · "))+'</span>':'')+'</div></div>'+
+   '<div class="st">'+stat(u||"–","Unit")+stat(cf!==null?fmt(B(cf)):"–","Cafe",cf!==null?"":"nil")+stat(st!==null?fmt(B(st)):"–","Storage",st!==null?"":"nil")+(rc?"":stat(a?fmt(B(a)):"–","Added",a?"":"nil"))+'</div><div class="r">'+
    '<div class="step"><button type="button" class="stp" data-step="'+(-stepOf(it)*bx)+'" data-key="'+esc(k)+'" aria-label="'+esc((bx>1?"One box less ":stepOf(it)<1?"A quarter less ":"One less ")+it.item)+'">−</button>'+
-   '<label class="cin'+(has?" has":"")+'"><span class="sr">'+esc((sm?"In storage now: ":(st!==null?"Brought from storage: ":"Arrived now: "))+it.item)+'</span><input type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" autocorrect="off" spellcheck="false" data-draft="'+esc(k)+'" value="'+(d?esc(fmt(B(d))):(sm&&has?"0":""))+'" placeholder="0"></label>'+
+   '<label class="cin'+(has?" has":"")+'"><span class="sr">'+esc((rc?"In storage now: ":sm?"Into storage now: ":(st!==null?"Brought from storage: ":"Arrived now: "))+it.item)+'</span><input type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" autocorrect="off" spellcheck="false" data-draft="'+esc(k)+'" value="'+(d?esc(fmt(B(d))):(rc&&has?"0":""))+'" placeholder="0"></label>'+
    '<button type="button" class="stp plus" data-step="'+stepOf(it)*bx+'" data-key="'+esc(k)+'" aria-label="'+esc((bx>1?"One box more ":stepOf(it)<1?"A quarter more ":"One more ")+it.item)+'">+</button>'+'</div></div></div>';
  });
- h+='<section class="kfadd"><h2 class="h"><span>'+(sm?"Count storage":"Add to cafe")+'</span><span class="vsum">'+nn+'</span></h2>'+(nn?colh(["Unit","Storage",sm?"":"Added"],sm?"In storage now":"Add now"):"")+'<div class="orlist kfl">'+acc+'</div>';
+ h+='<section class="kfadd'+(rc?' kfrc':'')+'"><h2 class="h"><span>'+(rc?"Recount storage":sm?"Add to storage":"Add to cafe")+'</span><span class="vsum">'+nn+'</span></h2>'+(nn?colh(rc?["Unit","Cafe","Storage"]:["Unit","Cafe","Storage","Added"],rc?"In storage now":"Add now"):"")+'<div class="orlist kfl">'+acc+'</div>';
  if(sm&&!nrows)h+='<p class="empty">Nothing is kept in storage for this section.</p>';
- var nl=(w.additions||[]).length;
+ var nl=(w.additions||[]).length+(w.storageAdds||[]).length;
  return h+'<div id="barslot"></div></section><section class="kflog"><h2 class="h"><span>Added this week</span><span class="vsum">'+nl+'</span></h2>'+logHtml(w,true)+'</section>';
 }
 function logHtml(w,canRemove){
- var l=(w.additions||[]).slice().sort(function(a,b){return String(b.time).localeCompare(String(a.time))});
+ var l=(w.additions||[]).map(function(a){return{a:a,s:0}}).concat((w.storageAdds||[]).map(function(a){return{a:a,s:1}})).sort(function(x,y){return String(y.a.time).localeCompare(String(x.a.time))});
  if(!l.length)return'<p class="empty">Nothing added yet this week.</p>';
- var h=colh(["Unit","Date","Added"],"")+'<div class="orlist kfl">';
- l.forEach(function(a){
-  var it=itemByKey(a.key),bq=bxOf(it),u=bq>1?"box":(it&&it.unit?it.unit:""),q=(a.qty<0?"−":"")+fmt(r2(Math.abs(a.qty)/bq)),nm=it?it.item:a.key;
-  h+='<div class="orow kfa kfrow'+(a.qty<0?' kneg':'')+'"><div class="l"><div class="on">'+esc(nm)+(a.note?' <span class="u">('+esc(a.note)+')</span>':'')+'</div><div class="sub">'+esc((u?u+" · ":"")+dayText(a.time))+'</div></div><div class="st">'+stat(u||"–","Unit")+stat(dayText(a.time),"Date","dt")+stat(q,"Added")+'</div><div class="r"><span class="kq">'+esc(q)+'</span>'+(canRemove&&editable()?'<button type="button" class="kx" data-rm="'+esc(a.id)+'" aria-label="'+esc("Remove "+nm+" "+fmt(a.qty))+'"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>':'')+'</div></div>';
+ var h=colh(["Unit","Added to","Date","Added"],"")+'<div class="orlist kfl">';
+ l.forEach(function(x){
+  var a=x.a,it=itemByKey(a.key),bq=bxOf(it),u=bq>1?"box":(it&&it.unit?it.unit:""),q=(a.qty<0?"−":"")+fmt(r2(Math.abs(a.qty)/bq)),nm=it?it.item:a.key,to=x.s?"Storage":"Cafe",nt=/^(from storage|delivery)$/i.test(a.note||"")?"":a.note;
+  h+='<div class="orow kfa kfrow'+(a.qty<0?' kneg':'')+'"><div class="l"><div class="on">'+esc(nm)+(nt?' <span class="u">('+esc(nt)+')</span>':'')+'</div><div class="sub">'+esc((u?u+" · ":"")+to+" · "+dayText(a.time))+'</div></div><div class="st">'+stat(u||"–","Unit")+stat(to,"Added to","to")+stat(dayText(a.time),"Date","dt")+stat(q,"Added")+'</div><div class="r"><span class="kq">'+esc(q)+'</span>'+(canRemove&&editable()?'<button type="button" class="kx" '+(x.s?'data-srm':'data-rm')+'="'+esc(a.id)+'" aria-label="'+esc("Remove "+nm+" "+fmt(a.qty)+" added to "+to.toLowerCase())+'"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>':'')+'</div></div>';
  });
  return h+'</div>';
 }
@@ -3627,14 +3698,14 @@ function invHtml(){
   if(!by[g]){by[g]=[];secs.push(g)}by[g].push({it:it,k:k,bx:bx,cafe:cafe,est:est,st:st,all:all,hasS:isStor(it),so:storOnly});tot++;
  });
  var h='<p class="note">'+esc("Cafe is the latest ending count (or begin + added until counted). Storage is what is in the back.")+'</p>';
+ var PR=["Coffee + Matcha","Milks","Syrups","Cups","Paper Goods","Supplies","Cleaning","Retail"];secs.sort(function(a,b){var x=PR.indexOf(a),y=PR.indexOf(b);return(x<0?9:x)-(y<0?9:y)});
  secs.forEach(function(g){
   var acc="";by[g].forEach(function(r){
-   var it=r.it,u=r.bx>1?"sleeve":(it.unit||""),sub=[];
-   if(r.bx>1&&r.hasS)sub.push(fmt(r2(r.st/r.bx))+" boxes in storage");
-   else if(it.perBox&&r.hasS)sub.push(fmt(r2(r.st/it.perBox))+" boxes in storage");
-   var low=r.hasS&&!!(S.storageLow||{})[r.k];
-   acc+='<div class="orow kfa row inv'+(low?' kbad':'')+'"><div class="l"><div class="on">'+nmb(it.item)+(low?' <span class="chip bad">Low in storage</span>':'')+'</div><div class="sub"><span class="pu">'+esc(u)+(sub.length?" \u00B7 ":"")+'</span>'+esc(sub.join(" \u00B7 "))+'</div></div>'+
-    '<div class="st">'+stat(u||"\u2013","Unit")+stat(r.so?"\u2013":fmt(r.cafe),"Cafe")+stat(r.hasS?fmt(r.st):"\u2013","Storage")+stat(fmt(r.all),"Total")+'</div></div>';
+   var it=r.it,u=r.bx>1?bxWord(it,false):(it.unit||""),sub=[];
+   var pb=r.bx>1?r.bx:(it.perBox||0),bxt=(pb>1&&r.hasS)?fmt(r2(r.st/pb))+(r2(r.st/pb)===1?" box":" boxes"):"";
+   var low=!!(S.storageLow||{})[r.k]||!!(S.cafeLow||{})[r.k];
+   acc+='<div class="orow kfa row inv'+(low?' kbad':'')+'"><div class="l"><div class="on">'+nmb(it.item)+lowChips(r.k,false)+'</div><div class="sub"><span class="pu">'+esc(u)+(sub.length?" \u00B7 ":"")+'</span>'+esc(sub.join(" \u00B7 "))+'</div></div>'+
+    '<div class="st">'+stat(u||"\u2013","Unit")+stat(r.so?"\u2013":fmt(r.cafe),"Cafe")+stat(r.hasS?fmt(r.st):"\u2013","Storage").replace("</span>",(bxt?'<small class="bxs">'+esc(bxt)+'</small>':"")+"</span>")+stat(fmt(r.all),"Total")+'</div></div>';
   });
   h+='<section class="kfadd kfinv"><h2 class="h"><span>'+esc(g)+'</span><span class="vsum">'+by[g].length+'</span></h2>'+colh(["Unit","Cafe","Storage","Total"],"")+'<div class="orlist kfl">'+acc+'</div></section>';
  });
@@ -3644,7 +3715,7 @@ function endingHtml(){
  var w=S.cur,sec=curSec(),total=S.items.filter(function(x){return counted(x)&&required(x)}).length,left=uncounted(w);
  var h='<div class="endhd"><p class="note">'+esc((total-left)+" of "+total+" counted")+'</p>'+((total-left)>0?'<button type="button" class="linkb" id="togdone">'+(S.showDone?"Hide counted":"Show counted")+'</button>':'')+'</div>',acc="",shown=0;
  S.items.forEach(function(it,i){
-  if(!counted(it)||grp(it)!==sec||grp(it)==="Supplies")return;
+  if(!counted(it)||grp(it)!==sec||noEnd(it))return;
   var c=calc(w,it),k=keyOf(it),d=S.edrafts[k],val=d!==undefined?d:c.e,u=it.unit||"",tot=r2(c.b+c.a);
   if(c.e!==null&&d===undefined&&!S.showDone)return;shown++;
   var sub=[];if(u)sub.push(u);sub.push("Begin "+fmt(r2(c.b))+" + Added "+fmt(r2(c.a))+" = "+fmt(tot));if(it.perBox)sub.push(fmt(it.perBox)+" per box");if(it.note)sub.push(it.note);
@@ -3846,7 +3917,7 @@ function onOrderHtml(){
 function bringHtml(){
  var b=bringRows(wk());if(!b.length)return"";
  var h='<section><h2 class="h"><span>Bring from storage</span><span class="vsum">'+b.length+'</span></h2>'+colh(["Cafe","Storage","Uses / wk"],"Bring")+'<div class="orlist">';
- b.forEach(function(x){var it=x.r.it,bx=bxOf(it),stT=bx>1?fmt(r2(x.st/bx))+(r2(x.st/bx)===1?" box":" boxes"):fmt(x.st),qT=bx>1?(function(n){return n+(n===1?" box":" boxes")})(Math.max(1,Math.ceil(x.qty/bx-1e-9))):fmt(x.qty);h+='<div class="orow"><div class="l"><div class="on">'+nmb(it.item)+'</div><div class="sub">Cafe '+esc(fmt(x.r.e))+(bx>1?" sleeves":"")+' \u00B7 Storage '+esc(stT)+'</div></div><div class="st">'+stat(fmt(x.r.e),"Cafe")+stat(stT,"Storage")+stat(fmt(r2(x.typ)),"Uses / wk")+'</div><div class="r"><div class="q">'+esc(qT)+'</div></div></div>'});
+ b.forEach(function(x){var it=x.r.it,bx=bxOf(it),stT=bx>1?fmt(r2(x.st/bx))+(r2(x.st/bx)===1?" box":" boxes"):fmt(x.st),qT=bx>1?(function(n){return n+(n===1?" box":" boxes")})(Math.max(1,Math.ceil(x.qty/bx-1e-9))):fmt(x.qty);h+='<div class="orow"><div class="l"><div class="on">'+nmb(it.item)+'</div><div class="sub">Cafe <b class="sn">'+esc(fmt(x.r.e))+(bx>1?" sleeves":"")+'</b> \u00B7 Storage <b class="sn">'+esc(stT)+'</b></div></div><div class="st">'+stat(fmt(x.r.e),"Cafe")+stat(stT,"Storage")+stat(fmt(r2(x.typ)),"Uses / wk")+'</div><div class="r"><div class="q">'+esc(qT)+'</div></div></div>'});
  return h+'</div></section>';
 }
 function orderHtml(){
@@ -4096,9 +4167,9 @@ $("main").addEventListener("input",function(e){
  if(inp.dataset&&inp.dataset.draft!==undefined){
   var n=cleanNum(inp);
   var dr=DR(),dk=inp.dataset.draft;if(n!==null)n=Math.min(99999,r2(n*bxKey(dk)));
-  if(S.addMode==="storage"){if(n===null||n===storOf(dk))delete dr[dk];else dr[dk]=n}
+  if(RC()){if(n===null||n===storOf(dk))delete dr[dk];else dr[dk]=n}
   else if(n===null||n<=0)delete dr[dk];else dr[dk]=n;
-  inp.parentNode.className="cin"+(dr[dk]!==undefined&&(S.addMode==="storage"||dr[dk])?" has":"");
+  inp.parentNode.className="cin"+(dr[dk]!==undefined&&(RC()||dr[dk])?" has":"");
   persist();renderNav();renderBar();
  }else if(inp.dataset&&inp.dataset.ekey!==undefined){
   var it2=itemByKey(inp.dataset.ekey),c2=cleanNum(inp);
@@ -4110,6 +4181,18 @@ $("main").addEventListener("input",function(e){
 });
 $("main").addEventListener("click",function(e){
  var t=e.target;
+ var srec=t.closest("#srec");
+ if(srec){S.recount=!S.recount;persist();renderAll();var sb=$("srec");if(sb)sb.focus();return}
+ var srm=t.closest("button[data-srm]");
+ if(srm){
+  var sid=srm.dataset.srm,sa=null;(S.cur.storageAdds||[]).forEach(function(x){if(x.id===sid)sa=x});
+  var sit=sa&&itemByKey(sa.key);
+  ask("Remove this entry?",(sit?sit.item:"Item")+": +"+(sa?fmt(sa.qty):"")+(sit&&sit.unit?" "+sit.unit:"")+" from storage","Remove","red",function(){
+   var op={type:"srm",week:S.cur.id,id:sid};if(sa)S.storage[sa.key]=Math.max(0,r2(storOf(sa.key)-sa.qty));applyOp(S.cur,op);enqueue(op);renderAll();
+   showNotice("\u2713 Entry removed",false,5000);
+  },srm);
+  return;
+ }
  var rm=t.closest("button[data-rm]");
  if(rm){
   var id=rm.dataset.rm,a=null;S.cur.additions.forEach(function(x){if(x.id===id)a=x});
@@ -4183,7 +4266,7 @@ $("main").addEventListener("click",function(e){
   paintEnd(S.items.indexOf(itE));persist();renderNav();renderBar();return;
  }
  if(sp){
-  var key=sp.dataset.key,dr2=DR(),sm2=S.addMode==="storage",cur0=sm2?(dr2[key]!==undefined?dr2[key]:storOf(key)):(dr2[key]||0),nx=Math.max(0,r2(cur0+(+sp.dataset.step)));
+  var key=sp.dataset.key,dr2=DR(),sm2=RC(),cur0=sm2?(dr2[key]!==undefined?dr2[key]:storOf(key)):(dr2[key]||0),nx=Math.max(0,r2(cur0+(+sp.dataset.step)));
   if(sm2){if(nx===storOf(key))delete dr2[key];else dr2[key]=Math.min(99999,nx)}
   else if(nx<=0)delete dr2[key];else dr2[key]=Math.min(99999,nx);
   var shown=sm2?nx:dr2[key],on2=sm2?dr2[key]!==undefined:!!dr2[key];
@@ -4224,7 +4307,7 @@ $("main").addEventListener("click",function(e){
   return;
  }
  var am=t.closest("button[data-amode]");
- if(am){S.addMode=am.dataset.amode==="storage"?"storage":"cafe";persist();renderAll();var na=document.querySelector('#view [data-amode="'+S.addMode+'"]');if(na)na.focus();return}
+ if(am){S.addMode=am.dataset.amode==="storage"?"storage":"cafe";S.recount=false;persist();renderAll();var na=document.querySelector('#view [data-amode="'+S.addMode+'"]');if(na)na.focus();return}
  var bs=t.closest("button[data-basis]");
  if(bs){S.basis=bs.dataset.basis==="month"?"month":"week";persist();renderAll();var nb=document.querySelector('#view [data-basis="'+S.basis+'"]');if(nb)nb.focus();return}
  if(t.closest("#usageall")){S.usageAll=!S.usageAll;renderView();return}
@@ -4272,6 +4355,17 @@ $("bar").addEventListener("click",function(e){
   return;
  }
  if(!e.target.closest("#confirmadd"))return;
+ if(S.addMode==="storage"&&!S.recount){
+  var ak=Object.keys(S.sadds||{});if(!ak.length)return;
+  var al2=ak.map(function(k){var it=itemByKey(k),b=bxOf(it),q=S.sadds[k];return(it?it.item:k)+"|+"+(b>1?fmt(r2(q/b))+(r2(q/b)===1?" box":" boxes"):fmt(q)+(it&&it.unit?" "+it.unit:""))+" into storage"});
+  ask("Add to storage?","These are added on top of what is in storage now.","Save","green",function(){
+   var en=ak.map(function(k){return{key:k,qty:S.sadds[k]}});
+   var op={type:"sadd",week:S.cur.id,batch:"b"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),entries:en,time:new Date().toISOString()};
+   S.sadds={};applyOp(S.cur,op);en.forEach(function(x){S.storage[x.key]=r2(storOf(x.key)+x.qty)});enqueue(op);renderAll();
+   showNotice("\u2713 Added "+en.length+(en.length===1?" item":" items")+" to storage",false,6000);
+  },$("confirmadd"),al2);
+  return;
+ }
  if(S.addMode==="storage"){
   var sk=Object.keys(S.sdrafts);if(!sk.length)return;
   var sl=sk.map(function(k){var it=itemByKey(k),b=bxOf(it);return(it?it.item:k)+"|"+(b>1?fmt(r2(S.sdrafts[k]/b))+" boxes":fmt(S.sdrafts[k]))+" in storage"});
@@ -4363,6 +4457,8 @@ function bodyFor(op){
  if(op.type==="end")return{action:"setEnding",week:op.week,key:op.key,count:op.count};
  if(op.type==="begin")return{action:"setBeginning",week:op.week,key:op.key,count:op.count};
  if(op.type==="stor")return{action:"setStorage",entries:op.entries};
+ if(op.type==="sadd")return{action:"addStorage",week:op.week,batch:op.batch,entries:op.entries};
+ if(op.type==="srm")return{action:"removeStorageAdd",week:op.week,id:op.id};
  if(op.type==="ord")return{action:"placeOrder",batch:op.batch,vendor:op.vendor,ordered:op.ordered,entries:op.entries};
  if(op.type==="recv")return{action:"receiveOrder",week:op.week,ids:op.ids};
  if(op.type==="ordx")return{action:"cancelOrder",id:op.id};
@@ -4416,7 +4512,7 @@ async function loadRemote(force){
    var d=await fetchJson(API+(S.viewId&&!S.cache[S.viewId]?"?week="+encodeURIComponent(S.viewId):""));
    if(!d||!d.ok||!Array.isArray(d.items))throw new Error("bad response");
    var before=JSON.stringify([S.items,S.weeks,S.cur,S.usage]);
-   S.items=d.items;S.items.forEach(function(it){if(!it.rawItem)it.rawItem=it.item;it.item=it.rawItem.replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters").replace(/ - single origin$/i," - VSO").replace(/ - medium$/i,"");if(it.vendor)it.vendor=it.vendor.replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters");if(/^retail$/i.test(it.section)&&/^C\u00e0ph\u00ea Roasters/.test(it.item))it.item+=" (Retail)";it.item=it.item.replace(/\s*\(Retail Bag\)$/i," (Retail)");if(/^retail$/i.test(it.section)&&/^Marou\s+(?!-)/i.test(it.item))it.item=it.item.replace(/^Marou\s+/i,"Marou - ");if(/^each$/i.test(it.unit||""))it.unit="ea";if(/^(straws?|napkins?|sugar packets?|stirs?|drink carriers?)\b/i.test(it.rawItem||it.item)){it.gr="Supplies";it.item=it.item.replace(/^Sugar Packets/i,"Sugar Packs")}if(/syrup/i.test(it.item)&&/^500\s*ml$/i.test(it.unit||""))it.unit="550g bottle"; var mm=String(it.unit||"").match(/^([\d.]+\s*(?:g|kg|oz|lb|ml|l))\s+(\S.*)$/i);if(mm){it.meas=mm[1].replace(/\s+/g,"");it.unit=mm[2]}else{mm=String(it.unit||"").match(/^(.*?)\s*\((\d+)\)$/);if(mm&&mm[1]){it.meas=mm[2]+" ct";it.unit=mm[1]}}});S.weeks=d.weeks||[];S.usage=d.usage||{};S.storage=d.storage||{};S.storageLow=d.storageLow||{};S.orders=d.orders||[];
+   S.items=d.items;S.items.forEach(function(it){if(!it.rawItem)it.rawItem=it.item;it.item=it.rawItem.replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters").replace(/ - single origin$/i," - VSO").replace(/ - medium$/i,"").replace(/^grinds$/i,"Grindz");if(it.vendor)it.vendor=it.vendor.replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters");if(/^retail$/i.test(it.section)&&/^C\u00e0ph\u00ea Roasters/.test(it.item))it.item+=" (Retail)";it.item=it.item.replace(/\s*\(Retail Bag\)$/i," (Retail)");if(/^retail$/i.test(it.section)&&/^Marou\s+(?!-)/i.test(it.item))it.item=it.item.replace(/^Marou\s+/i,"Marou - ");if(/^(straws?|napkins?|sugar packets?|stirs?|drink carriers?)\b/i.test(it.rawItem||it.item)){it.item=it.item.replace(/^Sugar Packets/i,"Sugar Packs")}if(/syrup/i.test(it.item)&&/^500\s*ml$/i.test(it.unit||""))it.unit="550g bottle"; var mm=String(it.unit||"").match(/^([\d.]+\s*(?:g|kg|oz|lb|ml|l))\s+(\S.*)$/i);if(mm){it.meas=mm[1].replace(/\s+/g,"");it.unit=mm[2]}else{mm=String(it.unit||"").match(/^(.*?)\s*\((\d+)\)$/);if(mm&&mm[1]){it.meas=mm[2]+" ct";it.unit=mm[1]}}});S.weeks=d.weeks||[];S.usage=d.usage||{};S.storage=d.storage||{};S.storageLow=d.storageLow||{};S.cafeLow=d.cafeLow||{};S.orders=d.orders||[];
    S.cur=d.current?rebase(d.current):null;
    if(S.cur&&S.edw!==S.cur.id){S.edrafts={};S.edw=S.cur.id}
    if(d.week)S.cache[d.week.id]=rebase(d.week);
@@ -4452,7 +4548,7 @@ async function closeWeek(auto){
   if(d&&d.ok){
    await loadRemote(true);
    var dd=await fetchJson(API+"?week="+encodeURIComponent(id));
-   if(dd&&dd.week){S.cache[id]=rebase(dd.week);if(auto){S.viewId=null;S.nav="added";S.drafts={};S.sdrafts={};S.edrafts={}}else{S.viewId=id;S.nav="report"}persist()}
+   if(dd&&dd.week){S.cache[id]=rebase(dd.week);if(auto){S.viewId=null;S.nav="added";S.drafts={};S.sdrafts={};S.sadds={};S.edrafts={}}else{S.viewId=id;S.nav="report"}persist()}
    renderAll();window.scrollTo(0,0);
    var dm=d.discord==="sent"?" Order list sent to Discord.":(d.discord==="not_set"?" Discord isn\u2019t set up yet.":(d.discord?" Discord problem: "+String(d.discord).replace(/^error: /,""):""));
    showNotice("\u2713 Week closed"+(auto?" and next week started":"")+". Total COGS "+money(d.total)+"."+dm,!!(d.discord&&d.discord!=="sent"&&d.discord!=="not_set"),14000);

@@ -2912,6 +2912,53 @@ html[data-page="stock"] body.skin #nav .tab[data-nav="inv"]{--ic:url("data:image
 html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .colh .cs i,html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .kfl>.orow.kfa .st .sv,html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfinv .kfl>.orow.kfa .st .sv b{text-align:center!important}
 html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t) body.skin section.kfinv :is(.kfl>.orow.kfa .st,.colh .cs){gap:0!important;column-gap:0!important}
 @media (min-width:761px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s) body.skin section.kfinv :is(.kfl>.orow.kfa .st .sv,.colh .cs i){width:112px!important;margin:0!important;padding:0!important;box-sizing:border-box}}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s) body.skin :is(section.kfadd,section.kfend,section.kflog) :is(.colh .cs i,.kfl>.orow.kfa .st .sv,.kfl>.orow.kfa .st .sv b,.kfl>.orow.kfa .st .sv i){text-align:center!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r) body.skin section:has(>.colh) :is(.colh .cs i,.orow .st .sv,.orow .st .sv b){text-align:center!important}
+/* stock Added: phone number line, storage note + recount button */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfadd .kfl>.orow.kfa .sub .pn{display:none}
+@media (max-width:760px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin section.kfadd .kfl>.orow.kfa .sub .pn{display:inline}}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin .note.snote{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin .note.snote .srec{flex:none;border:0;border-radius:12px;background:var(--card,#fff);color:var(--ink);font:inherit;font-weight:600;font-size:14px;padding:10px 16px;min-height:44px;cursor:pointer;box-shadow:0 0 0 1px var(--line,rgba(0,0,0,.08)) inset}
+@media (min-width:761px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r) body.skin :is(section.kfadd,section.kflog) .kfl>.orow.kfa .st{width:auto!important;flex:none!important;grid-template-columns:none!important;display:flex!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r) body.skin :is(section.kfadd,section.kflog) :is(.kfl>.orow.kfa .st .sv,.colh .cs i){width:112px!important;flex:none!important;min-width:0!important;margin:0!important;padding:0 4px!important;box-sizing:border-box}}
+/* stepper focus ring: only for keyboard focus, drawn outside the box so the green + keeps its shape */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin :is(.step,.ctl):focus-within{box-shadow:none!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin :is(.step,.ctl):has(:focus-visible){box-shadow:none!important;outline:2px solid var(--brand)!important;outline-offset:3px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u) body.skin :is(.step,.ctl):has(input:focus){outline:2px solid var(--brand)!important;outline-offset:3px!important}
+/* desktop/iPad nav: inset from the screen edge */
+@media (min-width:1100px){
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o):not(#n) body.skin{--sbw:92px}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o):not(#n) body.skin .sb{width:92px!important;padding-left:16px!important;box-sizing:border-box!important}
+html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o):not(#n) body.skin .thp{left:22px!important}
+}
+/* recipe batch stepper: keep the − readable when it is at 1 (just dimmer) */
+html:not(#k):not(#j):not(#x):not(#w):not(#v) body.skin .bs button:disabled{opacity:1!important;color:var(--mute)!important;cursor:default}
+html:not(#k):not(#j):not(#x):not(#w):not(#v) body.skin .bs .bv{border-radius:14px!important}
+
+/* nav alert badge: a circle, not a square */
+html:not(#k):not(#j):not(#i):not(#h):not(#g):not(#f):not(#e):not(#d):not(#c):not(#b):not(#a):not(#z) body.skin :is(.sb,.bnav,#nav,.drawer) .nbd{border-radius:999px!important;min-width:20px!important;height:20px!important;padding:0 4px!important;box-sizing:border-box!important;line-height:16px!important;text-align:center!important}
+
+/* boxes under the storage number on Inventory */
+body.skin section.kfinv .sv .bxs{display:block;font-size:12px;font-weight:600;color:var(--mute,#6f6c68);margin-top:2px;text-align:center}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q) body.skin section.kfinv .kfl>.orow.kfa .st .sv{position:relative!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q) body.skin section.kfinv .sv .bxs{position:absolute!important;left:0!important;right:0!important;top:100%!important;width:100%!important;margin:1px 0 0!important;padding:0!important;text-align:center!important;white-space:nowrap}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q) body.skin section.kfinv .orow.inv:has(.bxs){padding-bottom:26px!important}
+
+/* Inventory: the unit line sits under the item name, not under the dot */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p) body.skin section.kfinv .orow.inv .l .sub{padding-left:18px!important}
+
+/* names that wrap hang under the first letter, not under the dot */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p) body.skin .kfl>.orow:not(.kend) .l>.on{padding-left:18px!important;text-indent:-18px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p) body.skin .kfl>.orow:not(.kend) .l>.sub{padding-left:18px!important}
+
+/* every list row: name hangs after the dot, sub line under the name; Bring from storage count is bold green */
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orlist>.orow:not(.kend) .l>.on{padding-left:18px!important;text-indent:-18px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orlist>.orow:not(.kend) .l>.sub{padding-left:18px!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orlist>.orow .l>.sub .sn{color:var(--brand,#005949)!important;font-weight:800!important}
+
+/* low stock list on the owner Home card */
+html:not(#k):not(#j):not(#x) body.skin .olist.lowlist{margin:0 0 14px}
+html:not(#k):not(#j):not(#x) body.skin .olist.lowlist li b{color:var(--red)!important;font-weight:700;font-size:.9em;text-align:right;white-space:normal}
 
 @media (prefers-color-scheme:dark){
 html:not([data-theme="light"]):not(#k):not(#j) body.skin{--pg:#1F1E1F;--card:#2B292A;--fill:#363435;--sep:#3D3B3C;--ink:#F1EEDB;--mute:#A9A493;--black:#141314;--onb:#fff;color-scheme:dark;background:var(--pg)!important;color:var(--ink)!important}
@@ -2979,6 +3026,9 @@ html:not([data-theme="light"]):not(#k):not(#j) body.skin p.note{padding-left:16p
 html:not([data-theme="light"]):not(#k):not(#j) body.skin .sum li.ok{background:var(--fill)!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin :is(#copyquote,#proposalpdf){background:var(--fill)!important;color:var(--ink)!important;border-color:var(--sep)!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin .sum li.ok{background:transparent!important}
+html:not([data-theme="light"]):not(#k):not(#j) body.skin .bs :is(button:first-child,.bv){background:var(--fill)!important;color:var(--ink)!important}
+html:not([data-theme="light"]):not(#k):not(#j) body.skin .bs .bv *{color:var(--ink)!important}
+html:not([data-theme="light"]):not(#k):not(#j) body.skin .bs .bv{border-color:transparent!important}
 }
 html[data-theme="dark"]:not(#k):not(#j) body.skin{--pg:#1F1E1F;--card:#2B292A;--fill:#363435;--sep:#3D3B3C;--ink:#F1EEDB;--mute:#A9A493;--black:#141314;--onb:#fff;color-scheme:dark;background:var(--pg)!important;color:var(--ink)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin :is(.sbl img,header img,.logo img,img.logo,.brand img,#top img){filter:invert(1) sepia(.15) brightness(1.05)!important}
@@ -3045,6 +3095,9 @@ html[data-theme="dark"]:not(#k):not(#j) body.skin p.note{padding-left:16px!impor
 html[data-theme="dark"]:not(#k):not(#j) body.skin .sum li.ok{background:var(--fill)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin :is(#copyquote,#proposalpdf){background:var(--fill)!important;color:var(--ink)!important;border-color:var(--sep)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin .sum li.ok{background:transparent!important}
+html[data-theme="dark"]:not(#k):not(#j) body.skin .bs :is(button:first-child,.bv){background:var(--fill)!important;color:var(--ink)!important}
+html[data-theme="dark"]:not(#k):not(#j) body.skin .bs .bv *{color:var(--ink)!important}
+html[data-theme="dark"]:not(#k):not(#j) body.skin .bs .bv{border-color:transparent!important}
 </style>
 </head>
 <body class="skin">
@@ -3064,7 +3117,7 @@ html[data-theme="dark"]:not(#k):not(#j) body.skin .sum li.ok{background:transpar
 /* ---- Settings ---- */
 var API="https://script.google.com/macros/s/AKfycbyKx4I_lpEZcIfX0zFrp7OQPWjc7MVRj6XirZ5m9GfRj-Y0XcqU9v1kZVFKj2XLzoNq/exec";
 var KEY="kinhfolk-prepcheck-v1";
-var GROUPS=["Cream Tops","Milk Bases","Syrups","Coffee","Other"];
+var GROUPS=["Coffee","Cream Tops","Milk Bases","Other","Syrups"];
 function I(n,g,u){return{n:n,g:g,u:u||""}}
 var ITEMS=[
  I("Sea Salt Cream Top","Cream Tops"),
@@ -3086,7 +3139,8 @@ var ITEMS=[
  I("Phin Brewed","Coffee"),
  I("Cold Brew","Coffee"),
  I("Drip","Coffee"),
- I("Condensed Milk","Other","containers")
+ I("Condensed Milk","Other","bottles"),
+ I("Matcha","Other","")
 ];
 /* What is in the prep list the first time the page opens on a tablet. */
 var DEFAULT_ON=["Sea Salt Cream Top","Pandan Coconut Cloud","Pandan Coconut Milk","Earl Grey Syrup","Pho Spice Syrup","Pandan Syrup"];
@@ -3105,6 +3159,9 @@ if(!S.cfg||!S.cfg.on||!S.cfg.t){
  DEFAULT_ON.forEach(function(n){S.cfg.on[n]=true});
  for(var k in DEFAULT_TARGETS)S.cfg.t[k]=DEFAULT_TARGETS[k];
 }
+/* One time: switch on Matcha and Condensed Milk on tablets that already have a saved list. */
+function mig(){if(S.cfg.on.__m1)return false;S.cfg.on.__m1=true;S.cfg.on["Matcha"]=true;S.cfg.on["Condensed Milk"]=true;return true}
+mig();
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 function q(v){v=Number(v);return isFinite(v)?Math.min(999,Math.max(0,Math.round(v*4)/4)):0}
 function fq(n){var w=Math.floor(n+1e-9),r=Math.round((n-w)*4)/4,f={0.25:"\u00BC",0.5:"\u00BD",0.75:"\u00BE"}[r];if(r>=1){w++;f=""}return f?(w?w:"")+f:""+w}
@@ -3135,7 +3192,10 @@ function renderBar(){
  }});
 }
 function applyFC(j){FC=j.today||{};FCW=(j.weather&&j.weather.today)||null;FCB=(j.basis&&j.basis.today)||null;FCN=+j.nudge||0;renderBar();if(!setupOpen){renderCount();paintAll()}}
-function tgt(it){var f=FC[it.n];if(f&&f.t>=0.25)return q(f.t);var v=Number(S.cfg.t[it.n]);return v>=0.25?q(v):null}
+/* Matcha is counted in grams (tins are 100 g or 250 g), kept as 50 g steps. */
+var MULT={"Matcha":50};function mul(it){return MULT[it.n]||1}function stp(it){return MULT[it.n]?1:0.25}
+function fqI(it,n){return MULT[it.n]?Math.round(n*MULT[it.n])+" g":fq(n)}
+function tgt(it){var f=FC[it.n];if(f&&f.t>=0.25)return MULT[it.n]?Math.ceil(f.t-1e-9):q(f.t);var v=Number(S.cfg.t[it.n]);return v>=0.25?q(v):null}
 function loadForecast(){if(!FC_API||!navigator.onLine)return;fetch(FC_API+(FC_API.indexOf("?")<0?"?":"&")+"action=prep").then(function(r){return r.json()}).then(function(j){if(j&&j.ok&&j.today)applyFC(j)}).catch(function(){})}
 
 /* ---- Elements ---- */
@@ -3163,14 +3223,14 @@ function recipeUrl(it){
 }
 function recipeLink(it,i){
  var u=recipeUrl(it);
- return u?'<a class="rl"'+(i===undefined?'':' id="rl'+i+'"')+' href="'+u+'" target="_blank" rel="noopener" aria-label="'+esc("Recipe for "+dn(it.n)+" (opens in a new tab)")+'">'+esc("Recipe")+'</a>':"";
+ return u?'<a class="rl"'+(i===undefined?'':' id="rl'+i+'"')+' href="'+u+'" aria-label="'+esc("Recipe for "+dn(it.n))+'">'+esc("Recipe")+'</a>':"";
 }
 var DISP={"Phin Brewed":"Phin brewed coffee"};
 function dn(n){return DISP[n]||n}
 function nameLink(it){return esc(dn(it.n))}
 function iconLink(it,i){
  var u=recipeUrl(it);
- return (u?'<a class="rl ri"'+(i===undefined?'':' id="rl'+i+'"')+' href="'+u+'" target="_blank" rel="noopener" aria-label="'+esc("Recipe for "+dn(it.n)+" (opens in a new tab)")+'" title="Recipe"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M9 7h6"/></svg></a>':"");
+ return (u?'<a class="rl ri"'+(i===undefined?'':' id="rl'+i+'"')+' href="'+u+'" aria-label="'+esc("Recipe for "+dn(it.n))+'" title="Recipe"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 1h13v-3M9 7h6"/></svg></a>':"");
 }
 function renderSummary(){
  var el=$("summary");
@@ -3189,7 +3249,7 @@ function renderSummary(){
   h+='<ul>';
   more.concat(low).sort(function(x,y){return x.pc-y.pc||x.it.n.localeCompare(y.it.n)}).forEach(function(r){
    var cl=r.pc>=71?"ok":(r.pc>=41?"low":"more");
-   h+='<li class="'+cl+'"><span class="sn">'+nameLink(r.it)+'</span><span class="sd">'+esc("Need "+fq(r.need)+" more")+'</span></li>';
+   h+='<li class="'+cl+'"><span class="sn">'+nameLink(r.it)+'</span><span class="sd">'+esc("Need "+fqI(r.it,r.need)+" more")+'</span></li>';
   });
   h+='</ul>';
  }
@@ -3198,17 +3258,17 @@ function renderSummary(){
 }
 function targetText(it){
  var t=tgt(it);
- if(t===null)return"";
+ if(t===null)return it.n==="Condensed Milk"?"Bottled up on Thursdays":"";
  var u=unitFor(it,t);
  var f=FC[it.n];
- return"Target "+fq(t)+(u?" "+u:"")+(f?" \u00B7 "+(f.limited?"limited by bottles":(typeof f.lw==="number"||typeof f.pd==="number")?[typeof f.lw==="number"?"last "+(FCB?FCB.group:"week")+" "+fq(f.lw):"",typeof f.pd==="number"?(FCB&&FCB.prior?dname(FCB.prior.d):"day before")+" "+fq(f.pd):""].filter(Boolean).join(" \u00B7 "):"avg "+fq(f.avg)):"");
+ return"Target "+fqI(it,t)+(u?" "+u:"")+(f&&f.wk?" \u00B7 bottle-up for the week":f?" \u00B7 "+(f.limited?"limited by bottles":(typeof f.lw==="number"||typeof f.pd==="number")?[typeof f.lw==="number"?"last "+(FCB?FCB.group:"week")+" "+fqI(it,f.lw):"",typeof f.pd==="number"?(FCB&&FCB.prior?dname(FCB.prior.d):"day before")+" "+fqI(it,f.pd):""].filter(Boolean).join(" \u00B7 "):"avg "+fqI(it,f.avg)):"");
 }
 function sentC(t){t=String(t||"").trim();return t.charAt(0).toUpperCase()+t.slice(1)}
 function drinksHtml(){
  var B=FCB,g=B?"Last "+B.group:"Last week",pd=B&&B.prior&&B.prior.d?dname(B.prior.d):"Day before",blocks="";
  function nv(v){return v===null||v===undefined?"–":Math.round(v)}
  ITEMS.forEach(function(it){
-  if(!isOn(it)||(it.g!=="Cream Tops"&&it.g!=="Milk Bases"&&it.g!=="Coffee"))return;var f=FC[it.n];if(!f||!f.drinks||!f.drinks.length)return;
+  if(!isOn(it)||(it.g!=="Cream Tops"&&it.g!=="Milk Bases"&&it.g!=="Coffee"&&it.n!=="Matcha"))return;var f=FC[it.n];if(!f||!f.drinks||!f.drinks.length)return;
   var tl=null,tp=null;f.drinks.forEach(function(d){if(d.lw!==null)tl=(tl||0)+d.lw;if(d.pd!==null)tp=(tp||0)+d.pd});
   var cnt=f.drinks.length+(f.drinks.length===1?" drink":" drinks");
   blocks+='<details class="dgrp"><summary aria-label="'+esc(dn(it.n)+", "+cnt+". "+g+": "+nv(tl)+" a day. "+pd+": "+nv(tp)+". Show drinks")+'"><span class="dn"><span class="dsn">'+esc(dn(it.n))+'</span><span class="dcn">'+esc(cnt)+'</span></span><b class="dv">'+nv(tl)+'</b><b class="dv">'+nv(tp)+'</b><svg class="dchev" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><ul class="dlist">'+f.drinks.map(function(d){
@@ -3216,7 +3276,7 @@ function drinksHtml(){
    return'<li><span class="dn">'+esc(nm)+tag+'</span><b class="dv" aria-label="'+esc(g+": "+(d.lw===null?"none":d.lw)+" a day")+'">'+nv(d.lw)+'</b><b class="dv" aria-label="'+esc(pd+": "+(d.pd===null?"none":d.pd))+'">'+nv(d.pd)+'</b><span></span></li>'}).join("")+'</ul></details>';
  });
  if(!blocks)return"";
- return'<section class="drk" aria-labelledby="drkh"><h2 id="drkh">'+esc("Drinks sold")+'</h2><p class="dsub">'+esc("Drinks that use each cream top, milk base and coffee. "+g+" is the average a day. Tap an item to see its drinks.")+'</p><div class="dhd" aria-hidden="true"><span></span><i>'+esc(g)+'</i><i>'+esc(pd)+'</i><span></span></div>'+blocks+'</section>';
+ return'<section class="drk" aria-labelledby="drkh"><h2 id="drkh">'+esc("Drinks sold")+'</h2><p class="dsub">'+esc("Drinks that use each cream top, milk base, coffee and matcha. "+g+" is the average a day. Tap an item to see its drinks.")+'</p><div class="dhd" aria-hidden="true"><span></span><i>'+esc(g)+'</i><i>'+esc(pd)+'</i><span></span></div>'+blocks+'</section>';
 }
 function renderCount(){
  var html="",any=false;
@@ -3227,9 +3287,9 @@ function renderCount(){
    any=true;
    rows+='<li class="row"><div class="nmbox none" id="nb'+i+'"><div class="nmt"><div class="nm">'+nameLink(it)+'</div><div class="tg"><span id="t'+i+'">'+esc(targetText(it))+'</span><span class="chip none" id="s'+i+'"></span></div></div>'+iconLink(it,i)+'</div>'+
     '<div class="ctl" role="group" aria-label="'+esc(dn(it.n))+'">'+
-    '<button type="button" data-act="-0.25" data-i="'+i+'" aria-label="'+esc("Decrease "+it.n+" by one quarter")+'">\u2212</button>'+
+    '<button type="button" data-act="'+(-stp(it))+'" data-i="'+i+'" aria-label="'+esc("Decrease "+it.n+(MULT[it.n]?" by 50 grams":" by one quarter"))+'">\u2212</button>'+
     '<div class="ct" id="c'+i+'" aria-live="polite">0</div>'+
-    '<button type="button" data-act="0.25" data-i="'+i+'" aria-label="'+esc("Increase "+it.n+" by one quarter")+'">+</button></div>'+
+    '<button type="button" data-act="'+stp(it)+'" data-i="'+i+'" aria-label="'+esc("Increase "+it.n+(MULT[it.n]?" by 50 grams":" by one quarter"))+'">+</button></div>'+
     '</li>';
   });
   if(rows)html+='<section><h2>'+esc(g)+'</h2><ul class="list">'+rows+'</ul></section>';
@@ -3252,10 +3312,11 @@ function paintRow(i){
  var s=$("s"+i);
  if(!s)return;
  var it=ITEMS[i],c=count(it.n),st=statusOf(c,tgt(it));
- $("c"+i).textContent=fq(c);
+ $("c"+i).textContent=fqI(it,c);
  s.className="chip "+st.cls;
  s.innerHTML='<span aria-hidden="true">'+st.ic+'</span><span>'+esc(st.word)+'</span>';
  s.style.display=st.cls==="none"?"":"none";
+ if(it.n==="Condensed Milk"&&tgt(it)===null)s.style.display="none";
  $("nb"+i).className="nmbox "+st.cls;
  var rl=$("rl"+i);if(rl)rl.href=recipeUrl(it);
 }
@@ -3271,9 +3332,9 @@ function renderSetup(){
    var on=isOn(it),t=tgt(it);
    cells+='<div class="pc"><button type="button" data-sel="'+i+'" aria-pressed="'+on+'">'+esc(dn(it.n))+'</button>'+
     (on?'<div class="tm" role="group" aria-label="'+esc("Target for "+it.n)+'">'+
-     '<button type="button" data-tstep="-0.25" data-i="'+i+'" aria-label="'+esc("Lower target for "+it.n+" by one quarter")+'">\u2212</button>'+
-     '<input id="ti'+i+'" data-tin="'+i+'" type="number" inputmode="decimal" min="0.25" max="999" step="0.25" placeholder="\u2013" aria-label="'+esc("Target for "+it.n)+'" value="'+(t===null?"":t)+'">'+
-     '<button type="button" data-tstep="0.25" data-i="'+i+'" aria-label="'+esc("Raise target for "+it.n+" by one quarter")+'">+</button></div>'
+     '<button type="button" data-tstep="'+(-stp(it))+'" data-i="'+i+'" aria-label="'+esc("Lower target for "+it.n+(MULT[it.n]?" by 50 grams":" by one quarter"))+'">\u2212</button>'+
+     '<input id="ti'+i+'" data-tin="'+i+'" type="number" inputmode="decimal" min="'+(MULT[it.n]?50:0.25)+'" max="'+(MULT[it.n]?49950:999)+'" step="'+(MULT[it.n]?50:0.25)+'" placeholder="\u2013" aria-label="'+esc("Target for "+it.n+(MULT[it.n]?" in grams":""))+'" value="'+(t===null?"":t*mul(it))+'">'+
+     '<button type="button" data-tstep="'+stp(it)+'" data-i="'+i+'" aria-label="'+esc("Raise target for "+it.n+(MULT[it.n]?" by 50 grams":" by one quarter"))+'">+</button></div>'
      :'<div class="tm ph" aria-hidden="true"></div>')+'</div>';
   });
   html+='<section><h2>'+esc(g)+'</h2><div class="pick">'+cells+'</div></section>';
@@ -3314,22 +3375,22 @@ function stepTarget(i,d){
  commitInputs();
  var cur=tgt(ITEMS[i]);
  if(cur===null&&d<0)return false;
- var nt=Math.min(999,Math.max(0.25,(cur||0)+d));
+ var nt=Math.min(999,Math.max(stp(ITEMS[i]),(cur||0)+d));
  if(nt===cur)return false;
  S.cfg.t[ITEMS[i].n]=nt;persist();enqueueSettings();
- var inp=$("ti"+i);if(inp)inp.value=nt;
+ var inp=$("ti"+i);if(inp)inp.value=nt*mul(ITEMS[i]);
  return true;
 }
 wireHold($("setup"),"button[data-tstep]",function(b){return stepTarget(+b.dataset.i,+b.dataset.tstep)});
 function applyInput(inp,fix){
- var it=ITEMS[+inp.dataset.tin],raw=inp.value.trim(),v=q(parseFloat(raw)),old=S.cfg.t[it.n];
- if(raw===""||v<0.25){
+ var it=ITEMS[+inp.dataset.tin],raw=inp.value.trim(),v=MULT[it.n]?Math.ceil(parseFloat(raw)/MULT[it.n]-1e-9):q(parseFloat(raw)),old=S.cfg.t[it.n];
+ if(raw===""||!(v>=0.25)){
   if(old!==undefined){delete S.cfg.t[it.n];persist();enqueueSettings()}
   if(fix)inp.value="";
   return;
  }
  if(old!==v){S.cfg.t[it.n]=v;persist();enqueueSettings()}
- if(fix)inp.value=v;
+ if(fix)inp.value=v*mul(it);
 }
 function commitInputs(){
  var list=document.querySelectorAll("#setup input[data-tin]");
@@ -3459,6 +3520,7 @@ async function loadRemote(){
    else if(!pending&&!setupOpen){
     var before=JSON.stringify(S.cfg);
     S.cfg={on:d.settings.on||{},t:d.settings.t||{}};
+    if(mig())enqueueSettings();
     cfgChanged=before!==JSON.stringify(S.cfg);
    }
   }
