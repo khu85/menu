@@ -2930,6 +2930,15 @@ html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not
 /* low stock list on the owner Home card */
 html:not(#k):not(#j):not(#x) body.skin .olist.lowlist{margin:0 0 14px}
 html:not(#k):not(#j):not(#x) body.skin .olist.lowlist li b{color:var(--red)!important;font-weight:700;font-size:.9em;text-align:right;white-space:normal}
+@media (min-width:761px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.on .chip{margin-left:10px!important;vertical-align:middle}}
+
+/* low chips: beside the name on iPad/desktop, under the unit line on iPhone */
+body.skin .orow .l>.chm{display:none}
+@media (max-width:760px){
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.on .chd{display:none!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.chm{display:flex!important;flex-wrap:wrap;gap:4px;padding-left:18px;margin-top:4px}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.chm .chip{margin:0!important}
+}
 
 @media (prefers-color-scheme:dark){
 html:not([data-theme="light"]):not(#k):not(#j) body.skin{--pg:#1F1E1F;--card:#2B292A;--fill:#363435;--sep:#3D3B3C;--ink:#F1EEDB;--mute:#A9A493;--black:#141314;--onb:#fff;color-scheme:dark;background:var(--pg)!important;color:var(--ink)!important}

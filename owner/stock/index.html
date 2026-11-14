@@ -3173,6 +3173,15 @@ html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not
 /* low stock list on the owner Home card */
 html:not(#k):not(#j):not(#x) body.skin .olist.lowlist{margin:0 0 14px}
 html:not(#k):not(#j):not(#x) body.skin .olist.lowlist li b{color:var(--red)!important;font-weight:700;font-size:.9em;text-align:right;white-space:normal}
+@media (min-width:761px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.on .chip{margin-left:10px!important;vertical-align:middle}}
+
+/* low chips: beside the name on iPad/desktop, under the unit line on iPhone */
+body.skin .orow .l>.chm{display:none}
+@media (max-width:760px){
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.on .chd{display:none!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.chm{display:flex!important;flex-wrap:wrap;gap:4px;padding-left:18px;margin-top:4px}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.chm .chip{margin:0!important}
+}
 
 @media (prefers-color-scheme:dark){
 html:not([data-theme="light"]):not(#k):not(#j) body.skin{--pg:#1F1E1F;--card:#2B292A;--fill:#363435;--sep:#3D3B3C;--ink:#F1EEDB;--mute:#A9A493;--black:#141314;--onb:#fff;color-scheme:dark;background:var(--pg)!important;color:var(--ink)!important}
@@ -3343,7 +3352,7 @@ function fmt(n){return String(Math.round(n*1000)/1000)}
 function money(n){return"$"+Number(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}
 function nmb(t){t=esc(t);return t.replace(/^(Marou -) /,'$1 <span class="mbr"></span>')}
 function keyOf(it){return it.section+" / "+(it.rawItem||it.item)}
-function stepOf(it){return it&&/syrup/i.test(it.item)?0.25:1}
+function stepOf(it){return it&&(/syrup/i.test(it.item)||/^kg$/i.test(it.unit||"")||/asahina/i.test(it.item))?0.25:1}
 /* Cups and lids come by the box but are counted by the sleeve: Added and Storage use boxes, Ending stays in sleeves. */
 function bxOf(it){return it&&it.perBox>0&&(/sleeve/i.test(it.unit||"")||(/^(bag|pack)$/i.test(it.unit||"")&&/^cups$/i.test(it.section||"")))?it.perBox:1}
 function bxWord(it,pl){var u=/sleeve/i.test(it.unit||"")?"sleeve":String(it.unit||"sleeve").toLowerCase();return u+(pl?"s":"")}
@@ -3353,6 +3362,7 @@ var ingShort=0;function ingText(){return""}
 function itemByKey(k){for(var i=0;i<S.items.length;i++)if(keyOf(S.items[i])===k)return S.items[i];return null}
 var GRP={"beans + matcha":"Coffee + Matcha","milk + juices":"Milks","syrups + garnish":"Syrups","cups":"Cups","dry goods":"Cups","cleaning":"Supplies","paper goods":"Supplies"};
 function grp(it){if(it.gr)return it.gr;var k=String(it.section||"").toLowerCase();
+ if(/^(lychee|pandan leaves?|sugar)(\b|$)/i.test(String(it.rawItem||it.item||""))&&!/packet|pack/i.test(String(it.rawItem||it.item||"")))return "Ingredients";
  if(k==="cups"||k==="supplies"||k==="cleaning"||k==="paper goods"||k==="dry goods"){var n=String(it.rawItem||it.item||"").toLowerCase();
   if(/^(straws?|napkins?|stirs?|drink carriers?|paper towels?|c.?fold|toilet paper)/.test(n))return "Paper Goods";
   if(/^(water|sugar packets?)/.test(n))return "Supplies";
@@ -3369,7 +3379,7 @@ function DR(){return S.addMode==="storage"?(S.recount?S.sdrafts:(S.sadds||(S.sad
 function cafeOf(w,it){if(it&&it.ingredient&&!counted(it))return null;var c=calc(w,it);return c.e!==null?c.e:r2(c.b+c.a)}
 function saddOf(w,key){var s=0;(w.storageAdds||[]).forEach(function(a){if(a.key===key)s+=a.qty});return r2(s)}
 function required(it){return !it.optional&&!noEnd(it)}
-function sections(){var o=[],so=false;S.items.forEach(function(it){var g=grp(it);if(counted(it)&&(!so||isStor(it))&&!(noEnd(it)&&curNav()==="ending")&&o.indexOf(g)<0)o.push(g)});var pr=["Coffee + Matcha","Milks","Syrups","Cups","Paper Goods","Supplies","Cleaning","Retail"];return o.sort(function(a,b){var x=pr.indexOf(a),y=pr.indexOf(b);return(x<0?9:x)-(y<0?9:y)})}
+function sections(){var o=[],so=false;S.items.forEach(function(it){var g=grp(it);if(counted(it)&&(!so||isStor(it))&&true&&o.indexOf(g)<0)o.push(g)});var pr=["Coffee + Matcha","Milks","Syrups","Ingredients","Cups","Paper Goods","Supplies","Cleaning","Retail"];return o.sort(function(a,b){var x=pr.indexOf(a),y=pr.indexOf(b);return(x<0?9:x)-(y<0?9:y)})}
 function clockText(iso){var d=new Date(iso);return isNaN(d)?"":d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}
 function dayText(iso){
  if(!iso)return"";
@@ -3475,7 +3485,7 @@ function kfDefaults(it){
  var d={lead:7,shelf:0,cycle:0};
  if(/milk \+ juices|milk \+ juice/.test(s)){d.lead=2;d.shelf=/can|bottle/.test(u)&&!/water/.test(n)?0:10}
  else if(/syrup/.test(s)){d.lead=3;d.shelf=/can|bottle/.test(u)&&!/syrup/.test(n)?0:30}
- if(/matcha/.test(n))d.lead=10.5;
+ if(/matcha|asahina/.test(n))d.lead=10.5;
  if(/riverphin/.test(n)&&/lb|1 lb/.test(u)){d.lead=3;d.cycle=14}
  return d;
 }
@@ -3641,7 +3651,7 @@ function addedHtml(){
   var k=keyOf(it),bx=bxOf(it),a=sm?saddOf(w,k):addedOf(w,k),cf=cafeOf(w,it),d=rc?(S.sdrafts[k]!==undefined?S.sdrafts[k]:storOf(k)):dr[k],has=rc?S.sdrafts[k]!==undefined:!!d,st=isStor(it)?storOf(k):null,u=bx>1?"box":(it.unit||""),al=alertFor(w,k),slow=!!(S.storageLow||{})[k]||!!(S.cafeLow||{})[k];var B=function(v){return v===null||v===undefined?v:r2(v/bx)};
   var sub=[];if(bx>1)sub.push("box of "+fmt(bx)+" "+bxWord(it,true));else{if(u)sub.push(u);if(it.meas)sub.push(it.meas);if(it.perBox)sub.push(fmt(it.perBox)+" per box")}
   var nums=[];if(cf!==null)nums.push("Cafe "+fmt(B(cf)));if(st!==null)nums.push("Storage "+fmt(B(st)));if(!rc&&a)nums.push("Added "+fmt(B(a)));
-  acc+='<div class="orow kfa row add'+(al||slow?' kbad':(!rc&&a?' kok':''))+'"><div class="l"><div class="on">'+nmb(it.item)+lowChips(k,al)+'</div><div class="sub">'+esc(sub.join(" · "))+(nums.length?'<span class="pn"> · '+esc(nums.join(" · "))+'</span>':'')+'</div></div>'+
+  acc+='<div class="orow kfa row add'+(al||slow?' kbad':(!rc&&a?' kok':''))+'"><div class="l"><div class="on">'+nmb(it.item)+'<span class="chd">'+lowChips(k,al)+'</span></div><div class="sub">'+esc(sub.join(" · "))+(nums.length?'<span class="pn"> · '+esc(nums.join(" · "))+'</span>':'')+'</div>'+(lowChips(k,al)?'<div class="chm">'+lowChips(k,al)+'</div>':'')+'</div>'+
    '<div class="st">'+stat(u||"–","Unit")+stat(cf!==null?fmt(B(cf)):"–","Cafe",cf!==null?"":"nil")+stat(st!==null?fmt(B(st)):"–","Storage",st!==null?"":"nil")+(rc?"":stat(a?fmt(B(a)):"–","Added",a?"":"nil"))+'</div><div class="r">'+
    '<div class="step"><button type="button" class="stp" data-step="'+(-stepOf(it)*bx)+'" data-key="'+esc(k)+'" aria-label="'+esc((bx>1?"One box less ":stepOf(it)<1?"A quarter less ":"One less ")+it.item)+'">−</button>'+
    '<label class="cin'+(has?" has":"")+'"><span class="sr">'+esc((rc?"In storage now: ":sm?"Into storage now: ":(st!==null?"Brought from storage: ":"Arrived now: "))+it.item)+'</span><input type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" autocorrect="off" spellcheck="false" data-draft="'+esc(k)+'" value="'+(d?esc(fmt(B(d))):(rc&&has?"0":""))+'" placeholder="0"></label>'+
@@ -3698,13 +3708,13 @@ function invHtml(){
   if(!by[g]){by[g]=[];secs.push(g)}by[g].push({it:it,k:k,bx:bx,cafe:cafe,est:est,st:st,all:all,hasS:isStor(it),so:storOnly});tot++;
  });
  var h='<p class="note">'+esc("Cafe is the latest ending count (or begin + added until counted). Storage is what is in the back.")+'</p>';
- var PR=["Coffee + Matcha","Milks","Syrups","Cups","Paper Goods","Supplies","Cleaning","Retail"];secs.sort(function(a,b){var x=PR.indexOf(a),y=PR.indexOf(b);return(x<0?9:x)-(y<0?9:y)});
+ var PR=["Coffee + Matcha","Milks","Syrups","Ingredients","Cups","Paper Goods","Supplies","Cleaning","Retail"];secs.sort(function(a,b){var x=PR.indexOf(a),y=PR.indexOf(b);return(x<0?9:x)-(y<0?9:y)});
  secs.forEach(function(g){
   var acc="";by[g].forEach(function(r){
    var it=r.it,u=r.bx>1?bxWord(it,false):(it.unit||""),sub=[];
    var pb=r.bx>1?r.bx:(it.perBox||0),bxt=(pb>1&&r.hasS)?fmt(r2(r.st/pb))+(r2(r.st/pb)===1?" box":" boxes"):"";
    var low=!!(S.storageLow||{})[r.k]||!!(S.cafeLow||{})[r.k];
-   acc+='<div class="orow kfa row inv'+(low?' kbad':'')+'"><div class="l"><div class="on">'+nmb(it.item)+lowChips(r.k,false)+'</div><div class="sub"><span class="pu">'+esc(u)+(sub.length?" \u00B7 ":"")+'</span>'+esc(sub.join(" \u00B7 "))+'</div></div>'+
+   acc+='<div class="orow kfa row inv'+(low?' kbad':'')+'"><div class="l"><div class="on">'+nmb(it.item)+'<span class="chd">'+lowChips(r.k,false)+'</span></div><div class="sub"><span class="pu">'+esc(u)+(sub.length?" \u00B7 ":"")+'</span>'+esc(sub.join(" \u00B7 "))+'</div>'+(lowChips(r.k,false)?'<div class="chm">'+lowChips(r.k,false)+'</div>':'')+'</div>'+
     '<div class="st">'+stat(u||"\u2013","Unit")+stat(r.so?"\u2013":fmt(r.cafe),"Cafe")+stat(r.hasS?fmt(r.st):"\u2013","Storage").replace("</span>",(bxt?'<small class="bxs">'+esc(bxt)+'</small>':"")+"</span>")+stat(fmt(r.all),"Total")+'</div></div>';
   });
   h+='<section class="kfadd kfinv"><h2 class="h"><span>'+esc(g)+'</span><span class="vsum">'+by[g].length+'</span></h2>'+colh(["Unit","Cafe","Storage","Total"],"")+'<div class="orlist kfl">'+acc+'</div></section>';
@@ -3715,7 +3725,7 @@ function endingHtml(){
  var w=S.cur,sec=curSec(),total=S.items.filter(function(x){return counted(x)&&required(x)}).length,left=uncounted(w);
  var h='<div class="endhd"><p class="note">'+esc((total-left)+" of "+total+" counted")+'</p>'+((total-left)>0?'<button type="button" class="linkb" id="togdone">'+(S.showDone?"Hide counted":"Show counted")+'</button>':'')+'</div>',acc="",shown=0;
  S.items.forEach(function(it,i){
-  if(!counted(it)||grp(it)!==sec||noEnd(it))return;
+  if(!counted(it)||grp(it)!==sec)return;
   var c=calc(w,it),k=keyOf(it),d=S.edrafts[k],val=d!==undefined?d:c.e,u=it.unit||"",tot=r2(c.b+c.a);
   if(c.e!==null&&d===undefined&&!S.showDone)return;shown++;
   var sub=[];if(u)sub.push(u);sub.push("Begin "+fmt(r2(c.b))+" + Added "+fmt(r2(c.a))+" = "+fmt(tot));if(it.perBox)sub.push(fmt(it.perBox)+" per box");if(it.note)sub.push(it.note);
@@ -4512,7 +4522,7 @@ async function loadRemote(force){
    var d=await fetchJson(API+(S.viewId&&!S.cache[S.viewId]?"?week="+encodeURIComponent(S.viewId):""));
    if(!d||!d.ok||!Array.isArray(d.items))throw new Error("bad response");
    var before=JSON.stringify([S.items,S.weeks,S.cur,S.usage]);
-   S.items=d.items;S.items.forEach(function(it){if(!it.rawItem)it.rawItem=it.item;it.item=it.rawItem.replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters").replace(/ - single origin$/i," - VSO").replace(/ - medium$/i,"").replace(/^grinds$/i,"Grindz");if(it.vendor)it.vendor=it.vendor.replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters");if(/^retail$/i.test(it.section)&&/^C\u00e0ph\u00ea Roasters/.test(it.item))it.item+=" (Retail)";it.item=it.item.replace(/\s*\(Retail Bag\)$/i," (Retail)");if(/^retail$/i.test(it.section)&&/^Marou\s+(?!-)/i.test(it.item))it.item=it.item.replace(/^Marou\s+/i,"Marou - ");if(/^(straws?|napkins?|sugar packets?|stirs?|drink carriers?)\b/i.test(it.rawItem||it.item)){it.item=it.item.replace(/^Sugar Packets/i,"Sugar Packs")}if(/syrup/i.test(it.item)&&/^500\s*ml$/i.test(it.unit||""))it.unit="550g bottle"; var mm=String(it.unit||"").match(/^([\d.]+\s*(?:g|kg|oz|lb|ml|l))\s+(\S.*)$/i);if(mm){it.meas=mm[1].replace(/\s+/g,"");it.unit=mm[2]}else{mm=String(it.unit||"").match(/^(.*?)\s*\((\d+)\)$/);if(mm&&mm[1]){it.meas=mm[2]+" ct";it.unit=mm[1]}}});S.weeks=d.weeks||[];S.usage=d.usage||{};S.storage=d.storage||{};S.storageLow=d.storageLow||{};S.cafeLow=d.cafeLow||{};S.orders=d.orders||[];
+   S.items=d.items;S.items.forEach(function(it){if(!it.rawItem)it.rawItem=it.item;it.item=it.rawItem.replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters").replace(/ - single origin$/i," - VSO").replace(/ - medium$/i,"").replace(/^grinds$/i,"Grindz").replace(/^lychee \(can\)$/i,"Lychee").replace(/^riverphin countryside$/i,"River Phin - Countryside").replace(/^coconut milk \((chaokoh|arroy d)\)$/i,function(m,b){return "Coconut Milk - "+(b.toLowerCase()==="chaokoh"?"Chaokoh":"Arroy D")});if(it.vendor)it.vendor=it.vendor.replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters");if(/^retail$/i.test(it.section)&&/^C\u00e0ph\u00ea Roasters/.test(it.item))it.item+=" (Retail)";it.item=it.item.replace(/\s*\(Retail Bag\)$/i," (Retail)");if(/^retail$/i.test(it.section)&&/^Marou\s+(?!-)/i.test(it.item))it.item=it.item.replace(/^Marou\s+/i,"Marou - ");if(/^(straws?|napkins?|sugar packets?|stirs?|drink carriers?)\b/i.test(it.rawItem||it.item)){it.item=it.item.replace(/^Sugar Packets/i,"Sugar Packs")}if(/syrup/i.test(it.item)&&/^500\s*ml$/i.test(it.unit||""))it.unit="550g bottle"; var mm=String(it.unit||"").match(/^([\d.]+\s*(?:g|kg|oz|lb|ml|l))\s+(\S.*)$/i);if(mm){it.meas=mm[1].replace(/\s+/g,"");it.unit=mm[2]}else{mm=String(it.unit||"").match(/^(.*?)\s*\((\d+)\)$/);if(mm&&mm[1]){it.meas=mm[2]+" ct";it.unit=mm[1]}}});S.weeks=d.weeks||[];S.usage=d.usage||{};S.storage=d.storage||{};S.storageLow=d.storageLow||{};S.cafeLow=d.cafeLow||{};S.orders=d.orders||[];
    S.cur=d.current?rebase(d.current):null;
    if(S.cur&&S.edw!==S.cur.id){S.edrafts={};S.edw=S.cur.id}
    if(d.week)S.cache[d.week.id]=rebase(d.week);

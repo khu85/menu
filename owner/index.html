@@ -2940,6 +2940,15 @@ html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not
 /* low stock list on the owner Home card */
 html:not(#k):not(#j):not(#x) body.skin .olist.lowlist{margin:0 0 14px}
 html:not(#k):not(#j):not(#x) body.skin .olist.lowlist li b{color:var(--red)!important;font-weight:700;font-size:.9em;text-align:right;white-space:normal}
+@media (min-width:761px){html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.on .chip{margin-left:10px!important;vertical-align:middle}}
+
+/* low chips: beside the name on iPad/desktop, under the unit line on iPhone */
+body.skin .orow .l>.chm{display:none}
+@media (max-width:760px){
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.on .chd{display:none!important}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.chm{display:flex!important;flex-wrap:wrap;gap:4px;padding-left:18px;margin-top:4px}
+html:not(#k):not(#j):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) body.skin .orow .l>.chm .chip{margin:0!important}
+}
 
 @media (prefers-color-scheme:dark){
 html:not([data-theme="light"]):not(#k):not(#j) body.skin{--pg:#1F1E1F;--card:#2B292A;--fill:#363435;--sep:#3D3B3C;--ink:#F1EEDB;--mute:#A9A493;--black:#141314;--onb:#fff;color-scheme:dark;background:var(--pg)!important;color:var(--ink)!important}
@@ -3306,10 +3315,11 @@ function kfPlan(samples,end,o){
  return{typ:typ,sd:sd,P:P,target:target,need:need>0?need:0,cover:typ>0?end/typ:null,min:Math.min.apply(null,samples),max:Math.max.apply(null,samples)};
 }
 function openStats(d){var cur=d.current;if(!cur||!cur.begin)return null;var hist=[];for(var i=0;i<(d.weeks||[]).length;i++){var x=d.weeks[i];if(x.id===cur.id)break;if(x.status==="closed")hist.push(x.id)}var cogs=0,orders=[],counted=0;(d.items||[]).forEach(function(it){if(it.alertOnly)return;var k=it.section+" / "+(it.rawItem||it.item),b=typeof cur.begin[k]==="number"?cur.begin[k]:0,e=typeof cur.end[k]==="number"?cur.end[k]:null;if(e===null)return;counted++;var a=0;(cur.additions||[]).forEach(function(x){if(x.key===k)a+=x.qty});var used=Math.round((b+a-e)*1000)/1000;cogs+=used*(it.cost||0);var sm=[Math.max(0,used)];for(var q=hist.length-1;q>=0&&sm.length<8;q--){var u=(d.usage||{})[hist[q]]&&d.usage[hist[q]][k];if(u)sm.push(Math.max(0,u[0]))}var dfl=kfDefaults(it),pp=kfPlan(sm,e,{lead:it.lead===undefined?dfl.lead:it.lead,shelf:it.shelf===undefined?dfl.shelf:it.shelf,cycle:it.cycle===undefined?dfl.cycle:it.cycle});var nd=pp?pp.need:0;if(nd>0)orders.push({name:it.item,need:nd})});var w=(d.weeks||[]).filter(function(x){return x.id===cur.id})[0]||{};return{cogs:r2(cogs),month:w.month,orders:orders,counted:counted>0}}
+function kfName(n){n=String(n||"").replace(/^ca ?phe roasters?/i,"C\u00e0ph\u00ea Roasters").replace(/ - single origin$/i," - VSO").replace(/ - medium$/i,"").replace(/^grinds$/i,"Grindz").replace(/^lychee \(can\)$/i,"Lychee").replace(/^riverphin countryside$/i,"River Phin - Countryside").replace(/^coconut milk \(chaokoh\)$/i,"Coconut Milk - Chaokoh").replace(/^coconut milk \(arroy d\)$/i,"Coconut Milk - Arroy D");return n}
 function alertsCard(d){
  var cur=d.current,h="";weeksApi=d.weeks||[];
  var lowAll=(cur&&cur.alerts||[]).filter(function(a){return a.status==="active"});
- var LM={},nm={};(d.items||[]).forEach(function(it){nm[it.section+" / "+(it.rawItem||it.item)]=it.item});
+ var LM={},nm={};(d.items||[]).forEach(function(it){nm[it.section+" / "+(it.rawItem||it.item)]=kfName(it.item)});
  var addLow=function(k,tag){if(!LM[k])LM[k]=[];if(LM[k].indexOf(tag)<0)LM[k].push(tag)};
  lowAll.forEach(function(a){addLow(a.key,"Staff reported")});
  Object.keys(d.cafeLow||{}).forEach(function(k){addLow(k,"Low in cafe")});
@@ -3317,7 +3327,7 @@ function alertsCard(d){
  var low=Object.keys(LM).map(function(k){return{k:k,name:nm[k]||k.split(" / ").slice(1).join(" / ")||k,tags:LM[k]}}).sort(function(x,y){return x.name.localeCompare(y.name)});
  OPEN=openStats(d);var od=OPEN?OPEN.orders:[];
  if(low.length)h+='<div class="alrow bad"><b>Low stock alert</b><span>'+low.length+(low.length===1?" item":" items")+'</span></div><ul class="olist lowlist">'+low.map(function(x){return'<li><span>'+esc(x.name)+'</span><b>'+esc(x.tags.join(" \u00B7 "))+'</b></li>'}).join("")+'</ul>';
- if(od.length)h+='<div class="alrow"><b>Items to order</b><span>'+od.length+(od.length===1?" item":" items")+'</span></div><ul class="olist">'+od.slice(0,8).map(function(o){return'<li><span>'+esc(o.name)+'</span><b>'+esc(String(o.need))+'</b></li>'}).join("")+'</ul><a class="olmore" href="./stock/">'+(od.length>8?"See all "+od.length+" in Stock":"Open the order list")+' \u203A</a>';
+ if(od.length)h+='<div class="alrow"><b>Items to order</b><span>'+od.length+(od.length===1?" item":" items")+'</span></div><ul class="olist">'+od.slice(0,8).map(function(o){return'<li><span>'+esc(kfName(o.name))+'</span><b>'+esc(String(o.need))+'</b></li>'}).join("")+'</ul><a class="olmore" href="./stock/">'+(od.length>8?"See all "+od.length+" in Stock":"Open the order list")+' \u203A</a>';
  if(!low.length&&!od.length)h='<div class="alrow"><b>Low stock</b><span>None flagged</span></div>';
  $("alerts").innerHTML=h;render();
 }
