@@ -3111,6 +3111,9 @@ html[data-theme="dark"]:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):
 html:not(#k):not(#j):not(#i):not(#h):not(#g):not(#f):not(#e):not(#d):not(#c):not(#b):not(#a):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o):not(#n):not(#m):not(#l):not(#k2):not(#j2):not(#i2):not(#h2):not(#g2):not(#f2) body :is(.sb,.bnav,.kfmore) a .if .t{fill:currentColor!important;fill-opacity:.32!important;stroke:none!important}
 /* Stock tabs: the selected fill is enough, no extra focus ring after tapping */
 html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u) body.skin #nav .tab[aria-selected="true"]:focus,html:not(#k):not(#j):not(#z):not(#y):not(#x):not(#w):not(#v):not(#u) body.skin #nav .tab[aria-selected="true"]:focus-visible{outline:0!important;box-shadow:none!important}
+/* Steppers: no lingering ring after tapping - or +; ring only while typing or keyboard focus */
+html:not(#q0):not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8):not(#q9):not(#q10):not(#q11):not(#q12):not(#q13):not(#q14):not(#q15):not(#q16):not(#q17):not(#q18):not(#q19):not(#q20):not(#q21):not(#q22):not(#q23):not(#q24):not(#q25):not(#q26):not(#q27):not(#q28):not(#q29):not(#q30):not(#q31):not(#q32):not(#q33):not(#q34):not(#q35) body .step:focus-within:not(:has(:focus-visible)),html[data-theme]:not(#q0):not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8):not(#q9):not(#q10):not(#q11):not(#q12):not(#q13):not(#q14):not(#q15):not(#q16):not(#q17):not(#q18):not(#q19):not(#q20):not(#q21):not(#q22):not(#q23):not(#q24):not(#q25):not(#q26):not(#q27):not(#q28):not(#q29):not(#q30):not(#q31):not(#q32):not(#q33):not(#q34):not(#q35) body .step:focus-within:not(:has(:focus-visible)){box-shadow:none!important;outline:0!important}
+html:not(#q0):not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8):not(#q9):not(#q10):not(#q11):not(#q12):not(#q13):not(#q14):not(#q15):not(#q16):not(#q17):not(#q18):not(#q19):not(#q20):not(#q21):not(#q22):not(#q23):not(#q24):not(#q25):not(#q26):not(#q27):not(#q28):not(#q29):not(#q30):not(#q31):not(#q32):not(#q33):not(#q34):not(#q35) body .step button:focus:not(:focus-visible){outline:0!important;box-shadow:none!important}
 
 @media (prefers-color-scheme:dark){html:not([data-theme="light"]){color-scheme:dark}}
 @media (prefers-color-scheme:dark) and (max-width:760px){html:not([data-theme="light"]):not(#k):not(#j):not(#z) body.skin .kfmore:not([hidden]){background:#3a393a!important;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 14px 34px -8px rgba(0,0,0,.6)!important}}
@@ -3164,7 +3167,7 @@ html:not([data-theme="light"]):not(#k):not(#j) body.skin .alrow.bad *{color:#F2B
 html:not([data-theme="light"]):not(#k):not(#j) body.skin .h .vsum.now,html:not([data-theme="light"]):not(#k):not(#j) body.skin .orow.ordn.od .st .sv:last-child b{color:#F2B8B3!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin .stats .stat:first-child{background:#141314!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin .tnote.tnote{background:var(--brand)!important}
-html:not([data-theme="light"]):not(#k):not(#j) body.skin section>h2>span:last-child:not(.vsum),html:not([data-theme="light"]):not(#k):not(#j) body.skin .h span:last-child:not(.vsum){background:var(--fill)!important;color:var(--ink)!important}
+html:not([data-theme="light"]):not(#k):not(#j) body.skin section>h2>span:last-child:not(.vsum),html:not([data-theme="light"]):not(#k):not(#j) body.skin .h span:last-child:not(.vsum){background:none!important;color:var(--ink)!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin :is(.cfmbox,.sheet,dialog){background:var(--card)!important;color:var(--ink)!important}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin :is(.cfmbox) *{color:var(--ink)}
 html:not([data-theme="light"]):not(#k):not(#j) body.skin .cfmbox :is(li,.ln){background:var(--fill)!important}
@@ -3233,7 +3236,7 @@ html[data-theme="dark"]:not(#k):not(#j) body.skin .alrow.bad *{color:#F2B8B3!imp
 html[data-theme="dark"]:not(#k):not(#j) body.skin .h .vsum.now,html[data-theme="dark"]:not(#k):not(#j) body.skin .orow.ordn.od .st .sv:last-child b{color:#F2B8B3!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin .stats .stat:first-child{background:#141314!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin .tnote.tnote{background:var(--brand)!important}
-html[data-theme="dark"]:not(#k):not(#j) body.skin section>h2>span:last-child:not(.vsum),html[data-theme="dark"]:not(#k):not(#j) body.skin .h span:last-child:not(.vsum){background:var(--fill)!important;color:var(--ink)!important}
+html[data-theme="dark"]:not(#k):not(#j) body.skin section>h2>span:last-child:not(.vsum),html[data-theme="dark"]:not(#k):not(#j) body.skin .h span:last-child:not(.vsum){background:none!important;color:var(--ink)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin :is(.cfmbox,.sheet,dialog){background:var(--card)!important;color:var(--ink)!important}
 html[data-theme="dark"]:not(#k):not(#j) body.skin :is(.cfmbox) *{color:var(--ink)}
 html[data-theme="dark"]:not(#k):not(#j) body.skin .cfmbox :is(li,.ln){background:var(--fill)!important}
