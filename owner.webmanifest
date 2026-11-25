@@ -1,0 +1,24 @@
+{
+ "name": "Kinhfolk Owner",
+ "short_name": "Kinhfolk Owner",
+ "id": "owner/",
+ "start_url": "owner/",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#F7F6F3",
+ "theme_color": "#F7F6F3",
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
+  }
+ ]
+}
